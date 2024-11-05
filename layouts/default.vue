@@ -1,15 +1,15 @@
 <template>
-  <VApp>
+  <section id="default-layout">
 	<header>
-		Default layout header
+		[Default layout header]
 	</header>
 	<main>
 		<slot/>
 	</main>
 	<footer>
-		Default layout footer
+		[Default layout footer]
 	</footer>
-  </VApp>
+  </section>
 </template>
 <script lang="ts">
 
