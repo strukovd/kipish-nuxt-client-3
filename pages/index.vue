@@ -1,7 +1,6 @@
 <template>
   <div id="default-page">
-	[Default page]
-    <v-btn>Test button</v-btn>
+    [Default page]
   </div>
 </template>
 <script lang="ts" setup>
