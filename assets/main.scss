@@ -1,6 +1,7 @@
 @use "variables.scss" as *;
 
 body {
+	background:$lightbg;
 	font-family: $font-family, sans-serif !important;
 }
 

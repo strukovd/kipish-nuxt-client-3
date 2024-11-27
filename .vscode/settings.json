@@ -1,0 +1,28 @@
+{
+	"workbench.colorCustomizations": {
+		// Активная вкладка
+		"tab.activeBorderTop": "#080822",
+		"tab.activeBorder": "#0A84FF",
+		"tab.activeBackground": "#080822",
+
+		"activityBar.background": "#107a4e46",
+		"activityBar.foreground": "#FFFFFF",
+		// "sideBar.background": "#107a4e48",
+		// "sideBar.foreground": "#FFFFFF",
+		// "sideBarSectionHeader.background": "#107a4e1c",
+		// "sideBarSectionHeader.foreground": "#FFFFFF",
+		// "sideBarSectionHeader.border": "#107a4e1f",
+		// "sideBar.border": "#107a4e46",
+
+		// "editor.background": "#080822",
+		// "editor.foreground": "#FFFFFF",
+		// "editor.lineHighlightBackground": "#080822",
+		// "editor.selectionBackground": "#0A84FF",
+		// "editor.selectionForeground": "#FFFFFF",
+		// "editor.inactiveSelectionBackground": "#0A84FF",
+
+		// "editorGroupHeader.tabsBackground": "#080822",
+		// "editorGroupHeader.tabsBorder": "#080822",
+		// "editorGroupHeader.border": "#080822",
+	},
+}

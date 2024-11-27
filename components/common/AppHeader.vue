@@ -2,7 +2,7 @@
   <header id="header">
     <div class="header-content">
       <section class="left-side">
-        <img src="assets/images/logo.svg" width="54px" alt="Logo">
+        <img src="/images/logo.svg" width="54px" alt="Logo">
         <v-select class="city-select" :items="[{id: 1, nameRu: 'Бишкек'}]" item-title="nameRu" item-value="id" menu-icon="" return-object @change="()=>{}" v-model="appStore.currentCity" dense hide-details>
           <template v-slot:selection="{ item, index }">
             <div style="display:flex; align-items:center; gap:.2em;">
@@ -21,7 +21,7 @@
         </div>
         <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->
         <div class="cursor-pointer ml-8">
-          <img width="32" height="32" src="assets/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': $vuetify.theme.dark }"/>
+          <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': $vuetify.theme.dark }"/>
         </div>
       </section>
     </div>
