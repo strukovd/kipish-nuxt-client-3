@@ -4,96 +4,12 @@
     <main>
       <slot/>
     </main>
-    <article>
-      [Default layout footer]
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-      Lorem ipsum dolor sit. <br>
-    </article>
     <AppFooter/>
   </section>
 </template>
 <script lang="ts">
-import AppFooter from '~/components/common/AppFooter.vue';
 import AppHeader from '~/components/common/AppHeader.vue';
+import AppFooter from '~/components/common/AppFooter.vue';
 
 export default {
   components: { AppHeader, AppFooter },

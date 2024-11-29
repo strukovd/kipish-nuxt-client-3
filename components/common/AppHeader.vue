@@ -113,6 +113,7 @@ export default {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(30px);
   height: 70px;
+  padding:0 20px;
 
   .header-content {
     border-bottom:none;
@@ -124,7 +125,7 @@ export default {
   top:0;
   width: 100%;
   height:110px;
-  z-index:100;
+  z-index:9999;
   transition: all 0.5s ease-in-out;
 
   .header-content {

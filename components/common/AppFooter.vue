@@ -23,7 +23,7 @@
           background: #EFEFEF;
         ">
           <div style="width: 32px;height: 32px">
-            <img src="/images/arrowTop.svg"/>
+            <img src="/icons/ArrowTop.svg"/>
           </div>
         </div>
       </div>

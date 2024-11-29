@@ -23,6 +23,10 @@ export default {
     }
   },
   methods: {
+    initGlobalProperties() {
+      this.appStore.windowWidth = document.body.clientWidth;
+    },
+
     handleResize() {
       if(document?.body) {
         const wWidth = document.body.clientWidth;
@@ -40,6 +44,8 @@ export default {
 
   created() {
     if( import.meta.browser ) {
+      this.initGlobalProperties();
+
       window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
           document.body.classList.add('scrolled'); // Добавляем класс, если страница прокручена
@@ -47,14 +53,6 @@ export default {
           document.body.classList.remove('scrolled'); // Убираем класс, если вернулись наверх
         }
       });
-
-      // document.body.addEventListener('scroll', () => {
-      //   if (document.body.scrollTop > 0) {
-      //     document.body.classList.add('scrolled');
-      //   } else {
-      //     document.body.classList.remove('scrolled');
-      //   }
-      // });
 
       window.addEventListener("resize", this.handleResize);
     }
