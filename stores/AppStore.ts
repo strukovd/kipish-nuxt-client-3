@@ -7,6 +7,7 @@ export const useAppStore = defineStore('app', {
     windowWidth: 0,
     redirects: [],
     redirectsMap: null,
+    isMobile: false,
     currentCity: import.meta.browser ? JSON.parse(localStorage.getItem('city') ?? 'null') : null,
     sourceId: import.meta.browser ? JSON.parse(localStorage.getItem('sourceId') ?? 'null') : null,
     errorMessages: [],

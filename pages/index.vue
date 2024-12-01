@@ -15,7 +15,9 @@
         </ClientOnly>
       </section>
       <section class="ad-section">
-
+        <ClientOnly>
+          <BaseAd :loading="loading"/>
+        </ClientOnly>
       </section>
       <section class="reports-section">
 
@@ -27,7 +29,7 @@
 
       </section>
       <section class="ad-section">
-
+        <BaseAd :loading="loading"/>
       </section>
       <section class="about-section">
 
@@ -51,10 +53,11 @@ import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 import BasePosterSlider from '~/components/common/BasePosterSlider.vue';
 import Marquee from "@/components/common/Marquee.vue";
+import BaseAd from '@/components/common/BaseAd.vue';
 
 export default defineComponent({
   name: 'MainPage',
-  components: { BasePosterSlider, Marquee },
+  components: { BasePosterSlider, Marquee, BaseAd },
   computed: {
     ...mapStores( useAppStore ),
   },
@@ -128,7 +131,7 @@ export default defineComponent({
     text-transform: uppercase;
   }
 
-  .poster-section {
+  .poster-section, .ad-section {
     width:1300px;
     margin-right: auto;
     margin-left: auto;
