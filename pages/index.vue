@@ -10,7 +10,9 @@
         </div>
       </section>
       <section class="marquee-section">
-        <Marquee text="Стиль / Люди / События /"/>
+        <ClientOnly>
+          <Marquee text="Стиль / Люди / События /"/>
+        </ClientOnly>
       </section>
       <section class="ad-section">
 
