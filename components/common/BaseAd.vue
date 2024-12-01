@@ -28,9 +28,6 @@ export default {
       }
 
       return `https://files.kipish.kg/advertisement/${ad?.minioPath}`;
-    },
-    adSrc() {
-
     }
   },
   data: () => {
@@ -43,13 +40,6 @@ export default {
     this.getAdvertisements()
   },
   methods: {
-    setImage(id) {
-      if (!id) return
-      this.$http.get(`/files/` + id)
-        .then(r => {
-          this.ad.file = r.data[id]
-        })
-    },
     async getAdvertisement() {
       try {
         const {id} = this.advertisements[Math.floor(Math.random() * this.advertisements.length)]
@@ -61,6 +51,7 @@ export default {
         return null;
       }
     },
+
     async getAdvertisements() {
       try {
         const response = await this.$http.get('/advertisement/ids');
