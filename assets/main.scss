@@ -8,6 +8,10 @@ body {
 		text-decoration: none;
 		color: inherit;
 	}
+
+	.v-img__img--contain {
+		object-fit: cover;
+	}
 }
 
 .font-title {
