@@ -1,7 +1,7 @@
 <template>
   <div id="main-page">
     <template v-if="true || appStore.currentCity">
-      <section class="poster-section" data-aos="fade-up" data-aos-duration="1500">
+      <section class="poster-section mid" data-aos="fade-up" data-aos-duration="1500">
         <h1 class="h1-font" style="z-index: 999; font-size:68px; line-height:1.2em; position:relative;"><span>Медиа ресурс о светской</span><br><span>жизни</span></h1>
         <div style="position:relative; height:500px; margin-top:-78px;">
           <div v-if="!loading" data-aos="fade-up" data-aos-duration="500" style="position: relative;border-radius: 20px 0 0 20px; height: 500px; overflow: hidden;">
@@ -14,21 +14,21 @@
           <Marquee text="Стиль / Люди / События /"/>
         </ClientOnly>
       </section>
-      <section class="ad-section" data-aos="fade-up" data-aos-duration="1500">
+      <section class="ad-section mid" data-aos="fade-up" data-aos-duration="1500">
         <ClientOnly>
           <BaseAd :loading="loading"/>
         </ClientOnly>
       </section>
-      <section class="reports-section" data-aos="fade-up" data-aos-duration="1500">
+      <section class="reports-section mid" data-aos="fade-up" data-aos-duration="1500">
         <DesktopReports/>
       </section>
       <section class="videos-section" data-aos="fade-up" data-aos-duration="1500">
-
+        <DesktopVideo/>
       </section>
       <section class="establishments-section" data-aos="fade-up" data-aos-duration="1500">
 
       </section>
-      <section class="ad-section" data-aos="fade-up" data-aos-duration="1500">
+      <section class="ad-section mid" data-aos="fade-up" data-aos-duration="1500">
         <BaseAd :loading="loading"/>
       </section>
       <section class="about-section" data-aos="fade-up" data-aos-duration="1500">
@@ -55,10 +55,11 @@ import BasePosterSlider from '~/components/common/BasePosterSlider.vue';
 import Marquee from "@/components/common/Marquee.vue";
 import BaseAd from '@/components/common/BaseAd.vue';
 import DesktopReports from '~/components/sections/reportsBlock/DesktopReports.vue';
+import DesktopVideo from '~/components/sections/videoBlock/DesktopVideo.vue';
 
 export default defineComponent({
   name: 'MainPage',
-  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports },
+  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideo },
   computed: {
     ...mapStores( useAppStore ),
   },
@@ -132,7 +133,7 @@ export default defineComponent({
     text-transform: uppercase;
   }
 
-  .poster-section, .ad-section, .reports-section {
+  .mid {
     width:1312px;
     margin-right: auto;
     margin-left: auto;

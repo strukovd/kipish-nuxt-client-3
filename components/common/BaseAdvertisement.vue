@@ -1,11 +1,11 @@
 <template>
-  <div v-if="payload" class="report-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
-    <v-img class="report-card-image cursor-pointer"
+  <div v-if="payload" class="advertisement-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
+    <v-img class="advertisement-card-image cursor-pointer"
       :src="payload.fileDesktop.file"
       lazy-src="/static/images/cover-2.jpg"
       height="516"
     >
-      <router-link :to="payload.link" class="report-card-content">
+      <router-link :to="payload.link ?? ''" :is="payload.link ? 'a' : 'div'" class="advertisement-card-content">
         <div>
           <div style="background: #FFFFFF33;border-radius: 30px;display: inline-block" class="py-1 px-4">
             <span class="text-18 white--text">Реклама</span>
@@ -64,10 +64,10 @@ export default {
 </script>
 
 <style lang="scss">
-.report-card {
+.advertisement-card {
   position: relative;
 
-  .report-card-image {
+  .advertisement-card-image {
     position: relative;
     border-radius: 20px;
 
@@ -80,7 +80,7 @@ export default {
       transform:scale(1.2) !important;
     }
 
-    .report-card-content {
+    .advertisement-card-content {
       position: absolute;
       z-index: 999;
       width: 100%;
