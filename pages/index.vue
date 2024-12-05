@@ -25,8 +25,8 @@
       <section class="videos-section" data-aos="fade-up" data-aos-duration="1500">
         <DesktopVideo/>
       </section>
-      <section class="establishments-section" data-aos="fade-up" data-aos-duration="1500">
-
+      <section class="establishments-section mid" data-aos="fade-up" data-aos-duration="1500">
+        <DesktopEstabs/>
       </section>
       <section class="ad-section mid" data-aos="fade-up" data-aos-duration="1500">
         <BaseAd :loading="loading"/>
@@ -56,10 +56,11 @@ import Marquee from "@/components/common/Marquee.vue";
 import BaseAd from '@/components/common/BaseAd.vue';
 import DesktopReports from '~/components/sections/reportsBlock/DesktopReports.vue';
 import DesktopVideo from '~/components/sections/videoBlock/DesktopVideo.vue';
+import DesktopEstabs from "~/components/sections/estabsBlock/DesktopEstabs.vue";
 
 export default defineComponent({
   name: 'MainPage',
-  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideo },
+  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideo, DesktopEstabs },
   computed: {
     ...mapStores( useAppStore ),
   },
@@ -121,7 +122,7 @@ export default defineComponent({
 
 <style lang="scss">
 #main-page {
-  section {
+  [class*="-section"] {
     margin-top: 6em;
   }
 
@@ -131,12 +132,6 @@ export default defineComponent({
     line-height: 92px;
     font-weight: 300;
     text-transform: uppercase;
-  }
-
-  .mid {
-    width:1312px;
-    margin-right: auto;
-    margin-left: auto;
   }
 }
 </style>
