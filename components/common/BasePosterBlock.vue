@@ -1,6 +1,6 @@
 <template>
   <div class="base-poster-block">
-    <div style="position: absolute;width: 100%;height: 100%; background: #28282880;z-index: 998 !important;"></div>
+    <!-- <div style="position: absolute;width: 100%;height: 100%; background: #28282880;z-index: 998 !important;"></div>
     <v-img style="z-index: 997 !important;position: absolute; object-fit: cover !important;" height="100%" width="100%" lazy-src="/static/images/cover-2.jpg" :data-src="`https://files.kipish.kg/${poster.coverPath}`" :src="`https://files.kipish.kg/${poster.coverPath}`"/>
     <div style="position: absolute;z-index: 999 !important;width: 100%;height: 100%;">
       <v-row style="height: 100%" class="pa-0 ma-0">
@@ -33,7 +33,7 @@
           </div>
         </v-col>
       </v-row>
-    </div>
+    </div> -->
   </div>
 </template>
 
