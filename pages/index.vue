@@ -29,10 +29,12 @@
         <DesktopEstabs/>
       </section>
       <section class="ad-section mid" data-aos="fade-up" data-aos-duration="1500">
-        <BaseAd :loading="loading"/>
+        <ClientOnly>
+          <BaseAd :loading="loading"/>
+        </ClientOnly>
       </section>
       <section class="about-section" data-aos="fade-up" data-aos-duration="1500">
-
+        <!-- <DesktopMedia/> -->
       </section>
       <section class="statistics-section" data-aos="fade-up" data-aos-duration="1500">
 
@@ -57,10 +59,12 @@ import BaseAd from '@/components/common/BaseAd.vue';
 import DesktopReports from '~/components/sections/reportsBlock/DesktopReports.vue';
 import DesktopVideo from '~/components/sections/videoBlock/DesktopVideo.vue';
 import DesktopEstabs from "~/components/sections/estabsBlock/DesktopEstabs.vue";
+// import DesktopMedia from '~/components/sections/mediaBlock/DesktopMedia.vue';
+// import DesktopStats from '~/components/sections/statBlock/DesktopStats.vue';
 
 export default defineComponent({
   name: 'MainPage',
-  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideo, DesktopEstabs },
+  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideo, DesktopEstabs, },
   computed: {
     ...mapStores( useAppStore ),
   },
