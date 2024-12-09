@@ -92,11 +92,11 @@
   </NuxtLink>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+export default defineComponent({
   name: 'BaseEstabCard',
   props: {
-    item: Object,
+    item: Object as () => any,
   },
   data() {
     return {};
@@ -109,7 +109,7 @@ export default {
     if(typeof socials === 'string') this.item.socials = JSON.parse(socials);
     if(typeof paysways === 'string') this.item.paysways = JSON.parse(paysways);
   },
-};
+});
 </script>
 
 <style lang="scss">
