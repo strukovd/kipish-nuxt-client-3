@@ -33,7 +33,7 @@
                   <v-spacer/>
                   <div class="d-flex flex-column align-end">
                     <div class="d-flex align-end">
-                      <span class="text-44 font-weight-550 white--text mr-1">{{ currentSlide }}/</span>
+                      <span class="text-44 font-weight-550 white--text mr-1">{{ currentSlide+1 }}/</span>
                       <span style="color: #4D4E4D" class="text-20 font-weight-550">{{posters.length}}</span>
                     </div>
                     <div class="mt-2 d-flex align-center">
