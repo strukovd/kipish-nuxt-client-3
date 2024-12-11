@@ -1,12 +1,26 @@
 <template>
   <div class="estabs-desktop mid">
     <BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/establishments', title: 'Заведения'}]"/>
-    <h1 class="h1-font text-68 black--text font-title text-uppercase font-weight-300">Лучшие заведения в Бишкеке</h1>
+    <h1 style="margin-bottom:.6em;" class="h1-font text-68 black--text font-title text-uppercase font-weight-300">Лучшие заведения в Бишкеке</h1>
 
-    <div>
-      <span style="border-right: 1px solid rgba(17, 17, 17, 0.1);" class="pr-4 mr-4 text-32 font-weight-300 text-uppercase black--text font-title">Топ заведений</span>
-      <!-- <span class="text-32 text-uppercase black--text">Топ заведений</span> -->
+    <div style="margin-bottom:1.6em;">
+      <span class="pr-4 mr-4 text-32 font-weight-300 text-uppercase black--text font-title">Топ заведений</span>
+      <!-- TODO: фильтры -->
     </div>
+
+    <!-- Карточки заведений -->
+    <v-row style="height: 100%" class="pa-0 ma-0">
+      <template v-if="!loading">
+        <v-col cols="3" v-for="estab of visibleItems" :key="estab.id" >
+          <BaseEstabCard :item="estab"/>
+        </v-col>
+      </template>
+      <template v-else>
+        <v-col cols="3" v-for="i of 4" :key="i" style="display:flex;flex-direction:column;overflow:hidden;border-radius:20px;position:relative;">
+          <v-skeleton-loader class="mx-auto" type="image"></v-skeleton-loader>
+        </v-col>
+      </template>
+    </v-row>
 
   </div>
 
@@ -24,18 +38,9 @@
     </script>
 
     <v-row style="width: 1440px !important;" class="ma-0 pa-0 ">
-      <v-col class="pa-0" cols="12">
-        <tool-bar @selectedCity="setSelectedCity"/>
-      </v-col>
       <v-col style="min-height: 70vh" class="pa-0 px-16 mb-120" cols="12">
         <v-card elevation="0" color="transparent">
-          <!-- BREADCRUMBS --
-          <BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/establishments', title: 'Заведения'}]"/>
 
-          <!-- TITLE --
-          <v-card-text class="pa-0">
-            <h1 class="h1-font text-68">Лучшие заведения в Бишкеке</h1>
-          </v-card-text>
           <!-- <v-card-text class="pa-0 mt-10 mb-16">
             <div class="d-flex flex-column">
               <div class="d-flex flex-wrap">
@@ -53,9 +58,6 @@
           </v-card-text> --
 
           <v-card-text class="px-0 pt-7 pb-0 d-flex justify-space-between">
-            <div class="d-flex align-end">
-              <span class="text-32 font-weight-300 text-uppercase mr-8 black--text font-title">Топ заведений</span>
-            </div>
             <!-- Кнопка фильтр --
             <div>
               <v-btn depressed @click="handleFilter"
