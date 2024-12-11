@@ -468,7 +468,7 @@ export default {
 }
 
 .videos-desktop {
-  padding-bottom: 6em;
+
 }
 
 .reports_desc_container {
