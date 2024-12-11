@@ -1,7 +1,7 @@
 <template>
   <section id="default-layout">
     <AppHeader/>
-    <main style="min-height:600px;">
+    <main style="min-height:600px; padding-bottom:6em;">
       <slot/>
     </main>
     <AppFooter/>
