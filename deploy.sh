@@ -11,8 +11,8 @@ then
 fi
 
 
-NPM_PATH="/root/.nvm/versions/node/v14.21.3/bin/npm"
-PM2_PATH="/root/.nvm/versions/node/v14.21.3/bin/pm2"
+NPM_PATH="/root/.nvm/versions/node/v22.12.0/bin/npm"
+PM2_PATH="/root/.nvm/versions/node/v22.12.0/bin/pm2"
 
 # Проверяем, успешно ли мы получили пути
 if [ -z "$NPM_PATH" ]; then
@@ -38,11 +38,11 @@ echo "Build version upgraded: $PREV_VERSION -> $CUR_VERSION"
 
 # Билдим
 echo "Build version: ${SERVICE_NAME}:${CUR_VERSION}"
-# npm run build || exit 1
+npm run build || exit 1
 
 # Копируем файлы на сервер
 echo "Copying files to the server..."
-# --exclude=node_modules 
+# --exclude=node_modules
 rsync -avz --exclude=.git . ${KIPSH_HOST}:/opt/kipish-nuxt
 
 # Перезапуск приложения через PM2
@@ -50,7 +50,7 @@ echo "Restarting the service with PM2 on the server..."
 RERUN_COMMAND="cd /opt/kipish-nuxt && \
   $NPM_PATH install && \
   $PM2_PATH stop ${SERVICE_NAME} || echo 'No process found to stop' && \
-  $PM2_PATH start ${NPM_PATH} --name '${SERVICE_NAME}' -- run start -- --key=kipish-nuxt && \
+  $PM2_PATH start $NPM_PATH --name '${SERVICE_NAME}' --cwd '/opt/kipish-nuxt' -- run start -- --key=kipish-nuxt && \
   $PM2_PATH save
 "
 ssh -t -i ~/.ssh/id_rsa ${KIPSH_HOST} "$RERUN_COMMAND"
@@ -59,3 +59,12 @@ ssh -t -i ~/.ssh/id_rsa ${KIPSH_HOST} "$RERUN_COMMAND"
 echo "Checking PM2 logs:"
 LOGS_COMMAND="$PM2_PATH logs ${SERVICE_NAME} --lines 20"
 ssh -t -i ~/.ssh/id_rsa ${KIPSH_HOST} "$LOGS_COMMAND"
+
+
+
+# TODO: в случае проблем с версией ноды:
+# Убедится что ссылка указывает на нужную версию ноды: ls -l /usr/bin/node
+# Иначе
+# sudo rm /usr/bin/node
+# nvm which current
+# sudo ln -s /root/.nvm/versions/node/v22.12.0/bin/node /usr/bin/node
