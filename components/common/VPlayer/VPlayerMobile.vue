@@ -27,10 +27,10 @@
           <div class="d-flex flex-column" style="padding-top:7%;">
             <div style="z-index: 998; position: absolute; right: 50%; top: 47%; transform: translate(50%, -50%);" class="player_button mb-10">
               <div v-if="!loading">
-                <v-img width="44" height="44" src="/static/images/icons/player.png" />
+                <v-img width="44" height="44" src="/icons/player.png" />
               </div>
               <!-- <div v-if="video.loading">
-                <v-img class="circle_block" width="40" height="40" src="/static/images/logo2.svg" />
+                <v-img class="circle_block" width="40" height="40" src="/images/logo2.svg" />
               </div> -->
             </div>
 
@@ -41,7 +41,7 @@
 
           </div>
         </div>
-        <v-img class="player-cover-image" height="100%" style="border-radius: 16px; z-index: 997 " :src="coverImage ? coverImage : '/static/images/video-bg-mob.png'"/>
+        <v-img class="player-cover-image" height="100%" style="border-radius: 16px; z-index: 997 " :src="coverImage ? coverImage : '/images/video-bg-mob.png'"/>
       </template>
     </div>
   </v-card-text>

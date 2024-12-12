@@ -21,7 +21,7 @@
             <div class="d-flex align-center flex-column">
               <div style="z-index: 998; position: absolute; right: 50%; top: 47%; transform: translate(50%, -50%); " @click="playVideo(video.id)" class="player_button mb-5">
                 <div v-if="!video.loading">
-                  <v-img width="35" height="35" src="/images/icons/player.png" />
+                  <v-img width="35" height="35" src="/icons/player.png" />
                 </div>
                 <div v-if="video.loading">
                   <v-img class="circle_block" width="35" height="35" src="/images/logo2.svg" />

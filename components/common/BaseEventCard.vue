@@ -2,7 +2,7 @@
   <div class="event-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
     <v-img class="event-card-image cursor-pointer"
       :src="`https://files.kipish.kg/${event.coverPath}`"
-      lazy-src="/static/images/cover-2.jpg"
+      lazy-src="/images/cover-2.jpg"
       height="516"
     >
       <router-link :to="`/event/${event?.url?.url ?? event.id}`" class="event-card-content">

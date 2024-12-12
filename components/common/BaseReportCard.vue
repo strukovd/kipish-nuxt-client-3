@@ -2,7 +2,7 @@
   <div v-if="payload" class="report-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
     <v-img class="report-card-image cursor-pointer"
       :src="`https://files.kipish.kg/${payload.coverPath}`"
-      lazy-src="/static/images/cover-2.jpg"
+      lazy-src="/images/cover-2.jpg"
       height="516"
     >
       <router-link :to="`/report/${payload?.url?.url ?? payload.id}`" class="report-card-content">

@@ -43,7 +43,7 @@ export default {
         id: 1,
         name: 'Dvor bar',
         establishment: {
-          name: 'pab'
+          name: 'pub'
         },
         albumDate: '01-01-2024',
         files: [
@@ -58,7 +58,7 @@ export default {
         id: 2,
         name: 'Dvor bar',
         establishment: {
-          name: 'pab'
+          name: 'pub'
         },
         albumDate: '01-01-2024',
         files: [
@@ -73,7 +73,7 @@ export default {
         id: 3,
         name: 'Dvor bar',
         establishment: {
-          name: 'pab'
+          name: 'pub'
         },
         albumDate: '01-01-2024',
         files: [
@@ -161,6 +161,7 @@ export default {
         }
       }
     },
+
     async fetchAdvertImages(adverts) {
       if (!adverts) adverts = this.advertisements;
       for (const advert of adverts) {
@@ -174,9 +175,11 @@ export default {
         }
       }
     },
+
     handleScroll() {
       this.topOffset = Math.max(80, 80 - window.scrollY);
     },
+
     formatDate(dateString) {
       if(dateString){
         const months = [
@@ -199,10 +202,6 @@ export default {
         const formattedDate = `${day} ${months[month]} / ${year}`;
         return formattedDate;
       }
-    },
-    getCoverFile(files) {
-      const coverFile = files.find(el => el.isCover === true);
-      return coverFile ? (coverFile.imgReserve ? coverFile.file : 'data:image/png;base64,' + coverFile.file) : null;
     },
   },
 }

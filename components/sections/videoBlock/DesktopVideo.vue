@@ -36,7 +36,7 @@
                 <div class="d-flex align-center flex-column justify-center fill-height pl-10">
                   <div style="z-index: 998" @click="playVideo(video.id)" class="player_button">
                     <div v-if="!video.loading">
-                      <v-img width="44" height="44" src="/images/icons/player.png"/>
+                      <v-img width="44" height="44" src="/icons/player.png"/>
                     </div>
                     <div v-if="video.loading">
                       <v-img class="circle_block" width="40" height="40" src="/images/logo2.svg"/>

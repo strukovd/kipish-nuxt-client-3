@@ -1,8 +1,8 @@
 <template>
-  <div v-if="payload" class="advertisement-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
+  <div v-if="payload?.fileDesktop" class="advertisement-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
     <v-img class="advertisement-card-image cursor-pointer"
       :src="payload.fileDesktop.file"
-      lazy-src="/static/images/cover-2.jpg"
+      lazy-src="/images/cover-2.jpg"
       height="516"
     >
       <router-link :to="payload.link ?? ''" :is="payload.link ? 'a' : 'div'" class="advertisement-card-content">

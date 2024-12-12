@@ -21,10 +21,10 @@ export default {
     advertisementPath() {
       let ad;
       if( this.isMobile ) {
-        ad = this.advertisement.fileMobile;
+        ad = this.advertisement?.fileMobile ?? 'https://files.kipish.kg/advertisement/ADVERTISEMENT/380%D1%85360.gif';
       }
       else {
-        ad = this.advertisement.fileDesktop;
+        ad = this.advertisement?.fileDesktop ?? 'https://files.kipish.kg/advertisement/ADVERTISEMENT/1300х320.gif';
       }
 
       return `https://files.kipish.kg/advertisement/${ad?.minioPath}`;

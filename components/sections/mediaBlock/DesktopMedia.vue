@@ -10,7 +10,7 @@
 
         <div v-if="!loading" data-aos="fade-up" data-aos-duration="500" style="position: relative;border-radius: 20px 0 0 20px; height: 500px; overflow: hidden;">
           <div v-if="!posters" style="border-radius: 32px;width: 100%;height: 100%;">
-            <v-img lazy-src="/static/images/cover-2.jpg" style="z-index: 997 !important;position: absolute; object-fit: cover !important; border-radius: 32px !important;" height="100%" width="100%"/>
+            <v-img lazy-src="/images/cover-2.jpg" style="z-index: 997 !important;position: absolute; object-fit: cover !important; border-radius: 32px !important;" height="100%" width="100%"/>
           </div>
           <div v-else-if="posters && posters.length" style="width: 100%;height: 100%">
             <CustomPosterSlider :posters="posters"/>

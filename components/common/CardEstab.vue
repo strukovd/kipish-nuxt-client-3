@@ -1,7 +1,7 @@
 <template>
   <div class="estabs_card cursor-pointer" @click="$router.push('/establishment/' + (!!item?.url?.url ? item.url.url : item.id))">
     <div style="width: 100%;height: 420px">
-      <v-img :src="item.coverImage ? item.coverImage : `https://files.kipish.kg/${item.coverPath}`" lazy-src="/static/images/cover-2.jpg" width="100%" height="380px">
+      <v-img :src="item.coverImage ? item.coverImage : `https://files.kipish.kg/${item.coverPath}`" lazy-src="/images/cover-2.jpg" width="100%" height="380px">
         <div class="d-flex flex-column justify-space-between pa-6 estabs_card__content"
           style="position: absolute;z-index: 99999;width: 100%;height: 100%; background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%);"
           >
