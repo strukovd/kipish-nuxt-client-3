@@ -43,7 +43,7 @@ npm run build || exit 1
 # Копируем файлы на сервер
 echo "Copying files to the server..."
 # --exclude=node_modules
-rsync -avz --exclude=.git . ${KIPSH_HOST}:/opt/kipish-nuxt
+rsync -avz --exclude=node_modules --exclude=.git . ${KIPSH_HOST}:/opt/kipish-nuxt
 
 # Перезапуск приложения через PM2
 echo "Restarting the service with PM2 on the server..."

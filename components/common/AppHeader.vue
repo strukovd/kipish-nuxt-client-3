@@ -2,7 +2,9 @@
   <header id="header">
     <div class="header-content">
       <section class="left-side">
-        <img src="/images/logo.svg" width="54px" alt="Logo">
+        <RouterLink to="/">
+          <img src="/images/logo.svg" width="54px" alt="Logo">
+        </RouterLink>
         <v-select class="city-select" :items="[{id: 1, nameRu: 'Бишкек'}]" item-title="nameRu" item-value="id" menu-icon="" return-object @change="()=>{}" v-model="appStore.currentCity" dense hide-details>
           <template v-slot:selection="{ item, index }">
             <div style="display:flex; align-items:center; gap:.2em;">
