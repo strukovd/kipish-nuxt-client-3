@@ -11,17 +11,8 @@
             <span v-else @click="link.onClick">{{ link.title }}</span>
           </span>
         </div>
-        <div class="up" @click="goTo"
-          style="
-          border-radius:50%;
-          width:74px !important;
-          height:74px !important;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #EFEFEF;
-        ">
+        <div class="up" @click="scrollToTop"
+          style="border-radius:50%; width:74px !important; height:74px !important; cursor: pointer; display: flex; align-items: center; justify-content: center; background: #EFEFEF;">
           <div style="width: 32px;height: 32px">
             <img src="/icons/ArrowTop.svg"/>
           </div>
@@ -89,7 +80,15 @@ export default {
     ...mapStores( useAppStore ),
   },
   methods: {
-
+    scrollToTop() {
+      const destinationElement = document.body;
+      if (destinationElement) {
+        window.scrollTo({
+          top: document.body.offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }
   },
   created() {
 
