@@ -1,5 +1,8 @@
 @use "variables.scss" as *;
 
+* {
+	box-sizing: border-box;
+}
 body {
 	background:$lightbg;
 	font-family: $font-family, sans-serif !important;
@@ -331,68 +334,68 @@ body {
   margin: 0 auto;
 }
 
-@media screen and (max-width: 1400px) {
-  .page-wrapper {
-    width: 1000px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 1400px) {
+//   .page-wrapper {
+//     width: 1000px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 1024px) {
-  .page-wrapper {
-    width: 800px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 1024px) {
+//   .page-wrapper {
+//     width: 800px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 800px) {
-  .page-wrapper {
-    width: 600px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 800px) {
+//   .page-wrapper {
+//     width: 600px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 600px) {
-  .page-wrapper {
-    width: 500px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 600px) {
+//   .page-wrapper {
+//     width: 500px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 500px) {
-  .page-wrapper {
-    width: 430px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 500px) {
+//   .page-wrapper {
+//     width: 430px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 430px) {
-  .page-wrapper {
-    width: 420px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 430px) {
+//   .page-wrapper {
+//     width: 420px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 400px) {
-  .page-wrapper {
-    width: 390px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 400px) {
+//   .page-wrapper {
+//     width: 390px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 375px) {
-  .page-wrapper {
-    width: 370px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 375px) {
+//   .page-wrapper {
+//     width: 370px !important;
+//     margin: 0 auto;
+//   }
+// }
 
-@media screen and (max-width: 345px) {
-  .page-wrapper {
-    width: 345px !important;
-    margin: 0 auto;
-  }
-}
+// @media screen and (max-width: 345px) {
+//   .page-wrapper {
+//     width: 345px !important;
+//     margin: 0 auto;
+//   }
+// }
 
 
 .opacity {
