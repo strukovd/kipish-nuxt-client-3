@@ -6,6 +6,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: ['@pinia/nuxt', 'nuxt-aos'],
+  plugins: [
+    '~/plugins/global-components',
+    '~/plugins/http',
+    '~/plugins/http2',
+    '~/plugins/vuetify',
+  ],
 
   css: [ "vuetify/styles/main.sass" ],
   build: {
