@@ -53,7 +53,7 @@ export default {
 
     filteredReports() {
       if (this.filterOptions?.name || this.filterOptions.establishmentName || this.filterOptions.date) {
-        const filteredReportsMap = {};
+        const filteredReportsMap: any = {};
         for (const curDateItem of this.visibleDays) {
           if (!this.reportsCacheMap[curDateItem]) continue;
 

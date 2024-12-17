@@ -1,5 +1,5 @@
 <template>
-  <svg class="heroicon" :width="width" :height="height" :viewBox="`0 0 ${width} ${height}`" :fill="fill" :stroke="stroke" xmlns="http://www.w3.org/2000/svg" v-html="icons[name].path"></svg>
+  <svg class="heroicon" :width="width" :height="height" :viewBox="`0 0 24 24`" :fill="fill" :stroke="stroke" xmlns="http://www.w3.org/2000/svg" v-html="icons[name].path"></svg>
 </template>
 
 <script lang="ts">
