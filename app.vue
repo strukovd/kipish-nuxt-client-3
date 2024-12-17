@@ -1,6 +1,9 @@
 <template>
   <div @resize="handleResize">
-    <NuxtLayout>
+    appStore.isMobile: {{ appStore.isMobile }}
+    <br>
+    windowWidth: {{ appStore.windowWidth }}
+    <NuxtLayout :name="appStore.isMobile ? 'default-mobile' : 'default'">
       <NuxtPage/>
     </NuxtLayout>
   </div>
@@ -25,6 +28,7 @@ export default {
   methods: {
     initGlobalProperties() {
       this.appStore.windowWidth = document.body.clientWidth;
+      this.appStore.isMobile = this.appStore.windowWidth <= 1400;
     },
 
     handleResize() {

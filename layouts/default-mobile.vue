@@ -1,5 +1,6 @@
 <template>
   <section id="default-layout">
+    mobilka
     <AppHeader/>
     <main style="min-height:600px; padding-bottom:6em;">
       <slot/>
