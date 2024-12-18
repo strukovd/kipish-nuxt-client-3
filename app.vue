@@ -1,6 +1,6 @@
 <template>
-  <div @resize="handleResize">
-    <NuxtLayout>
+  <div @resize="onResize">
+    <NuxtLayout :name="layout">
       <NuxtPage/>
     </NuxtLayout>
   </div>
@@ -16,6 +16,9 @@ import { mapStores } from 'pinia';
 export default {
   computed: {
     ...mapStores( useAppStore ),
+    layout() {
+      return this.appStore.isMobile ? 'default-mobile' : 'default';
+    }
   },
   data() {
     return {
@@ -25,9 +28,10 @@ export default {
   methods: {
     initGlobalProperties() {
       this.appStore.windowWidth = document.body.clientWidth;
+      this.appStore.isMobile = document.body.clientWidth <= 1400;
     },
 
-    handleResize() {
+    onResize() {
       if(document?.body) {
         const wWidth = document.body.clientWidth;
         let baseWidth = 1440;
@@ -38,7 +42,8 @@ export default {
       }
       else return;
 
-      // this.updateElementSize(baseWidth);
+      this.appStore.windowWidth = document.body.clientWidth;
+      this.appStore.isMobile = document.body.clientWidth <= 1400;
     },
   },
 
@@ -54,12 +59,12 @@ export default {
         }
       });
 
-      window.addEventListener("resize", this.handleResize);
+      window.addEventListener("resize", this.onResize);
     }
   },
   destroyed() {
     if( import.meta.browser ) {
-      window.removeEventListener("resize", this.handleResize);
+      window.removeEventListener("resize", this.onResize);
     }
   },
 };
