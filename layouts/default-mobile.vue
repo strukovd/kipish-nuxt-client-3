@@ -1,6 +1,6 @@
 <template>
   <section id="default-layout">
-    <AppHeader/>
+    <AppMobileHeader/>
     <main style="min-height:600px; padding-bottom:6em;">
       <slot/>
     </main>
@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-import AppHeader from '~/components/common/AppHeader.vue';
+import AppMobileHeader from '~/components/common/AppMobileHeader.vue';
 import AppFooter from '~/components/common/AppFooter.vue';
 
 export default {
-  components: { AppHeader, AppFooter },
+  components: { AppMobileHeader, AppFooter },
 };
 </script>
 
