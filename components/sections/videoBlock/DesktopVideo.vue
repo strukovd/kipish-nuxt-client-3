@@ -7,8 +7,7 @@
     </h1>
 
     <div class="mt-15 d-flex justify-center">
-      <swiper style="width: 100% !important;" v-show="videos.length" class="swiper ma-auto" :options="swiperOption"
-              ref="swiper">
+      <swiper style="width: 100% !important;" v-show="videos.length" class="swiper ma-auto" :options="swiperOption" ref="swiper">
         <swiper-slide
           style="height : 550px !important;max-width: 845px !important;border-radius: 16px !important;position: relative"
           class="mx-8 cursor-pointer" v-for="(video,index) in videos"
@@ -75,9 +74,15 @@
 <script>
 import { mapState } from "pinia";
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+
+// import 'swiper/modules/effect-coverflow/effect-coverflow.min.css';
+// import 'swiper/modules/pagination/pagination.min.css';
+
 
 import VideoPlayer from "@/components/common/VideoPlayer.vue";
-import 'swiper/swiper.min.css';
 import Loader from "@/components/common/Loader.vue";
 
 export default {

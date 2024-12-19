@@ -34,10 +34,10 @@ export default {
     onResize() {
       if(document?.body) {
         const wWidth = document.body.clientWidth;
-        let baseWidth = 1440;
+        // let baseWidth = 1440;
 
         if (wWidth < 1920) {
-          baseWidth = wWidth * 0.75;
+          // baseWidth = wWidth * 0.75;
         }
       }
       else return;
