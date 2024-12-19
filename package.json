@@ -26,6 +26,7 @@
     "vue-awesome-swiper": "^5.0.1",
     "vue-router": "^4.5.0",
     "vue3-marquee-slider": "^1.0.5",
+    "vueperslides": "^3.5.1",
     "vuetify": "^3.0.0"
   }
 }
