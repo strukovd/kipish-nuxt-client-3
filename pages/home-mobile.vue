@@ -1,9 +1,17 @@
 <template>
-  <section class="poster-section mmid" data-aos="fade-up" data-aos-duration="1500">
-    <h1 class="font-title" style="font-size:28px; text-transform:uppercase; margin-bottom:2em; font-weight:300;">Медиа ресурс о светской жизни</h1>
-    <ClientOnly>
-      <BaseMobileSlider :posters="posters"/>
-    </ClientOnly>
+  <section class="home-mobile">
+    <section class="poster-section mmid" data-aos="fade-up" data-aos-duration="1500">
+      <h1 class="font-title" style="font-size:28px; text-transform:uppercase; margin-bottom:2em; font-weight:300;">Медиа ресурс о светской жизни</h1>
+      <ClientOnly>
+        <BaseMobileSlider :posters="posters"/>
+      </ClientOnly>
+    </section>
+
+    <section class="marquee-section" data-aos="fade-up" data-aos-duration="1500">
+      <ClientOnly>
+        <Marquee text="Стиль / Люди / События /"/>
+      </ClientOnly>
+    </section>
   </section>
 </template>
 
@@ -11,9 +19,10 @@
 import { mapStores } from 'pinia';
 import { defineComponent } from 'vue';
 import BaseMobileSlider from '~/components/common/BaseMobileSlider.vue';
+import Marquee from '~/components/common/Marquee.vue';
 
 export default defineComponent({
-  components: { BaseMobileSlider },
+  components: { BaseMobileSlider, Marquee },
   computed: {
     ...mapStores( useAppStore ),
   },
