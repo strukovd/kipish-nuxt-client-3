@@ -46,7 +46,7 @@
             </v-row>
           </div>
           <template v-if="video.play || !video.coverImageId">
-            <video-player style="position: absolute;width: 100%;height: 100%;z-index: 999 !important;" :controls="video.play ? true : false" :autoplay="video.play" :file="videoDomain + video.id" />
+            <video-player style="position: absolute;width: 100%;height: 100%;z-index: 999 !important;" :controls="video.play ? true : false" :autoplay="video.play" :file="appStore.videoDomain + video.id" />
           </template>
           <template v-if="!video.play">
             <v-img class="image_item_cover" lazy-src="/images/cover-2.jpg" height="100%" style="border-radius: 16px " :src="video.coverImage"/>
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapStores } from "pinia";
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -86,10 +86,10 @@ import VideoPlayer from "@/components/common/VideoPlayer.vue";
 import Loader from "@/components/common/Loader.vue";
 
 export default {
-  name: "DesktopVideo",
+  name: "DesktopVideos",
   components: { Loader, VideoPlayer, SwiperSlide, Swiper },
   computed: {
-    ...mapState(useAppStore, ['videoDomain', 'currentCity']),
+    ...mapStores(useAppStore, ['videoDomain', 'currentCity']),
     swiper() {
       return this.$refs.swiper.$swiper;
     },
@@ -134,11 +134,11 @@ export default {
     },
 
     async fetchReports() {
-      if (!this.currentCity) {
+      if (!this.appStore.currentCity) {
         return;
       }
       try {
-        const { data: { content } } = await this.$http2.get(`/reports/video/top?city=${this.currentCity.id}`);
+        const { data: { content } } = await this.$http2.get(`/reports/video/top?city=${this.appStore.currentCity.id}`);
         this.videos = content
           .filter(el => el.top)
           .map(el => ({
@@ -199,7 +199,7 @@ export default {
   },
 
   created() {
-    if (this.currentCity) {
+    if (this.appStore.currentCity) {
       this.fetchReports()
     }
   },
