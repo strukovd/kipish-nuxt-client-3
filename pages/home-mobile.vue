@@ -1,7 +1,7 @@
 <template>
   <section class="home-mobile">
     <section class="poster-section mmid" data-aos="fade-up" data-aos-duration="1500">
-      <h1 class="font-title" style="font-size:28px; text-transform:uppercase; margin-bottom:2em; font-weight:300;">Медиа ресурс о светской жизни</h1>
+      <h1 class="font-title" style="font-size:28px; text-transform:uppercase; margin-bottom:2em; font-weight:200;">Медиа ресурс о светской жизни</h1>
       <ClientOnly>
         <BaseMobileSlider :posters="posters"/>
       </ClientOnly>
@@ -10,6 +10,24 @@
     <section class="marquee-section" data-aos="fade-up" data-aos-duration="1500">
       <Marquee text="Стиль / Люди / События /"/>
     </section>
+
+    <section class="ad-section mmid" data-aos="fade-up" data-aos-duration="1500">
+      <ClientOnly>
+        <BaseAd :loading="loading"/>
+      </ClientOnly>
+    </section>
+
+    <section class="reports-section mmid" data-aos="fade-up" data-aos-duration="1500">
+      <MobileReports/>
+    </section>
+
+    <!-- <section class="videos-section" data-aos="fade-up" data-aos-duration="1500">
+      <DesktopVideo/>
+    </section> -->
+
+    <!-- <section class="establishments-section mid" data-aos="fade-up" data-aos-duration="1500">
+      <DesktopEstabs/>
+    </section> -->
 
     <section class="ad-section mmid" data-aos="fade-up" data-aos-duration="1500">
       <ClientOnly>
@@ -25,9 +43,10 @@ import { defineComponent } from 'vue';
 import BaseMobileSlider from '~/components/common/BaseMobileSlider.vue';
 import Marquee from '~/components/common/Marquee.vue';
 import BaseAd from '~/components/common/BaseAd.vue';
+import MobileReports from '~/components/sections/reportsBlock/MobileReports.vue';
 
 export default defineComponent({
-  components: { BaseMobileSlider, Marquee, BaseAd },
+  components: { BaseMobileSlider, Marquee, BaseAd, MobileReports },
   computed: {
     ...mapStores( useAppStore ),
   },
