@@ -25,9 +25,9 @@
       <MobileVideos/>
     </section>
 
-    <!-- <section class="establishments-section mid" data-aos="fade-up" data-aos-duration="1500">
-      <DesktopEstabs/>
-    </section> -->
+    <section class="establishments-section mmid" data-aos="fade-up" data-aos-duration="1500">
+      <MobileEstabs/>
+    </section>
 
     <section class="ad-section mmid" data-aos="fade-up" data-aos-duration="1500">
       <ClientOnly>
@@ -45,9 +45,10 @@ import Marquee from '~/components/common/Marquee.vue';
 import BaseAd from '~/components/common/BaseAd.vue';
 import MobileReports from '~/components/sections/reportsBlock/MobileReports.vue';
 import MobileVideos from '~/components/sections/videoBlock/MobileVideos.vue';
+import MobileEstabs from '~/components/sections/estabsBlock/MobileEstabs.vue';
 
 export default defineComponent({
-  components: { BaseMobileSlider, Marquee, BaseAd, MobileReports, MobileVideos },
+  components: { BaseMobileSlider, Marquee, BaseAd, MobileReports, MobileVideos, MobileEstabs },
   computed: {
     ...mapStores( useAppStore ),
   },

@@ -106,60 +106,60 @@ export default {
 </script>
 
 <style lang="scss">
-.desktop_estabs {
-  .button_link {
-    &:hover {
-      background: #373737 !important;
-    }
-  }
+// .desktop_estabs {
+//   .button_link {
+//     &:hover {
+//       background: #373737 !important;
+//     }
+//   }
 
-  .v-skeleton-loader__image {
-    width: 416px !important;
-    height: 600px !important;
-    border-radius: 16px !important;
-  }
+//   .v-skeleton-loader__image {
+//     width: 416px !important;
+//     height: 600px !important;
+//     border-radius: 16px !important;
+//   }
 
-  .estabs_card {
-    width: 416px;
-    height: 600px;
-    margin-right: 32px !important;
-    margin-bottom: 32px !important;
-  }
+//   .estabs_card {
+//     width: 416px;
+//     height: 600px;
+//     margin-right: 32px !important;
+//     margin-bottom: 32px !important;
+//   }
 
-  //.estabs_card:nth-child(3n+1),
-  //.estabs_card:nth-child(3n+3) {
-  //  .estabs_card__content {
-  //    height: 340px !important;
-  //  }
-  //  height: 440px !important;
-  //  .v-image {
-  //    height: 340px !important;
-  //  }
-  //  .v-image__image {
-  //    height: 340px !important;
-  //  }
-  //}
+//   //.estabs_card:nth-child(3n+1),
+//   //.estabs_card:nth-child(3n+3) {
+//   //  .estabs_card__content {
+//   //    height: 340px !important;
+//   //  }
+//   //  height: 440px !important;
+//   //  .v-image {
+//   //    height: 340px !important;
+//   //  }
+//   //  .v-image__image {
+//   //    height: 340px !important;
+//   //  }
+//   //}
 
-  //.estabs_card:nth-child(3n+2) {
-  //  height: 420px !important;
-  //  .estabs_card__content {
-  //    height: 320px !important;
-  //  }
-  //  .v-image {
-  //    height: 320px !important;
-  //  }
-  //  .v-image__image {
-  //    height: 320px !important;
-  //  }
-  //}
+//   //.estabs_card:nth-child(3n+2) {
+//   //  height: 420px !important;
+//   //  .estabs_card__content {
+//   //    height: 320px !important;
+//   //  }
+//   //  .v-image {
+//   //    height: 320px !important;
+//   //  }
+//   //  .v-image__image {
+//   //    height: 320px !important;
+//   //  }
+//   //}
 
-  .estabs_card:nth-child(3n) {
-    margin-right: 0 !important;
-  }
+//   .estabs_card:nth-child(3n) {
+//     margin-right: 0 !important;
+//   }
 
-  .estabs_card:nth-last-child(-n+3) {
-    margin-bottom: 0 !important;
-  }
-}
+//   .estabs_card:nth-last-child(-n+3) {
+//     margin-bottom: 0 !important;
+//   }
+// }
 
 </style>
