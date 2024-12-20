@@ -8,8 +8,12 @@
     </section>
 
     <section class="marquee-section" data-aos="fade-up" data-aos-duration="1500">
+      <Marquee text="Стиль / Люди / События /"/>
+    </section>
+
+    <section class="ad-section mmid" data-aos="fade-up" data-aos-duration="1500">
       <ClientOnly>
-        <Marquee text="Стиль / Люди / События /"/>
+        <BaseAd :loading="loading"/>
       </ClientOnly>
     </section>
   </section>
@@ -20,9 +24,10 @@ import { mapStores } from 'pinia';
 import { defineComponent } from 'vue';
 import BaseMobileSlider from '~/components/common/BaseMobileSlider.vue';
 import Marquee from '~/components/common/Marquee.vue';
+import BaseAd from '~/components/common/BaseAd.vue';
 
 export default defineComponent({
-  components: { BaseMobileSlider, Marquee },
+  components: { BaseMobileSlider, Marquee, BaseAd },
   computed: {
     ...mapStores( useAppStore ),
   },
