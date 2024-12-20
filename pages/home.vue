@@ -21,7 +21,7 @@
     <DesktopReports/>
   </section>
   <section class="videos-section" data-aos="fade-up" data-aos-duration="1500">
-    <DesktopVideo/>
+    <DesktopVideos/>
   </section>
   <section class="establishments-section mid" data-aos="fade-up" data-aos-duration="1500">
     <DesktopEstabs/>
@@ -51,10 +51,10 @@ import BasePosterSlider from '~/components/common/BasePosterSlider.vue';
 import Marquee from '~/components/common/Marquee.vue';
 import DesktopEstabs from '~/components/sections/estabsBlock/DesktopEstabs.vue';
 import DesktopReports from '~/components/sections/reportsBlock/DesktopReports.vue';
-import DesktopVideo from '~/components/sections/videoBlock/DesktopVideo.vue';
+import DesktopVideos from '~/components/sections/videoBlock/DesktopVideos.vue';
 
 export default defineComponent({
-  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideo, DesktopEstabs },
+  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideos, DesktopEstabs },
   computed: {
     ...mapStores( useAppStore ),
   },

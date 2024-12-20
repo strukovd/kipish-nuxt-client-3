@@ -3,7 +3,7 @@
     <VueperSlides :autoplay="posters && posters?.length > 1" :infinite="false" :arrows="true">
       <VueperSlide v-for="(poster, index) in posters" :key="poster.id" class="cursor-pointer">
         <template #content>
-            <v-img lazy-src="/static/images/cover-2.jpg" style="position: relative" width="100%" height="100%"
+            <v-img lazy-src="/images/cover-2.jpg" style="position: relative" width="100%" height="100%"
                   :src="`https://files.kipish.kg/${poster.coverPath}`">
               <div style="position: absolute; width: 100%;height: 100%;z-index:998;background: #28282880"></div>
               <div style="position:absolute;width:100%;height: 100%;z-index:999;display:flex;flex-direction:column; padding:1.4em;">

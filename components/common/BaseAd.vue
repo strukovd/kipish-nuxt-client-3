@@ -70,6 +70,7 @@ export default {
 <style scoped lang="scss">
 .base-ad {
   .ad-img {
+    object-fit: cover;
     border-radius:12px; overflow:hidden;
   }
 }
