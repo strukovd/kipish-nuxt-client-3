@@ -25,13 +25,13 @@
 
 <script>
 import BaseEstabCard from "@/components/common/BaseEstabCard.vue";
-import { mapState } from "pinia";
+import { mapStores } from "pinia";
 
 export default {
   name: "DesktopEstabs",
   components: { BaseEstabCard },
   computed: {
-    ...mapState(useAppStore, ['currentCity']),
+    ...mapStores(useAppStore, ['currentCity']),
   },
   data: () => ({
     loading: false,
@@ -39,18 +39,18 @@ export default {
     estabs: [],
   }),
   created() {
-    if (this.currentCity) {
+    if (this.appStore.currentCity) {
       this.fetchEstabs()
     }
   },
   methods: {
     async fetchEstabs() {
-      if(!this.currentCity) {
+      if(!this.appStore.currentCity) {
         return;
       }
       this.loading = true;
       this.currentSlideEstab = [];
-      const params = {cityId: this.currentCity.id}
+      const params = {cityId: this.appStore.currentCity.id}
       try {
         const { data: { content } } = await this.$http2.get('/establishments?top=true')
         // const filteredEstabs = content.filter(estab => estab.id === 37 || estab.id === 30 || estab.id === 41)

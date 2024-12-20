@@ -3,24 +3,24 @@
     <v-skeleton-loader v-if="loading" style="border-radius: 17px;" type="image" width="100%" height="240px"/>
     <div v-else>
       <a :href="advertisement?.link" target="_blank" rel="noreferrer">
-        <img class="ad-img" lazy-src="/images/cover-2.jpg" :height="isMobile ? `240px` : `320px`" width="100%" :src="advertisementPath"/>
+        <img class="ad-img" lazy-src="/images/cover-2.jpg" :height="appStore.isMobile ? `240px` : `320px`" width="100%" :src="advertisementPath"/>
       </a>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'pinia';
+import { mapStores } from 'pinia';
 
 export default {
   props: {
     loading: {type: Boolean, default: false}
   },
   computed: {
-    ...mapState(useAppStore, ['isMobile']),
+    ...mapStores( useAppStore, ['isMobile'] ),
     advertisementPath() {
       let ad;
-      if( this.isMobile ) {
+      if( this.appStore.isMobile ) {
         ad = this.advertisement?.fileMobile ?? 'https://files.kipish.kg/advertisement/ADVERTISEMENT/380%D1%85360.gif';
       }
       else {

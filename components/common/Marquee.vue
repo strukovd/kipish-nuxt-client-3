@@ -1,11 +1,11 @@
 <template>
   <div>
-    <template v-if="!windowWidth || windowWidth > 1400">
+    <template v-if="!appStore.windowWidth || appStore.windowWidth > 1400">
       <VueMarqueeSlider id="marquee-slider-loop" :space="20" :speed="5000" :width="1275">
         <span style="font-weight:300; font-size:82px; text-transform:uppercase;" class="font-title">{{ text }}</span>
       </VueMarqueeSlider>
     </template>
-    <template v-if="windowWidth <= 1400">
+    <template v-if="appStore.windowWidth <= 1400">
       <VueMarqueeSlider id="marquee-slider-loop" :space="10" :speed="5000" :width="510">
         <span style="font-size:32px; line-height:42px; text-transform:uppercase;" class="font-title">{{ text }}</span>
       </VueMarqueeSlider>
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'pinia';
+import { mapStores } from 'pinia';
 import { VueMarqueeSlider } from 'vue3-marquee-slider';
 import '@/node_modules/vue3-marquee-slider/dist/style.css';
 
@@ -24,7 +24,7 @@ export default {
   },
   components: { VueMarqueeSlider },
   computed: {
-    ...mapState(useAppStore, ['windowWidth'])
+    ...mapStores(useAppStore, ['windowWidth'])
   },
   data() {
     return {};

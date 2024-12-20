@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapStores } from "pinia";
 import BaseReportCard from "~/components/common/BaseReportCard.vue";
 import BaseAdvertisement from "~/components/common/BaseAdvertisement.vue";
 
@@ -32,7 +32,7 @@ export default {
   name: "DesktopReports",
   components: { BaseReportCard, BaseAdvertisement },
   computed: {
-    ...mapState(useAppStore, ['currentCity'])
+    ...mapStores(useAppStore, ['currentCity'])
   },
   data: () => ({
     reports: [],
@@ -90,7 +90,7 @@ export default {
   mounted() {
   },
   created() {
-    if (this.currentCity) {
+    if (this.appStore.currentCity) {
       this.fetchReports();
     }
   },
@@ -126,12 +126,12 @@ export default {
     },
 
     async fetchReports() {
-      if (!this.currentCity) {
+      if (!this.appStore.currentCity) {
         return;
       }
       this.loading = true;
       try {
-        const {data: {content}} = await this.$http.get(`/albums/top?city=${this.currentCity.id}&sort=priority,asc`);
+        const {data: {content}} = await this.$http.get(`/albums/top?city=${this.appStore.currentCity.id}&sort=priority,asc`);
         this.reports = content.splice(0, 9)
         await this.fetchReportImages(this.reports)
         await this.fetchAds();
