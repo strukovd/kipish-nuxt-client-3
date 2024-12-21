@@ -13,7 +13,7 @@
           :coverId="report.coverImageId"
           :subTitle="formatDate(report.reportDate)"
           :label="report?.establishment?.name"
-          :coverImage="`https://files.kipish.kg/${report.coverPath}`"
+          :coverImage="report?.coverPath ? `https://files.kipish.kg/${report.coverPath}` : ''"
           :src="appStore.videoDomain + report.id"
           :link="'/video/' + report.id"
         />

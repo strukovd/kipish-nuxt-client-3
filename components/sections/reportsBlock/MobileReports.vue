@@ -5,7 +5,7 @@
       <div style="padding-left:1em;">фотоотчеты</div>
     </h1>
 
-    <div class="photo-cards" style="gap: 32px">
+    <div class="photo-cards">
       <template v-for="(card, index) of reports" :key="index">
         <component
           :is="card?.advert ? 'BaseAdvertisement' : 'BaseReportCard'"
@@ -165,6 +165,7 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
+    gap: 32px;
   }
 }
 
