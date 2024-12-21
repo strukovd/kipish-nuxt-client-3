@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import type { ModalModel } from '~/plugins/modal';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -11,7 +12,9 @@ export const useAppStore = defineStore('app', {
     currentCity: import.meta.browser ? JSON.parse(localStorage.getItem('city') ?? 'null') : {"id":1,"nameRu":"Бишкек","nameKg":"Бишкек","nameEn":"Bishkek","visible":true},
     sourceId: import.meta.browser ? JSON.parse(localStorage.getItem('sourceId') ?? 'null') : null,
     errorMessages: [],
-    isDark: false
+    isDark: false,
+
+    modals: [] as ModalModel[],
   }),
   actions: {}
 })

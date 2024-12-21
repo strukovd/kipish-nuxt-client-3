@@ -1,5 +1,8 @@
 <template>
   <div id="main-page">
+		<transition name="modal">
+			<ModalWrapper v-if="appStore.modals.length"/>
+		</transition>
     <template v-if="true || appStore.currentCity">
       <div>
         <template v-if="!appStore.isMobile">
@@ -22,12 +25,11 @@ import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 import Home from './home.vue';
 import HomeMobile from './home-mobile.vue';
-// import DesktopMedia from '~/components/sections/mediaBlock/DesktopMedia.vue';
-// import DesktopStats from '~/components/sections/statBlock/DesktopStats.vue';
+import ModalWrapper from '~/components/ModalWrapper.vue';
 
 export default defineComponent({
   name: 'MainPage',
-  components: { Home, HomeMobile, },
+  components: { ModalWrapper, Home, HomeMobile, },
   computed: {
     ...mapStores( useAppStore ),
   },
@@ -51,5 +53,13 @@ export default defineComponent({
     font-weight: 300;
     text-transform: uppercase;
   }
+
+
+  .modal-enter-active, .modal-leave-active {
+		transition:opacity .2s ease-in 0s;
+	}
+	.modal-enter-from, .modal-leave-to {
+		opacity: 0;
+	}
 }
 </style>
