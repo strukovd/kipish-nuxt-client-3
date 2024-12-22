@@ -23,7 +23,7 @@
         </div> -->
         <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->
         <div class="cursor-pointer ml-8">
-          <heroicon class="cursor-pointer" name="burger" :fill="appStore.isDark ? '#FFFFFF' : '#111111'" :stroke="appStore.isDark ? '#FFFFFF' : '#111111'"/>
+          <heroicon @click="openMenu" class="cursor-pointer" name="burger" fill="currentColor" stroke="currentColor"/>
           <!-- <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': $vuetify.theme.dark }"/> -->
         </div>
       </section>
@@ -32,122 +32,43 @@
 
 
 
+  <div class="right-menu">
+    <aside>
+      <section class="row-1" style="display: flex; align-items: center; justify-content: space-between;">
+        <div class="logo">
+          <img src="/images/logo.svg" height="36px" alt="">
+        </div>
+        <div style="display: flex; align-items: center; gap:2em;">
 
+        </div>
+      </section>
 
+      <nav class="nav-links">
+        <span v-for="link of links" :key="link.title" class="font-text nav-link">
+          <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
+          <span v-else @click="link.onClick">{{ link.title }}</span>
+        </span>
+      </nav>
 
+      <section class="contacts">
+        <div>
+          <div class="title font-text">Контакты</div>
+          <div>+996 (504) 443444</div>
+        </div>
+        <div>
+          <div class="title font-text">Email</div>
+          <div>info@kipish.kg</div>
+        </div>
+      </section>
 
+      <section class="socials">
+        <a target="_blank" href="https://www.youtube.com/channel/UCaHkOh9c7dgps2aC4EbShSA" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px); background-image:url('/images/socials/youtube.svg');"></a>
+        <a target="_blank" href="https://wa.me/996504443444" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 20px); background-image:url('/images/socials/whatsapp.svg');"></a>
+        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px); background-image:url('/images/socials/instagram.svg');"></a>
+      </section>
+    </aside>
+  </div>
 
-  <!-- <div v-if="appStore.windowWidth <= 1400" style="height: 80px">
-    <v-app-bar :style="appStore.isDark ? 'background-color: #171717' : 'background-color: #f5f5f5'" elevation="0" fixed height="80px" class="d-flex align-center justify-center">
-      <v-card style="border-radius: unset !important; z-index: 999 !important;border-bottom: 1px solid #0000001A" elevation="0" class="d-flex align-center pa-0 " color="transparent">
-        <v-card-text class="px-4 d-flex justify-space-between align-center pa-0 wrapper">
-          <div class="d-flex align-center header_block">
-            LOGO...
-            CITIES...
-          </div>
-          <div @click="openMenu" class="d-flex align-center">
-            <heroicon class="cursor-pointer" name="burger" :fill="appStore.isDark ? '#FFFFFF' : '#111111'"
-                      :stroke="appStore.isDark ? '#FFFFFF' : '#111111'"/>
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-app-bar>
-
-    <v-navigation-drawer style="border-radius: 8px 0 0 8px; z-index: 999 !important; max-width:350px;" app width="75%" fixed
-                          v-model="menu" right>
-      <v-card elevation="0" color="transparent" height="100%">
-        <v-card-text class="pa-0 px-6 pt-5 d-flex align-center justify-space-between">
-          <div class="d-flex align-center">
-            <div class="cursor-pointer" @click="$router.push('/')">
-              <v-img width="37" height="36"
-                      :src="$vuetify.theme.dark ? '/static/images/logo-light.svg' : '/static/images/logo.svg'"/>
-            </div>
-          </div>
-          <div class="d-flex align-center">
-            <heroicon @click="searchDialog = true" class="cursor-pointer mr-8" name="search"
-                      :fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/>
-            <v-img class="cursor-pointer" @click="toggleTheme" width="24" height="24"
-                    src="/static/images/mode.svg"
-                    :class="{ 'rotate-animation': rotateAnimation, 'rotate': $vuetify.theme.dark }"/>
-          </div>
-        </v-card-text>
-        <v-card-text class="pl-6 pr-0 py-0 mt-10 pb-10">
-          <div class="d-flex flex-column">
-            <template v-for="link of [
-                {href: '/reports',                title: 'Фото',              icon: 'mdi-camera'},
-                {href: '/videos',                 title: 'Видео',             icon: 'mdi-video'},
-                {href: '/events',                 title: 'События',           icon: 'mdi-calendar'},
-                {href: '/establishments',         title: 'Заведения',         icon: 'mdi-glass-wine'},
-                {onClick: scrollToContacts,       title: 'Контакты',          icon: 'mdi-phone-message'},
-                {href: '/feedback',               title: 'Заказать съемку',   icon: 'mdi-video-marker'},
-                // {href: '/news',                                  title: 'Новости',           icon: 'mdi-camera'},
-              ]">
-              <span class="black--text text-18 font-weight-regular mb-6 mr-8 cursor-pointer select-none">
-                    <router-link v-if="link.href"
-                          :to="link.href"
-                          style="text-decoration:none; color:inherit;"
-                    >{{ link.title }}</router-link>
-                    <span v-else
-                          @click="link.onClick"
-                    >{{ link.title }}</span>
-              </span>
-            </template>
-          </div>
-          <v-divider style="color: #0000001A !important;" class="mt-10"/>
-          <div class="mt-5">
-            <div class="d-flex flex-column">
-              <p class="black--text font-weight-300 text-12 mb-2 text-uppercase">
-                Контакты</p>
-              <p class="black--text text-16 mb-0"><a target="_blank" ref="noorefferer"
-                                                      class="text-decoration-none black--text"
-                                                      href="tel:+996504443444">+996 (504) 443444</a></p>
-            </div>
-            <div class="d-flex flex-column mt-8">
-              <p class="black--text font-weight-300 text-12 mb-2 text-uppercase">Email</p>
-              <p class="black--text text-16 mb-0"><a target="_blank" ref="noorefferer"
-                                                      class="text-decoration-none black--text"
-                                                      href="mailto:info@kipish.kg">info@kipish.kg</a></p>
-            </div>
-          </div>
-          <div class="d-flex align-center mt-10">
-            <div :style="$vuetify.theme.dark ? 'border: 1px solid #FFFFFF;' : 'border: 1px solid #0000001A;'"
-                  style="border-radius: 50%;width: 40px;height: 40px"
-                  class="d-flex justify-center align-center mr-6 cursor-pointer">
-              <a target="_blank" ref="noorefferer" class="text-decoration-none"
-                  href="https://www.youtube.com/channel/UCaHkOh9c7dgps2aC4EbShSA">
-                <div>
-                  <v-img
-                    :src="$vuetify.theme.dark ? '/static/images/social/yt-light.svg' : '/static/images/social/yt.svg'"/>
-                </div>
-              </a>
-            </div>
-            <div :style="$vuetify.theme.dark ? 'border: 1px solid #FFFFFF;' : 'border: 1px solid #0000001A;'"
-                  style="border-radius: 50%;width: 40px;height: 40px"
-                  class="d-flex justify-center align-center mr-6 cursor-pointer">
-              <a target="_blank" ref="noorefferer" href="https://wa.me/996504443444">
-                <div>
-                  <v-img
-                    width="18" height="18"
-                    :src="$vuetify.theme.dark ? '/static/images/social/whatsapp-light.svg' : '/static/images/social/whatsapp.svg'"/>
-                </div>
-              </a>
-            </div>
-            <div :style="$vuetify.theme.dark ? 'border: 1px solid #FFFFFF;' : 'border: 1px solid #0000001A;'"
-                  style="border-radius: 50%;width: 40px;height: 40px"
-                  class="d-flex justify-center align-center cursor-pointer">
-              <a target="_blank" ref="noorefferer" href="https://www.instagram.com/kipishkg/">
-                <div>
-                  <v-img
-                    width="18" height="18"
-                    :src="$vuetify.theme.dark ? '/static/images/social/inst-light.svg' : '/static/images/social/inst.svg'"/>
-                </div>
-              </a>
-            </div>
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-navigation-drawer>
-  </div> -->
 </template>
 
 <script lang="ts">
@@ -180,16 +101,22 @@ export default {
     ...mapStores( useAppStore ),
   },
   methods: {
-    // ...mapActions(['logout']),
+    scrollToBottom() {
+      const destinationElement = document.body;
+      if (destinationElement) {
+        window.scrollTo({
+          top: document.body.offsetHeight,
+          behavior: 'smooth'
+        });
+      }
+    },
 
-    // scrollToContacts() {
-    //   this.$router.push({hash: ""});
-    //   const fullHeight = document.documentElement.scrollHeight;
-    //   this.$vuetify.goTo(fullHeight);
-    // },
-    // openMenu() {
-    //   this.menu = !this.menu
-    // },
+    openMenu() {
+      console.log(`sadsa`);
+
+      this.$modal.show('menu-modal', 'ConfirmModal');
+      this.menu = !this.menu
+    },
     // toggleTheme() {
     //   this.rotateAnimation = true;
     //   this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
@@ -309,6 +236,90 @@ export default {
         }
       }
     }
+  }
+}
+
+.right-menu {
+  padding:3em 2em;
+  background: white;
+
+  .row-1 {
+    margin-bottom:2em;
+    .logo {}
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column !important;
+    gap: 1em;
+    margin-bottom:2em;
+
+    .nav-link {
+      font-size:16px;
+      color: #111111;
+      cursor:pointer;
+      font-weight:normal;
+      user-select:none;
+      position: relative;
+      >a, >span {
+        font-weight:300;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 0;
+        height: 1px;
+        background-color: #111111;
+        transition: width 0.6s ease;
+        clip-path: polygon(0 0, 0% 100%, 100% 100%, 100% 0);
+      }
+      &:hover::before {
+        width: 100%;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+    }
+  }
+
+  .contacts {
+    display: flex;
+    padding:1.6em 0 0 0;
+    margin:1.6em 0 0 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size:18px;
+    color: #111111;
+    flex-wrap: wrap;
+    gap: 3em;
+
+    .title {
+      font-weight:200;
+    }
+  }
+
+  .socials {
+    display: flex;
+    padding:1.6em 0 1.6em 0;
+    margin:0 0 1.6em 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+    gap: 16px;
+
+    >:hover {
+      background-color:rgb(18 18 18 / 10%);
+    }
+  }
+
+  .row-3 {
+    font-size: 18px;
+    color: #454545;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
+    margin-top: 2em;
   }
 }
 </style>

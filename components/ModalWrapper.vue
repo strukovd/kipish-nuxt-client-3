@@ -1,7 +1,8 @@
 <template>
   <div class="modal-shadow" @keydown.esc="close" @click.self="close">
     <div class="modal-window">
-      <header class="modal-header">
+      <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
+      <!-- <header class="modal-header">
         <h3>
           <v-icon v-if="visibleModal.options?.icon" color="cornflowerblue" :icon="visibleModal.options?.icon" size="1.2em"/>
           <span class="title">{{ visibleModal.title }}</span>
@@ -11,7 +12,7 @@
       <main class="main">
         <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
       </main>
-      <footer class="footer"></footer>
+      <footer class="footer"></footer> -->
     </div>
   </div>
 </template>
@@ -19,6 +20,7 @@
 <script lang="ts">
 import { mapStores } from 'pinia';
 import Confirm from '@/components/modals/ConfirmModal.vue';
+import MobileAsideMenu from '@/components/modals/MobileAsideMenuModal.vue';
 
 
 export default {
@@ -28,7 +30,7 @@ export default {
       return this.appStore.modals[this.appStore.modals.length-1];
     }
   },
-  components: { Confirm, },
+  components: { Confirm, MobileAsideMenu },
   methods: {
     onKeydown(e: KeyboardEvent) {
       if( e.key === 'Escape' ) {

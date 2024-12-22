@@ -31,8 +31,6 @@ declare module '#app' {
 export default defineNuxtPlugin((nuxtApp) => {
   const modal: ModalPlugin = {
     show: (title: string, template: string, options?: ModalOptions) => {
-      console.log(`was called`);
-
       return new Promise<any>((resolve, reject) => {
         const appStore = useAppStore();
         if (appStore) {
