@@ -69,7 +69,17 @@ export default defineComponent({
 
 <style lang="scss">
 .mobile-aside-menu-modal {
-  padding:3em 2em;
+  // height: 100vh;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  transform: translateX(0%);
+  width: 75%;
+  border-radius: 8px 0px 0px 8px;
+  z-index: 999 !important;
+  max-width: 350px;
+  padding: 3em 2em;
   background: white;
 
   .row-1 {

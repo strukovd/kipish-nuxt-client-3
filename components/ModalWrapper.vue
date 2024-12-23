@@ -1,8 +1,9 @@
 <template>
-  <div class="modal-shadow" @keydown.esc="close" @click.self="close">
+  <div class="modal-shadow" @keydown.esc="close" @pointerdown.self.stop.prevent="close">
+    <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
+    <!--
     <div class="modal-window">
-      <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
-      <!-- <header class="modal-header">
+      <header class="modal-header">
         <h3>
           <v-icon v-if="visibleModal.options?.icon" color="cornflowerblue" :icon="visibleModal.options?.icon" size="1.2em"/>
           <span class="title">{{ visibleModal.title }}</span>
@@ -12,8 +13,9 @@
       <main class="main">
         <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
       </main>
-      <footer class="footer"></footer> -->
+      <footer class="footer"></footer>
     </div>
+    -->
   </div>
 </template>
 
@@ -65,38 +67,38 @@ export default {
   background-color: rgb(20 33 51 / 60%);
   z-index:9999999;
 
-  .modal-window {
-    min-width:600px;
-    max-width: 800px;
-    margin:auto;
-    background: white;
-    border-radius:6px;
+  // .modal-window {
+  //   min-width:600px;
+  //   max-width: 800px;
+  //   margin:auto;
+  //   background: white;
+  //   border-radius:6px;
 
-    .modal-header {
-      border-radius:6px 6px 0 0;
-      // color: #656565;
-      border-bottom: 1px solid #e0e0e0;
-      background: #f5f5f5;
+  //   .modal-header {
+  //     border-radius:6px 6px 0 0;
+  //     // color: #656565;
+  //     border-bottom: 1px solid #e0e0e0;
+  //     background: #f5f5f5;
 
-      h3 {
-        line-height: 3em;
-        margin: 0 1em;
-        font-size: 17px;
-        font-weight: 500;
+  //     h3 {
+  //       line-height: 3em;
+  //       margin: 0 1em;
+  //       font-size: 17px;
+  //       font-weight: 500;
 
-        .title {
-          vertical-align:middle;
-          margin-left:.6em;
-        }
-      }
-    }
+  //       .title {
+  //         vertical-align:middle;
+  //         margin-left:.6em;
+  //       }
+  //     }
+  //   }
 
-    .main {
-      padding:.6em 1.8em 1em;
-      overflow: auto;
-      max-height: 90vh;
-    }
+  //   .main {
+  //     padding:.6em 1.8em 1em;
+  //     overflow: auto;
+  //     max-height: 90vh;
+  //   }
 
-  }
+  // }
 }
 </style>

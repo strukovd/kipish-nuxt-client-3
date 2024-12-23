@@ -29,46 +29,6 @@
       </section>
     </div>
   </header>
-
-
-
-  <div class="right-menu">
-    <aside>
-      <section class="row-1" style="display: flex; align-items: center; justify-content: space-between;">
-        <div class="logo">
-          <img src="/images/logo.svg" height="36px" alt="">
-        </div>
-        <div style="display: flex; align-items: center; gap:2em;">
-
-        </div>
-      </section>
-
-      <nav class="nav-links">
-        <span v-for="link of appStore.links" :key="link.title" class="font-text nav-link">
-          <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
-          <span v-else @click="link.onClick">{{ link.title }}</span>
-        </span>
-      </nav>
-
-      <section class="contacts">
-        <div>
-          <div class="title font-text">Контакты</div>
-          <div>+996 (504) 443444</div>
-        </div>
-        <div>
-          <div class="title font-text">Email</div>
-          <div>info@kipish.kg</div>
-        </div>
-      </section>
-
-      <section class="socials">
-        <a target="_blank" href="https://www.youtube.com/channel/UCaHkOh9c7dgps2aC4EbShSA" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px); background-image:url('/images/socials/youtube.svg');"></a>
-        <a target="_blank" href="https://wa.me/996504443444" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 20px); background-image:url('/images/socials/whatsapp.svg');"></a>
-        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px); background-image:url('/images/socials/instagram.svg');"></a>
-      </section>
-    </aside>
-  </div>
-
 </template>
 
 <script lang="ts">
