@@ -6,8 +6,8 @@
     </main>
     <footer class="footer">
       <div class="buttons">
-        <BaseButton prependIcon="mdi-check" @click="confirm" @keyup.enter="confirm">Да</BaseButton>
-        <BaseButton prependIcon="mdi-close" @click="close" :secondary="true" @keyup.escape="close">Отмена</BaseButton>
+        <!-- <BaseButton prependIcon="mdi-check" @click="confirm" @keyup.enter="confirm">Да</BaseButton>
+        <BaseButton prependIcon="mdi-close" @click="close" :secondary="true" @keyup.escape="close">Отмена</BaseButton> -->
       </div>
     </footer>
   </div>
