@@ -12,7 +12,7 @@
     <nav class="nav-links">
       <span v-for="link of appStore.links" :key="link.title" class="font-text nav-link">
         <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
-        <span v-else @click="link.onClick">{{ link.title }}</span>
+        <span v-else-if="link.onClick" @click="appStore.handleLinkClick(link)">{{ link.title }}</span>
       </span>
     </nav>
 

@@ -21,12 +21,30 @@ export const useAppStore = defineStore('app', {
       {href: '/videos',                 title: 'Видео',             icon: 'mdi-video'},
       {href: '/events',                 title: 'События',           icon: 'mdi-calendar'},
       {href: '/establishments',         title: 'Заведения',         icon: 'mdi-glass-wine'},
-      {onClick: ()=>{},                 title: 'Контакты',          icon: 'mdi-phone-message'},
+      {onClick: 'scrollToBottom',       title: 'Контакты',          icon: 'mdi-phone-message'},
       {href: '/feedback',               title: 'Заказать съемку',   icon: 'mdi-video-marker'},
       // {href: '/news',                                  title: 'Новости',           icon: 'mdi-camera'},
     ],
   }),
-  actions: {}
+  actions: {
+    scrollToBottom() {
+      if(!import.meta.client) return;
+      const destinationElement = document.body;
+      if (destinationElement) {
+        window.scrollTo({
+          top: document.body.offsetHeight,
+          behavior: 'smooth'
+        });
+      }
+    },
+
+    handleLinkClick(link: { href?: string; onClick?: string }) {
+      if (link.onClick && typeof (this as any)[String(link.onClick)] === 'function') {
+        (this as any)[String(link.onClick)]();
+      }
+    },
+
+  }
 })
 
 

@@ -18,7 +18,7 @@
         <div class="nav-links">
           <span v-for="link of appStore.links" :key="link.title" class="nav-link">
             <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
-            <span v-else @click="link.onClick">{{ link.title }}</span>
+            <span v-else-if="link.onClick" @click="appStore.handleLinkClick(link)">{{ link.title }}</span>
           </span>
         </div>
         <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->

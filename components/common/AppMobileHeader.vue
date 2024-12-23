@@ -15,12 +15,6 @@
         </v-select>
       </section>
       <section class="right-side">
-        <!-- <div class="nav-links">
-          <span v-for="link of links" :key="link.title" class="nav-link">
-            <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
-            <span v-else @click="link.onClick">{{ link.title }}</span>
-          </span>
-        </div> -->
         <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->
         <div class="cursor-pointer ml-8">
           <heroicon @click="showMenu" class="cursor-pointer" name="burger" fill="currentColor" stroke="currentColor"/>
@@ -51,16 +45,6 @@ export default {
     ...mapStores( useAppStore ),
   },
   methods: {
-    scrollToBottom() {
-      const destinationElement = document.body;
-      if (destinationElement) {
-        window.scrollTo({
-          top: document.body.offsetHeight,
-          behavior: 'smooth'
-        });
-      }
-    },
-
     showMenu() {
       this.$modal.show('menu-modal', 'MobileAsideMenu');
     },
