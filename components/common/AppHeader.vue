@@ -16,14 +16,14 @@
       </section>
       <section class="right-side">
         <div class="nav-links">
-          <span v-for="link of links" :key="link.title" class="nav-link">
+          <span v-for="link of appStore.links" :key="link.title" class="nav-link">
             <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
             <span v-else @click="link.onClick">{{ link.title }}</span>
           </span>
         </div>
         <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->
         <div class="cursor-pointer ml-8">
-          <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': $vuetify.theme.dark }"/>
+          <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': appStore.isDark }"/>
         </div>
       </section>
     </div>
@@ -41,15 +41,6 @@ export default {
   // components: {Search},
   data() {
     return {
-      links: [
-        {href: '/reports',                title: 'Фото',              icon: 'mdi-camera'},
-        {href: '/videos',                 title: 'Видео',             icon: 'mdi-video'},
-        {href: '/events',                 title: 'События',           icon: 'mdi-calendar'},
-        {href: '/establishments',         title: 'Заведения',         icon: 'mdi-glass-wine'},
-        {onClick: ()=>{},                 title: 'Контакты',          icon: 'mdi-phone-message'},
-        {href: '/feedback',               title: 'Заказать съемку',   icon: 'mdi-video-marker'},
-        // {href: '/news',                                  title: 'Новости',           icon: 'mdi-camera'},
-      ],
       rotateAnimation: false,
       cities: [],
       menu: false,

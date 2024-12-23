@@ -1,8 +1,10 @@
 <template>
   <div id="main-page">
-		<transition name="modal">
-			<ModalWrapper v-if="appStore.modals.length"/>
-		</transition>
+    <ClientOnly>
+      <transition name="modal">
+        <ModalWrapper v-if="appStore.modals.length"/>
+      </transition>
+    </ClientOnly>
     <template v-if="true || appStore.currentCity">
       <div>
         <template v-if="!appStore.isMobile">

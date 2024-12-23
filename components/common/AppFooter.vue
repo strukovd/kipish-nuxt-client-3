@@ -6,7 +6,7 @@
       </div>
       <div style="display: flex; align-items: center; gap:2em;">
         <div class="nav-links">
-          <span v-for="link of links" :key="link.title" class="nav-link">
+          <span v-for="link of appStore.links" :key="link.title" class="nav-link">
             <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
             <span v-else @click="link.onClick">{{ link.title }}</span>
           </span>
@@ -64,17 +64,7 @@ import { mapStores } from 'pinia';
 export default {
   name: "AppFooter",
   data() {
-    return {
-      links: [
-        {href: '/reports',                title: 'Фото',              icon: 'mdi-camera'},
-        {href: '/videos',                 title: 'Видео',             icon: 'mdi-video'},
-        {href: '/events',                 title: 'События',           icon: 'mdi-calendar'},
-        {href: '/establishments',         title: 'Заведения',         icon: 'mdi-glass-wine'},
-        {onClick: ()=>{},                 title: 'Контакты',          icon: 'mdi-phone-message'},
-        {href: '/feedback',               title: 'Заказать съемку',   icon: 'mdi-video-marker'},
-        // {href: '/news',                                  title: 'Новости',           icon: 'mdi-camera'},
-      ],
-    };
+    return {};
   },
   computed: {
     ...mapStores( useAppStore ),

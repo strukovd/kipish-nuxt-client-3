@@ -10,7 +10,7 @@
     </section>
 
     <nav class="nav-links">
-      <span v-for="link of links" :key="link.title" class="font-text nav-link">
+      <span v-for="link of appStore.links" :key="link.title" class="font-text nav-link">
         <router-link v-if="link.href" :to="link.href" style="text-decoration:none; color:inherit;" >{{ link.title }}</router-link>
         <span v-else @click="link.onClick">{{ link.title }}</span>
       </span>
@@ -36,10 +36,14 @@
 </template>
 
 <script lang="ts">
+import { mapStores } from 'pinia';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   props: ['payload'],
+  computed: {
+    ...mapStores( useAppStore ),
+  },
   data() {
     return {};
   },
