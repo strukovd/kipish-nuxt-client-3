@@ -224,6 +224,7 @@ export default {
   computed: {
     ...mapStores( useAppStore ),
   },
+
   head() {
     return {
       link: [
@@ -235,6 +236,7 @@ export default {
       ],
     }
   },
+
   data: () => ({
     closeOnClick: true,
     scrollPosition: 0,
@@ -268,6 +270,7 @@ export default {
     this.initOnScrollFetcher();
     this.getReports();
   },
+
   methods: {
     shouldShowDesktopEvents(dayIndex: any) {
       return dayIndex >= 2 && (dayIndex - 2) % 3 === 0;

@@ -4,7 +4,7 @@
       <VideosDesktop/>
     </template>
     <template v-if="appStore.windowWidth <= 1400">
-      <!-- <VideosMobile/> -->
+      <VideosMobile/>
     </template>
   </div>
 </template>
@@ -12,10 +12,11 @@
 <script>
 import { mapStores } from "pinia";
 import VideosDesktop from "./VideosDesktop.vue";
+import VideosMobile from "./VideosMobile.vue";
 
 
 export default defineComponent({
-  components: { VideosDesktop },
+  components: { VideosDesktop, VideosMobile },
   computed: {
     ...mapStores( useAppStore ),
   },
