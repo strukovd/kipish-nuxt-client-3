@@ -4,7 +4,7 @@
       <ReportsDesktop />
     </template>
     <template v-if="appStore.windowWidth <= 1400">
-      <!-- <ReportsMobile /> -->
+      <ReportsMobile />
     </template>
   </div>
 </template>
@@ -12,12 +12,12 @@
 <script lang="ts">
 import { mapStores } from 'pinia';
 import { defineComponent } from 'vue';
-// import ReportsMobile from './ReportsMobile.vue';
 import ReportsDesktop from './ReportsDesktop.vue';
+import ReportsMobile from './ReportsMobile.vue';
 
 
 export default defineComponent({
-  components: { ReportsDesktop },
+  components: { ReportsDesktop, ReportsMobile },
   computed: {
     ...mapStores( useAppStore ),
   },
