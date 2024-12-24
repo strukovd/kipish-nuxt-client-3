@@ -1,10 +1,10 @@
 <template>
   <div>
-    <template v-if="!appStore.windowWidth || appStore.windowWidth > 1400">
+    <template v-if="!appStore.isMobile">
       <EstablishmentsDesktop />
     </template>
-    <template v-if="appStore.windowWidth <= 1400">
-      <!-- <EstablishmentsMobile /> -->
+    <template v-else>
+      <EstablishmentsMobile />
     </template>
   </div>
 </template>
@@ -12,9 +12,10 @@
 <script lang="ts">
 import { mapStores } from "pinia";
 import EstablishmentsDesktop from "./EstablishmentsDesktop.vue";
+import EstablishmentsMobile from "./EstablishmentsMobile.vue";
 
 export default defineComponent({
-  components: { EstablishmentsDesktop },
+  components: { EstablishmentsDesktop, EstablishmentsMobile },
   computed: {
     ...mapStores( useAppStore )
   },
