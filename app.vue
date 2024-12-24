@@ -1,6 +1,12 @@
 <template>
   <div @resize="onResize">
     <NuxtLayout :name="layout">
+      <ClientOnly>
+        <transition name="modal">
+          <ModalWrapper v-if="appStore.modals.length"/>
+        </transition>
+      </ClientOnly>
+
       <NuxtPage/>
     </NuxtLayout>
   </div>
@@ -69,3 +75,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.modal-enter-active, .modal-leave-active {
+  transition:opacity .2s ease-in 0s;
+}
+.modal-enter-from, .modal-leave-to {
+  opacity: 0;
+}
+</style>

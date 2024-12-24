@@ -1,19 +1,12 @@
 <template>
   <div id="main-page">
-    <ClientOnly>
-      <transition name="modal">
-        <ModalWrapper v-if="appStore.modals.length"/>
-      </transition>
-    </ClientOnly>
     <template v-if="true || appStore.currentCity">
-      <div>
-        <template v-if="!appStore.isMobile">
-          <Home key="home"/>
-        </template>
-        <template v-else>
-          <HomeMobile key="home-mobile"/>
-        </template>
-      </div>
+      <template v-if="!appStore.isMobile">
+        <Home key="home"/>
+      </template>
+      <template v-else>
+        <HomeMobile key="home-mobile"/>
+      </template>
     </template>
     <template v-else>
       <h2>Выберите город</h2>
@@ -55,13 +48,5 @@ export default defineComponent({
     font-weight: 300;
     text-transform: uppercase;
   }
-
-
-  .modal-enter-active, .modal-leave-active {
-		transition:opacity .2s ease-in 0s;
-	}
-	.modal-enter-from, .modal-leave-to {
-		opacity: 0;
-	}
 }
 </style>
