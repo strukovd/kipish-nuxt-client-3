@@ -21,12 +21,24 @@
       </transition>
     </div>
     <v-dialog class="calendar-dialog" overlay-color="#1e1e1e" v-model="openDatePicker" max-width="600">
-      <v-card elevation="0" color="transparent">
-        <v-date-picker :weekdays="[1, 2, 3, 4, 5, 6, 7]" :weekday-format="getDay" elevation="0" locale="ru" v-model="currentDate" color="#333333" @input="onFilterDateSelect" style="border-radius:12px; width:100%;" :style="{background: appStore.isDark ? `#1e1e1e` : `#FFFFFF`}" outlined />
-        <v-btn depressed @click="openDatePicker = false" style="border-radius: 16px !important;width: 100%" color="#CCCCCC80" class="py-8 px-15 hover-red mt-4">
-          <span class="text-20 white--text opacity-70">Закрыть</span>
-        </v-btn>
-      </v-card>
+         <v-card elevation="0" color="transparent">
+           <v-date-picker
+              :weekdays="[1, 2, 3, 4, 5, 6, 7]"
+              :weekday-format="getDay"
+              elevation="0" locale="ru"
+              v-model="currentDate"
+              color="#333333"
+              @input="onFilterDateSelect"
+              style="border-radius:12px; width:100%;"
+              :style="{background: appStore.isDark ? `#1e1e1e` : `#FFFFFF`}"
+              outlined />
+
+           <v-btn depressed @click="openDatePicker = false" style="border-radius: 16px !important;width: 100%"
+                  color="#CCCCCC80"
+                  class="py-8 px-15 hover-red mt-4">
+             <span class="text-20 white--text opacity-70">Закрыть</span>
+           </v-btn>
+         </v-card>
     </v-dialog>
 
 

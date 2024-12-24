@@ -4,7 +4,7 @@
       <ReportDesktop/>
     </template>
     <template v-if="appStore.windowWidth <= 1400">
-
+      <!-- <ReportMobile/> -->
     </template>
   </div>
 </template>
