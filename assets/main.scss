@@ -1,7 +1,7 @@
 @use "variables.scss" as *;
 
 * {
-	box-sizing: border-box;
+	// box-sizing: border-box;
 }
 body {
 	background:$lightbg;
@@ -24,6 +24,10 @@ body {
 
 	.mmid {
 		padding:0 36px;
+	}
+
+	.mmid3 {
+		padding:0 2em;
 	}
 }
 
