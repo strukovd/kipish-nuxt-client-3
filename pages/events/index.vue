@@ -1,10 +1,10 @@
 <template>
   <div>
-    <template v-if="!windowWidth || windowWidth > 1400">
+    <template v-if="!appStore.isMobile">
       <EventsDesktop/>
     </template>
-    <template v-else-if="windowWidth <= 1400">
-      <!-- <EventsMobile/> -->
+    <template v-else>
+      <EventsMobile/>
     </template>
   </div>
 </template>
@@ -12,10 +12,11 @@
 <script>
 import { mapStores } from "pinia";
 import EventsDesktop from "./EventsDesktop.vue";
+import EventsMobile from "./EventsMobile.vue";
 
 export default {
   name: "Events",
-  components: { EventsDesktop },
+  components: { EventsDesktop, EventsMobile },
   computed: {
     ...mapStores( useAppStore ),
   },
