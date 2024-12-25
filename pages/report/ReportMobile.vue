@@ -55,29 +55,6 @@
             />
         </div>
       </masonry-infinite-grid>
-
-      <!-- <MasonryInfiniteGrid aria-sort="ascending" v-bind:gap="8" @renderComplete="()=>{}" @requestPrepend="()=>{}" @requestAppend="onRequestAppend">
-        <div class="cursor-pointer image_item"
-          v-for="(file, id) of allFiles" :key="file.id" :data-grid-groupkey="file.groupKey"
-        >
-        <img
-          loading="lazy"
-          class="image-watermark-image"
-          @load="getImageSize(file)"
-          @click="openImageDialog(file.id)"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-          width="428"
-          :ref="'image_' + file.id"
-          alt=""
-          style="border-radius: 16px"
-          :src="`https://files.kipish.kg/${file.minioBucket}/min-${file.minioPath}`"/>
-              </div>
-
-        <div v-if="loadingMore" class="cursor-pointer image_item" v-for="num of 6" :key="num" data-grid-groupkey="preloader">
-          <v-skeleton-loader type="image" width="428" :height="Math.random() * (640 - 285) + 285"/>
-        </div>
-      </MasonryInfiniteGrid> -->
     </section>
   </div>
 </template>
@@ -232,32 +209,32 @@ export default {
     },
 
     downloadZip() {
-    //   this.fileLoading = true
-    //   this.$fileHttp.get('/albums/download/zip', {
-    //     params: {id: this.appStore.sourceId},
-    //     responseType: 'arraybuffer'
-    //   })
-    //     .then(response => {
-    //       try {
-    //         const blob = new Blob([response.data], {type: 'application/zip'});
-    //         const url = window.URL.createObjectURL(blob);
-    //         const a = document.createElement('a');
-    //         a.style.display = 'none';
-    //         a.href = url;
-    //         a.download = `отчёт-${this.model.name}.zip`; // Укажите имя файла для скачивания
-    //         document.body.appendChild(a);
-    //         a.click(); // Кликаем на ссылку
-    //         window.URL.revokeObjectURL(url); // Освобождаем ресурсы
-    //         this.fileLoading = false
-    //       } catch (error) {
-    //         console.error('Ошибка при обработке данных:', error);
-    //         this.fileLoading = false
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.error('Ошибка при загрузке файла:', error);
-    //       this.fileLoading = false
-    //     });
+      this.fileLoading = true
+      this.$fileHttp.get('/albums/download/zip', {
+        params: {id: this.appStore.sourceId},
+        responseType: 'arraybuffer'
+      })
+        .then(response => {
+          try {
+            const blob = new Blob([response.data], {type: 'application/zip'});
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `отчёт-${this.model.name}.zip`; // Укажите имя файла для скачивания
+            document.body.appendChild(a);
+            a.click(); // Кликаем на ссылку
+            window.URL.revokeObjectURL(url); // Освобождаем ресурсы
+            this.fileLoading = false
+          } catch (error) {
+            console.error('Ошибка при обработке данных:', error);
+            this.fileLoading = false
+          }
+        })
+        .catch(error => {
+          console.error('Ошибка при загрузке файла:', error);
+          this.fileLoading = false
+        });
     },
 
     downloadImage(id) {
