@@ -20,6 +20,13 @@ import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 
 export default {
+  head() {
+    return {
+      link: [
+        { rel: 'icon', type: 'image/svg', href: '/favicon.svg' }
+      ]
+    }
+  },
   computed: {
     ...mapStores( useAppStore ),
     layout() {
