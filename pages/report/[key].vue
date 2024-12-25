@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import ReportDesktop from "@/pages/report/ReportDesktop.vue";
-import ReportMobile from "@/pages/report/ReportMobile.vue";
+import ReportMobile from "~/pages/report/ReportMobile.vue";
 import { mapStores } from "pinia";
 
 

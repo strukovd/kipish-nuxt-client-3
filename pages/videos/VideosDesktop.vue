@@ -264,7 +264,7 @@ export default {
   }),
   beforeMount() {
     const today = new Date();
-    this.currentDay = this.convertDateToFetchFormat(today);
+    this.currentDay = this.convertDateToFetchFormat( today.toLocaleDateString('fr-CA') );
   },
   mounted() {
     this.initOnScrollFetcher();
@@ -312,7 +312,7 @@ export default {
         });
     },
 
-    convertDateToFetchFormat(date: any) {
+    convertDateToFetchFormat(date: string) {
       const d = new Date(date);
       const year = d.getFullYear();
       const month = ("0" + (d.getMonth() + 1)).slice(-2);
