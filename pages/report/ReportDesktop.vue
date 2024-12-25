@@ -1,6 +1,6 @@
 <template>
 	<div class="report-desktop mid">
-		<BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/reports', title: 'Все репортажи'}, {href: '', title: model.name}]"/>
+		<BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/reports', title: 'Репортажи'}, {href: '', title: model.name}]"/>
     <section class="row">
       <h1 class="report-name h1-font text-68 font-title">{{ model.name }} - Фотоотчет</h1>
       <div>
