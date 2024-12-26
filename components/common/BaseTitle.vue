@@ -1,5 +1,5 @@
 <template>
-  <div class="title-mobile">
+  <div :class="{[`title-${type}`]: true}">
     <slot></slot>
   </div>
 </template>
@@ -8,6 +8,9 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  props: {
+    type: {type: String, default: 'desktop' as 'mobile' | 'desktop'},
+  },
   data() {
     return {};
   },
@@ -20,6 +23,17 @@ export default defineComponent({
   &, & > * {
     font-family: 'ALS Gorizont', sans-serif !important;
     font-size: 32px;
+    line-height:1.4em;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom:0;
+  }
+}
+
+.title-desktop {
+  &, & > * {
+    font-family: 'ALS Gorizont', sans-serif !important;
+    font-size: 48px;
     line-height:1.4em;
     text-transform: uppercase;
     font-weight: 300;

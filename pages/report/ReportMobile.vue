@@ -2,9 +2,9 @@
   <div class="report-mobile mmid3">
     <!-- BREADCRUMBS -->
 		<BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/reports', title: 'Репортажи'}, {href: '', title: model.name}]"/>
-    <TitleMobile style="margin-bottom:.6em;">
+    <BaseTitle type="mobile" style="margin-bottom:.6em;">
       <h1>{{ model.name }} - Фотоотчет</h1>
-    </TitleMobile>
+    </BaseTitle>
 
     <!-- INFO -->
     <section class="report-info">
@@ -64,12 +64,12 @@ import { MasonryInfiniteGrid, FrameInfiniteGrid } from "@egjs/vue3-infinitegrid"
 import { mapStores } from "pinia";
 import BaseBreadcrumbs from "~/components/common/BaseBreadcrumbs.vue";
 import BaseButton from "~/components/common/BaseButton.vue";
-import TitleMobile from "~/components/common/TitleMobile.vue";
+import BaseTitle from "~/components/common/BaseTitle.vue";
 
 
 export default {
   name: "ReportMobile",
-  components: { BaseBreadcrumbs, TitleMobile, BaseButton, MasonryInfiniteGrid, FrameInfiniteGrid },
+  components: { BaseBreadcrumbs, BaseTitle, BaseButton, MasonryInfiniteGrid, FrameInfiniteGrid },
   metaInfo() {
     return {
       title: this.model.name ? (this.model.establishment?.name ? `${this.model.establishment?.name} — ${this.model.name} | Кипиш` : `${this.model.name} | Кипиш`) : 'Кипиш',
