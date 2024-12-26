@@ -8,9 +8,12 @@
   </div>
 </template>
 
-<script setup>
+<script>
 definePageMeta({
-  title: '404 - Страница не найдена'
+  title: '404 - Страница не найдена',
+  meta: [
+    { name: 'robots', content: 'noindex, nofollow' },
+  ]
 })
 </script>
 
