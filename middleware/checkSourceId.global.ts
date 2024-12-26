@@ -13,12 +13,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       if (key && /^\d+$/.test(key) ) { // Если path — это число
         appStore.sourceId = to.path;
       } else { // Если path — это ЧПУ строка
-        const response = await $http.get(`/url/album/${key}`);
+        const response = await $http.get(sourceUrl);
         if (response.data) {
           appStore.sourceId = response.data.sourceId;
         } else {
           console.error('404');
-          // return navigateTo('/404');
+          return navigateTo('/404');
         }
       }
     } catch (error) {
