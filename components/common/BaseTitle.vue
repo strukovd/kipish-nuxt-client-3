@@ -33,7 +33,7 @@ export default defineComponent({
 .title-desktop {
   &, & > * {
     font-family: 'ALS Gorizont', sans-serif !important;
-    font-size: 48px;
+    font-size: 68px;
     line-height:1.4em;
     text-transform: uppercase;
     font-weight: 300;
