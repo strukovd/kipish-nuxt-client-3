@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const $http: any = useNuxtApp().$http;
     try {
       if (key && /^\d+$/.test(key) ) { // Если path — это число
-        appStore.sourceId = to.path;
+        appStore.sourceId = key;
       } else { // Если path — это ЧПУ строка
         const response = await $http.get(sourceUrl);
         if (response.data) {
