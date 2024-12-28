@@ -4,8 +4,8 @@
       <button type="button" class="tab-button"
         v-for="button in items" :key="button.key"
         :id="`tab-${button.key}`"
-        :class="{selected: value === button.key}"
-        :style="{background: value === button.key && button.color ? button.color : ''}"
+        :class="{selected: modelValue === button.key}"
+        :style="{background: modelValue === button.key && button.color ? button.color : ''}"
         @click="onSelected(button.key)"
       >
         <v-icon v-if="button.icon" :icon="button.icon" size="1.2em" style="margin-right:.2em; opacity:.8; vertical-align:baseline;"></v-icon>
@@ -16,11 +16,12 @@
   </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+export default defineComponent({
+  emits: [ 'update:modelValue' ],
   props: {
-    value: { type: [String, Number], default: undefined },
-    items: Array,
+    modelValue: { type: [String, Number], default: undefined },
+    items: Array as () => Array<any>,
     autoselect: { type: Boolean, default: false }
   },
   data() {
@@ -29,9 +30,9 @@ export default {
     };
   },
   methods: {
-    onSelected(selectedKey) {
+    onSelected(selectedKey: any) {
       this.selectedKey = selectedKey;
-      this.$emit('input', selectedKey);
+      this.$emit('update:modelValue', this.selectedKey);
     },
   },
   watch: {
@@ -53,7 +54,7 @@ export default {
       this.selectedKey = this.items[0].key;
     }
   },
-};
+});
 </script>
 
 <style lang="scss">
