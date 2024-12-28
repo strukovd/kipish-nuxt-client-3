@@ -135,16 +135,16 @@
       <BaseTabs style="margin-bottom:2em;"
             v-model="curPublicationsTab" autoselect
             :items="[
-              { key: 'REPORTS', caption: 'Фотоотчеты',  icon: 'mdi-format-list-bulleted' },
-              { key: 'VIDEOS',  caption: 'Видеоотчеты', icon: 'mdi-image-multiple-outline' },
-              { key: 'EVENTS',  caption: 'События',     icon: 'mdi-map-marker-outline' },
+              { key: 'REPORTS', caption: 'Фотоотчеты'  },
+              { key: 'VIDEOS',  caption: 'Видеоотчеты' },
+              { key: 'EVENTS',  caption: 'События'     },
             ]">
       </BaseTabs>
       <!-- <loader v-if="loadingPublications"></loader> -->
       <section v-if="curPublicationsTab === 'REPORTS'" class="estab-publications-reports">
         <v-row v-if="Array.isArray(reports) && reports.length || loadingPublications">
           <v-col cols="3" v-for="report of reports" :key="report.id">
-            <BaseReportCard :report="report"/>
+            <BaseReportCard :payload="report"/>
           </v-col>
           <v-col v-if="reportsCurPage < reportsTotalPage" cols="12" style="text-align:center;">
             <div v-if="loadingPublications"><Loader/></div>
