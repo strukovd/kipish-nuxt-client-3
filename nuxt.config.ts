@@ -27,8 +27,10 @@ export default defineNuxtConfig({
     },
   },
 
-
-  modules: ['@pinia/nuxt', 'nuxt-aos'],
+  modules: ['@pinia/nuxt', 'nuxt-aos', 'vue-yandex-maps/nuxt'],
+  yandexMaps: {
+    apikey: '62c88456-1fdb-474c-8ed3-a45218e508ca',
+  },
   plugins: [
     '~/plugins/global-components',
     '~/plugins/http',
@@ -36,7 +38,10 @@ export default defineNuxtConfig({
     '~/plugins/vuetify',
   ],
 
-  css: [ "vuetify/styles/main.sass" ],
+  css: [
+    "vue-yandex-maps/dist/vue-yandex-maps.css",
+    "vuetify/styles/main.sass"
+  ],
   build: {
     transpile: ['vuetify'],
   },
