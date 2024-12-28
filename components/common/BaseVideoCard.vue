@@ -7,28 +7,31 @@
       :label="video?.establishment?.name"
       :coverImage="video.coverPath ? `https://files.kipish.kg/${video.coverPath}` : ''"
       :coverId="video.coverImageId"
-      :src="videoDomain + video.id"
+      :src="appStore.videoDomain + video.id"
       :link="'/video/' + video.id"
     />
   </div>
 </template>
 
-<script>
-import { mapGetters } from "vuex";
+<script lang="ts">
+import { mapStores } from 'pinia';
 import VPlayer from './VPlayer/VPlayer.vue';
 
 
-export default {
-  props: { video: Object, width: Number | String },
+export default defineComponent({
+  props: {
+    video: Object as () => any,
+    width: { type: [Number, String] },
+  },
   computed: {
-    ...mapGetters(["videoDomain"]),
+    ...mapStores( useAppStore ),
   },
   components: { VPlayer },
   data() {
     return {};
   },
   methods: {
-    formatDate(dateString) {
+    formatDate(dateString: string) {
       const months = [
         'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
         'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
@@ -50,7 +53,7 @@ export default {
       return formattedDate;
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

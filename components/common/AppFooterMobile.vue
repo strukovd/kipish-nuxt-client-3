@@ -49,7 +49,6 @@
 <script lang="ts">
 import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
-// import {mapActions, mapGetters} from "vuex";
 // import Search from "@/views/other/Search.vue";
 
 export default {
