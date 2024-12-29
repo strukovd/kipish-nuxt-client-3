@@ -5,7 +5,7 @@
         <img src="/images/logo.svg" height="36px" alt="">
       </div>
       <div style="display: flex; align-items: center; gap:2em;">
-
+        <heroicon size="28" @click="$modal.show('', 'Find', { nonCloseable: false })" class="cursor-pointer" name="search" fill="currentColor"/>
       </div>
     </section>
 

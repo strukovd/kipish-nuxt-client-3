@@ -21,7 +21,9 @@
             <span v-else-if="link.onClick" @click="appStore.handleLinkClick(link)">{{ link.title }}</span>
           </span>
         </div>
-        <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->
+        <div @click="" class="cursor-pointer ml-8">
+          <heroicon size="28" @click="$modal.show('', 'Find', { nonCloseable: false })" class="cursor-pointer" name="search" fill="currentColor"/>
+        </div>
         <div class="cursor-pointer ml-8">
           <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': appStore.isDark }"/>
         </div>
@@ -31,7 +33,6 @@
 </template>
 
 <script lang="ts">
-import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 // import Search from "@/views/other/Search.vue";
 
