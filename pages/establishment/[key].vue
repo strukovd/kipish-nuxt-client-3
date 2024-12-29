@@ -4,21 +4,21 @@
       <EstablishmentDesktop/>
     </template>
     <template v-else>
-      <!-- <EstablishmentMobile/> -->
+      <EstablishmentMobile/>
     </template>
   </div>
 </template>
 
 <script lang="ts">
 import EstablishmentDesktop from "~/pages/establishment/EstablishmentDesktop.vue";
-// import EstablishmentMobile from "~/pages/establishment/EstablishmentMobile.vue";
+import EstablishmentMobile from "~/pages/establishment/EstablishmentMobile.vue";
 import { mapStores } from "pinia";
 
 
 export default defineComponent({
   name: "Establishment",
   middleware: ['checkSourceId'],
-  components: { EstablishmentDesktop,  },
+  components: { EstablishmentDesktop, EstablishmentMobile },
   computed: {
     ...mapStores( useAppStore )
   }
