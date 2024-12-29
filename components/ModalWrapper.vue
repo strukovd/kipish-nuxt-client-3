@@ -64,7 +64,8 @@ export default {
   bottom: 0;
   height:100vh;
   display: flex;
-  background-color: rgb(20 33 51 / 60%);
+  backdrop-filter: blur(20px) !important;
+  background-color: rgba(0, 0, 0, 0.2);
   z-index:9999999;
 
   // .modal-window {
