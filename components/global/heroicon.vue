@@ -1,5 +1,7 @@
 <template>
-  <svg class="heroicon" :width="width" :height="height" :viewBox="`0 0 24 24`" :fill="fill" :stroke="stroke" xmlns="http://www.w3.org/2000/svg" v-html="icons[name].path"></svg>
+  <div class="hero-wrapper">
+    <svg class="heroicon" :width="size ?? width" :height="size ?? height" :viewBox="`0 0 24 24`" :fill="fill" :stroke="stroke" xmlns="http://www.w3.org/2000/svg" v-html="icons[name].path"></svg>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,6 +12,7 @@ export default defineComponent({
     name: { type: String, default: '', },
     width: {type: String, default: '24' },
     height: { type: String, default: '24' },
+    size: { type: String, default: '24' },
     stroke: { type: String, default: 'none', },
     fill: { type: String, default: '#000000', },
   },
@@ -91,4 +94,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+.hero-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+</style>
 
