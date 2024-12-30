@@ -496,9 +496,6 @@ export default defineComponent({
 		},
 
 		openImageDialog(imageId: any) {
-      console.log(`suka`);
-      console.log(imageId);
-
 			const index = this.files.findIndex(file => file.id === imageId);
 			if (index !== -1) {
 				this.viewedImageId = index;
