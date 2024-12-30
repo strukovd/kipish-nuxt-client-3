@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-shadow" @keydown.esc="close" @pointerdown.self.stop.prevent="close">
+  <div class="modal-shadow" @keydown.esc="close" @pointerdown.self.stop.prevent="close" :style="{ background: visibleModal.options?.background }">
     <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
     <!--
     <div class="modal-window">
@@ -21,8 +21,9 @@
 
 <script lang="ts">
 import { mapStores } from 'pinia';
-import Confirm from '@/components/modals/ConfirmModal.vue';
-import MobileAsideMenu from '@/components/modals/MobileAsideMenuModal.vue';
+import Confirm from '~/components/modals/ConfirmModal.vue';
+import MobileAsideMenu from '~/components/modals/MobileAsideMenuModal.vue';
+import Find from '~/components/modals/FindModal.vue';
 
 
 export default {
@@ -32,7 +33,7 @@ export default {
       return this.appStore.modals[this.appStore.modals.length-1];
     }
   },
-  components: { Confirm, MobileAsideMenu },
+  components: { Confirm, MobileAsideMenu, Find },
   methods: {
     onKeydown(e: KeyboardEvent) {
       if( e.key === 'Escape' ) {

@@ -22,7 +22,7 @@
           </span>
         </div>
         <div @click="" class="cursor-pointer ml-8">
-          <heroicon size="28" @click="$modal.show('', 'Find', { nonCloseable: false })" class="cursor-pointer" name="search" fill="currentColor"/>
+          <heroicon size="28" @click="$modal.show('', 'Find', { nonCloseable: true, background: '#f5f5f5f0' })" class="cursor-pointer" name="search" fill="currentColor"/>
         </div>
         <div class="cursor-pointer ml-8">
           <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': appStore.isDark }"/>

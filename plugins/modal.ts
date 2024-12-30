@@ -15,6 +15,7 @@ export type ModalOptions = {
 	payload?: any;
 	icon?: string;
 	nonCloseable?: boolean;
+  background?: string;
 }
 declare module '@vue/runtime-core' {
 	interface ComponentCustomProperties {
