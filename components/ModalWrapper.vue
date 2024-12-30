@@ -24,6 +24,7 @@ import { mapStores } from 'pinia';
 import Confirm from '~/components/modals/ConfirmModal.vue';
 import MobileAsideMenu from '~/components/modals/MobileAsideMenuModal.vue';
 import Find from '~/components/modals/FindModal.vue';
+import ImageView from '~/components/modals/ImageViewModal.vue';
 
 
 export default {
@@ -33,7 +34,7 @@ export default {
       return this.appStore.modals[this.appStore.modals.length-1];
     }
   },
-  components: { Confirm, MobileAsideMenu, Find },
+  components: { Confirm, MobileAsideMenu, Find, ImageView },
   methods: {
     onKeydown(e: KeyboardEvent) {
       if( e.key === 'Escape' ) {

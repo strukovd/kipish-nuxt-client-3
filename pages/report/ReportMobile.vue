@@ -260,8 +260,9 @@ export default {
       const selectedImage = this.files.find((file, index) => file.id === imageId);
       this.selectedImage = selectedImage ? selectedImage : null;
       if (index !== -1) {
-        this.imageIndex = index;
-        this.dialog = true;
+        // this.imageIndex = index;
+        // this.dialog = true;
+        this.$modal.show('', 'ImageView', {payload: {files: this.files, index}});
       } else {
         console.warn('Элемент с imageId', imageId, 'еще не доступен');
       }

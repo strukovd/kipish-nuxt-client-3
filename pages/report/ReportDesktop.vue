@@ -496,10 +496,11 @@ export default defineComponent({
 		},
 
 		openImageDialog(imageId: any) {
-			const index = this.files.findIndex(file => file.id === imageId);
+      const index = this.files.findIndex(file => file.id === imageId);
 			if (index !== -1) {
-				this.viewedImageId = index;
-				this.dialog = true;
+        // this.viewedImageId = index;
+				// this.dialog = true;
+        this.$modal.show('', 'ImageView', {payload: {files: this.files, index}});
 			} else {
 				console.warn('Элемент с imageId', imageId, 'еще не доступен');
 			}
