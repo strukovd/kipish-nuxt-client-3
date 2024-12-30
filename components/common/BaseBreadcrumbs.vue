@@ -31,6 +31,9 @@ export default {
 
   .nav-item {
     text-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>
