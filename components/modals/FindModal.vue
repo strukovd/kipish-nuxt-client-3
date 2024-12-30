@@ -1,31 +1,33 @@
 <template>
-  <div class="find-container">
-    <section class="close">
-      <div @click="close" style="background: #FFFFFF99;border-radius: 50%;width: 60px;height: 60px" class="d-flex justify-center align-center cursor-pointer">
-        <heroicon name="cross" fill="#000000B2"/>
-      </div>
-    </section>
-    <section class="search-input">
-      <v-text-field v-model="searchWord" @input="search" hide-details placeholder="ПОИСК"></v-text-field>
-    </section>
-    <v-divider class="mt-4"/>
-    <section class="tags">
-      <div class="tag" @click="activeTab = tab.value" :class="activeTab === tab.value && 'active'" v-for="tab in tabs">
-        <span>{{ tab.name }}</span>
-      </div>
-    </section>
-    <section class="results">
-      <div class="mt-80 d-flex justify-center flex-wrap">
-        <div @click="openResult(card)" v-for="card in result" v-if="activeTab === 'ALL'" class="result_card cursor-pointer">
-          <span style="color:#111111" class="text-14 mb-3">{{ setTarget(card.target) }}</span>
-          <span style="color:#111111" class="text-32">{{ card.name }}</span>
+  <div class="find-scroll-wrapper">
+    <div class="find-container">
+      <section class="close">
+        <div @click="close" class="close-button">
+          <heroicon name="cross" fill="#000000B2"/>
         </div>
-        <div @click="openResult(card)" v-for="card in result.filter(el => el.target === activeTab)" v-if="activeTab !== 'ALL'" class="result_card cursor-pointer">
-          <span style="color:#111111" class="text-14 mb-3">{{ setTarget(card.target) }}</span>
-          <span style="color:#111111" class="text-32">{{ card.name }}</span>
+      </section>
+      <section class="search-input">
+        <v-text-field v-model="searchWord" @input="search" hide-details placeholder="ПОИСК"></v-text-field>
+      </section>
+      <!-- <v-divider class="mt-4"/> -->
+      <section class="tags">
+        <div class="tag" @click="activeTab = tab.value" :class="activeTab === tab.value && 'active'" v-for="tab in tabs">
+          <span>{{ tab.name }}</span>
         </div>
-      </div>
-    </section>
+      </section>
+      <section class="results">
+        <div class="mt-80 d-flex justify-center flex-wrap">
+          <div @click="openResult(card)" v-for="card in result" v-if="activeTab === 'ALL'" class="result_card cursor-pointer">
+            <span style="color:#111111" class="text-14 mb-3">{{ setTarget(card.target) }}</span>
+            <span style="color:#111111" class="text-32">{{ card.name }}</span>
+          </div>
+          <div @click="openResult(card)" v-for="card in result.filter(el => el.target === activeTab)" v-if="activeTab !== 'ALL'" class="result_card cursor-pointer">
+            <span style="color:#111111" class="text-14 mb-3">{{ setTarget(card.target) }}</span>
+            <span style="color:#111111" class="text-32">{{ card.name }}</span>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -117,57 +119,87 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.find-container {
+.find-scroll-wrapper {
   flex:auto 1 0;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height:600px;
-  max-width:1300px;
-  margin:auto;
+  overflow-y: auto;
 
-  @media (min-width: 1300px) {
-    /* Styles for screens larger than 1300px */
-  }
-
-  @media (max-width: 1300px) {
-    padding:0 3em;
-    max-width: 100vw;
-  }
-
-  .close {
-    position: absolute;
-    top: 0;
-    right: 3em;
-    cursor: pointer;
-  }
-
-  .search-input {
-    width: 100%;
-  }
-
-  .tags {
+  .find-container {
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 40px;
+    position: relative;
+    flex-direction: column;
+    // justify-content: center;
     align-items: center;
-    justify-content: center;
-    gap: 1em;
+    min-height:600px;
+    max-height:100vh;
+    max-width:1300px;
+    margin:auto;
 
-    .tag {
-      background: #fff;
-      border-radius: 60px;
-      padding: 0 2em;
-      font-size: 20px;
-      line-height:3em;
-      color: #111;
-      cursor: pointer;
+    @media (min-width: 1300px) {
+      /* Styles for screens larger than 1300px */
+    }
 
-      &.active {
-        background: #fe252e;
-        color: #fff;
+    @media (max-width: 1300px) {
+      padding:1em 3em;
+      max-width: 100vw;
+    }
+
+    .close {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      padding: 2em 0 3em 0;
+
+      .close-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #FFFFFF99;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+      }
+    }
+
+    .search-input {
+      width: 100%;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+
+      .tag {
+        background: #fff;
+        border-radius: 60px;
+        padding: 0 2em;
+        font-size: 20px;
+        line-height:3em;
+        color: #111;
+        cursor: pointer;
+
+        &.active {
+          background: #fe252e;
+          color: #fff;
+        }
+      }
+    }
+
+    .results {
+      .result_card {
+        width: 416px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        background: #fff;
+        padding: 32px 40px 32px 40px;
+        margin-right: 32px;
+        margin-bottom: 32px;
       }
     }
   }

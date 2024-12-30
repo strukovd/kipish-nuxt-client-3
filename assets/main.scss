@@ -1,5 +1,19 @@
 @use "variables.scss" as *;
 
+// Убираем двойной скролл при появлении модалки
+html {
+    scrollbar-width: none;
+}
+@supports selector(body:has(.modal-active)) {
+    html {
+        scrollbar-width: initial;
+    }
+}
+html:has(.modal-shadow) {
+    overflow-y: hidden;
+}
+
+
 * {
 	// box-sizing: border-box;
 }
