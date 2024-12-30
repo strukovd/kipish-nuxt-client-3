@@ -16,7 +16,6 @@
 import '@mdi/font/css/materialdesignicons.css';
 import '@/assets/style.scss';
 
-import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 
 export default {
@@ -27,12 +26,22 @@ export default {
       ]
     }
   },
+
   computed: {
     ...mapStores( useAppStore ),
+
     layout() {
       return this.appStore.isMobile ? 'default-mobile' : 'default';
     }
   },
+
+  watch: {
+    'appStore.isDark'() {
+      if(this.appStore.isDark) document.body.classList.add('dark-theme');
+      else document.body.classList.remove('dark-theme');
+    }
+  },
+
   data() {
     return {
 

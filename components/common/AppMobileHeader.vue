@@ -18,7 +18,6 @@
         <!-- <heroicon @click="()=>{}" class="cursor-pointer" name="search" fill="$vuetify.theme.dark ? '#FFFFFF' : '#111111'"/> -->
         <div class="cursor-pointer ml-8">
           <heroicon @click="showMenu" class="cursor-pointer" name="burger" fill="currentColor" stroke="currentColor"/>
-          <!-- <img width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': $vuetify.theme.dark }"/> -->
         </div>
       </section>
     </div>
@@ -26,7 +25,6 @@
 </template>
 
 <script lang="ts">
-import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 // import Search from "@/views/other/Search.vue";
 
