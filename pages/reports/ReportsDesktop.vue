@@ -5,6 +5,12 @@
 
     <TimeRouletteNew :dateMap="reportDateMap" @setActualDay="selectDay" class="my-15"/>
 
+    <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
+      <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
+      <BaseTextBox v-model="filterOptions.establishmentName" placeholder="Заведение"/>
+      <BaseTextBox v-model="filterOptions.date" placeholder="Выберите дату" disabled/>
+    </section>
+
     <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays" :key="curDateItem + dayIndex">
       <v-card-text data-aos="fade-up" data-aos-duration="1000" :class="dayIndex !== 0 && 'mt-8'" class="week-title px-0 pt-0 pb-0 d-flex justify-space-between">
         <!-- НАДПИСЬ ДНЯ НЕДЕЛИ И ДАТА -->
@@ -43,11 +49,12 @@
 import { mapStores } from "pinia";
 import BaseBreadcrumbs from "~/components/common/BaseBreadcrumbs.vue";
 import BaseReportCard from "~/components/common/BaseReportCard.vue";
+import BaseTextBox from "~/components/common/BaseTextBox.vue";
 import TimeRouletteNew from "~/components/common/TimeRouletteNew.vue";
 
 export default {
   name: "ReportsDesktop",
-  components: { TimeRouletteNew, BaseBreadcrumbs, BaseReportCard },
+  components: { TimeRouletteNew, BaseBreadcrumbs, BaseReportCard, BaseTextBox },
   computed: {
     ...mapStores( useAppStore ),
 
@@ -347,10 +354,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.reports-desktop {
+  .reports-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    >* {
+      flex:auto 1 0;
+    }
+  }
+}
+
 .dark-theme .v-picker__body >div{
   background: #1e1e1e;
 }
-
 .v-picker--date {
   .v-picker__title {
     .v-date-picker-title {
@@ -421,26 +440,6 @@ export default {
   }
 }
 
-
-// .filter-panel {
-//   .v-icon {
-//     color: black !important;
-//   }
-
-//   .v-input input {
-//     color: black !important;
-
-//     &::placeholder {
-//       color: black !important;
-//     }
-//   }
-// }
-
-// .img_item {
-//   .v-image__image {
-//     transition: transform 0.5s ease !important;
-//   }
-// }
 
 
   .v-skeleton-loader__image {
