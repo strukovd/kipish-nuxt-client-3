@@ -1,33 +1,63 @@
 <template>
+  <div class="calendar-modal">
+    <v-date-picker
+      :weekdays="[1, 2, 3, 4, 5, 6, 7]"
+      :weekday-format="getDay"
+      hide-weekdays
+      hide-header
+      elevation="0" locale="ru-RU"
+      v-model="currentDate"
+      color="#333333"
+      @update:model-value="close(currentDate)"
+      style="border-radius:12px; width:100%;"
+      outlined />
 
+    <BaseButton prependIcon="mdi-close" @click="close" class="mt-4">Закрыть</BaseButton>
+    <!-- <v-btn depressed @click="close" style="border-radius: 16px !important;width: 100%" color="#CCCCCC80" class="py-8 px-15 hover-red mt-4">
+      <span class="text-20 white--text opacity-70">Закрыть</span>
+    </v-btn> -->
+  </div>
 </template>
 
 <script lang="ts">
 import { mapStores } from 'pinia';
 import { defineComponent } from 'vue';
+import BaseButton from '../common/BaseButton.vue';
 
 export default defineComponent({
+  components: { BaseButton },
   props: ['payload'],
   computed: {
     ...mapStores( useAppStore ),
   },
+
   data() {
-    return {};
+    return {
+      currentDate: new Date(),
+    };
   },
+
+  created() {
+    // this.currentDate = new Date().toLocaleDateString("fr-CA");
+  },
+
   methods: {
-    confirm() {
-      const appStore = useAppStore();
-      if (appStore) {
-        const modal = appStore.modals.pop();
-        if(modal && modal.resolve) modal?.resolve(true);
-      }
+    getDay(date: any) {
+      const daysOfWeek = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+      let i = new Date(date)
+        .toLocaleString('ru-RU', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+        });
+      return daysOfWeek[i];
     },
 
-    close() {
+    close(resValue?: any) {
       const appStore = useAppStore();
       if (appStore) {
         const modal = appStore.modals.pop();
-        if(modal && modal.resolve) modal?.resolve(false);
+        if(modal && modal.resolve) modal?.resolve(resValue);
       }
     }
   },
@@ -35,97 +65,82 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.mobile-aside-menu-modal {
-  // height: 100vh;
-  position: absolute;
-  top: 0px;
-  right: 0;
-  bottom: 0;
-  transform: translateX(0%);
-  width: 75%;
-  border-radius: 8px 0px 0px 8px;
-  z-index: 999 !important;
-  max-width: 350px;
-  padding: 3em 2em;
-  background: white;
+.calendar-modal {
+  margin: auto;
 
-  .row-1 {
-    margin-bottom:2em;
-    .logo {}
+  .dark-theme .v-picker__body >div{
+    background: #1e1e1e;
   }
 
-  .nav-links {
-    display: flex;
-    flex-direction: column !important;
-    gap: 1em;
-    margin-bottom:2em;
+  .v-picker--date {
+    // .v-picker__title {
+    //   .v-date-picker-title {
+    //     display: flex !important;
+    //     justify-content: center;
+    //     flex-direction: row !important;
+    //     gap: 1em;
+    //     flex-wrap: wrap;
+    //     line-height: 1;
+    //     display: flex;
+    //     flex-direction: column;
 
-    .nav-link {
-      font-size:16px;
-      color: #111111;
-      cursor:pointer;
-      font-weight:normal;
-      user-select:none;
-      position: relative;
-      >a, >span {
-        font-weight:300;
-      }
+    //     .v-date-picker-title__year {
+    //       text-align: center;
+    //       // display: block;
+    //       font-size: 2em;
+    //       opacity: 0.9;
+    //       margin: auto 0 auto auto;
+    //       // display: flex;
+    //     }
+    //     .v-date-picker-title__date {
+    //       text-align: center;
+    //       font-size: 1.6em;
+    //       opacity: 0.6;
+    //       padding: 0;
+    //       margin: auto auto auto 0;
+    //       display: flex;
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-        width: 0;
-        height: 1px;
-        background-color: #111111;
-        transition: width 0.6s ease;
-        clip-path: polygon(0 0, 0% 100%, 100% 100%, 100% 0);
+    //       &:not(:empty)::before {
+    //         content: '';
+    //         display: block;
+    //         width: 1px;
+    //         height: 1em;
+    //         margin: 0 .5em 0 0;
+    //         background-color: #bfc7c7;
+    //         opacity: 0.6;
+    //       }
+    //     }
+    //   }
+    // }
+    .v-picker__body {
+      background-color: currentColor;
+      >div {
+        // background: #1e1e1e;
       }
-      &:hover::before {
-        width: 100%;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      .v-date-picker-header {
+        font-weight: 400 !important;
+      }
+      .v-date-picker-table {
+        th {
+          font-size:.9em;
+          font-weight:500;
+          color: #bfc7c7;
+        }
+
+        td {
+          button {
+            border-radius: 4px;
+          }
+          .v-date-picker-table__current {
+            // border-color:#FE252E99;
+            background-color: #FE252E;
+            color: whitesmoke !important;
+            font-weight:600;
+            border-color: #FE252E;
+          }
+        }
       }
     }
-  }
-
-  .contacts {
-    display: flex;
-    padding:1.6em 0 0 0;
-    margin:1.6em 0 0 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    font-size:18px;
-    color: #111111;
-    flex-wrap: wrap;
-    gap: 3em;
-
-    .title {
-      font-weight:200;
-    }
-  }
-
-  .socials {
-    display: flex;
-    padding:1.6em 0 1.6em 0;
-    margin:0 0 1.6em 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    align-items: center;
-    gap: 16px;
-
-    >:hover {
-      background-color:rgb(18 18 18 / 10%);
-    }
-  }
-
-  .row-3 {
-    font-size: 18px;
-    color: #454545;
-    font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    justify-content: space-between;
-    margin-top: 2em;
   }
 }
 </style>

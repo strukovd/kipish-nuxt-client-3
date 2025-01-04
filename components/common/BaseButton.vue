@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="base-button" :class="[{ 'disabled': disabled }, 'thin-button']">
+  <button type="button" class="base-button" :class="[{ 'disabled': disabled }, `${type}-button`]">
     <!-- <v-icon v-if="prependIcon" :icon="prependIcon" size="1.2em" style="margin-right:.3em; opacity:.8;"></v-icon> -->
     <slot name="default"></slot>
     <!-- <span style="display:flex; align-items:center; gap:.6em;"></span> -->
@@ -13,6 +13,7 @@ export default defineComponent({
   name: 'BaseButton',
   props: {
     prependIcon: String,
+    type: { type: String as () => 'thin' | 'small' | 'glass', default: 'thin' },
     disabled: { type: Boolean, default: false },
     color: String
   },
