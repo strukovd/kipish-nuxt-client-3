@@ -56,6 +56,10 @@ export default defineComponent({
 
 <style lang="scss">
 .text-box {
+  &:has(input.disabled) {
+		pointer-events: none;
+	}
+
 	.text-box-wrapper {
 		margin:0 0 .6em 0;
 
@@ -79,9 +83,13 @@ export default defineComponent({
 			box-shadow: none;
 			padding: .4em .4em .4em .6em;
 
-      // &.disabled {
-      //   opacity:.6;
-      // }
+      &.disabled {
+        //   opacity:.6;
+
+        > input {
+          pointer-events: none;
+        }
+      }
 
 			&:focus-within {
 				box-shadow: 0 0 0 2px #0079C1aa;
