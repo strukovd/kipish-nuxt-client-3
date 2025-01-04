@@ -8,7 +8,7 @@
     <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
       <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
       <BaseTextBox v-model="filterOptions.establishmentName" placeholder="Заведение"/>
-      <BaseTextBox v-model="filterOptions.date" placeholder="Выберите дату" disabled/>
+      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar', { payload: { date: filterOptions.date } }); selectDay(date); }" v-model="filterOptions.date" placeholder="Выберите дату" disabled/>
     </section>
 
     <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays" :key="curDateItem + dayIndex">
@@ -91,7 +91,6 @@ export default {
   },
   data: () => ({
     currentDate: new Date().toLocaleDateString("fr-CA"),
-    openDatePicker: false,
     adverts: [] as any[],
     closeOnClick: true,
     scrollPosition: 0,
