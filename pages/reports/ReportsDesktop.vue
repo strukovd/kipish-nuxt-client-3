@@ -8,7 +8,7 @@
     <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
       <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
       <BaseTextBox v-model="filterOptions.establishmentName" placeholder="Заведение"/>
-      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar', { payload: { date: filterOptions.date } }); selectDay(date); }" v-model="filterOptions.date" placeholder="Выберите дату" disabled/>
+      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar'); if(date) selectDay(date); }" v-model="selectedDay" placeholder="Выберите дату" disabled/>
     </section>
 
     <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays" :key="curDateItem + dayIndex">
@@ -236,6 +236,8 @@ export default {
     },
 
     selectDay(date: any) {
+      if(!date) return;
+
       const formattedDate = this.convertDateToFetchFormat(date);
       this.selectedDay = formattedDate;
       this.visibleDays = [this.selectedDay];
@@ -359,6 +361,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 1em;
+    margin:.6em 0;
 
     >* {
       flex:auto 1 0;

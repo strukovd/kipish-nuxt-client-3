@@ -5,6 +5,11 @@
 
     <TimeRouletteNew :dateMap="reportDateMap" @setActualDay="selectDay" class="my-15"/>
 
+    <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
+      <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
+      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar'); if(date) selectDay(date); }" v-model="selectedDay" placeholder="Выберите дату" disabled/>
+    </section>
+
     <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays" :key="curDateItem + dayIndex">
       <v-card-text data-aos="fade-up" data-aos-duration="1000" :class="dayIndex !== 0 && 'mt-8'" class="px-0 pt-0 pb-0 d-flex justify-space-between">
         <!-- НАДПИСЬ ДНЯ НЕДЕЛИ И ДАТА -->
@@ -15,45 +20,15 @@
 
         <!-- КНОПКА ФИЛЬТР, отображается только для первого дня -->
         <div v-if="dayIndex === 0">
-          <!--
-          <v-btn depressed @click="filterPanel"
-                  :style="filter ? ($vuetify.theme.dark ? 'border: 1px solid #FFFFFF' : 'border: 1px solid #0000001A') : ($vuetify.theme.dark ? 'border: 1px solid #FFFFFF' : 'border: 1px solid rgba(0, 0, 0, 0.10)')"
-                  style="border-radius: 12px !important;"
-                  :outlined="!filter"
-                  color="red"
-                  class="px-6 py-6 hover-red">
-            <span :class="filter ? 'white--text' : 'black--text'" class="text-20 mr-3">Фильтр</span>
-            <heroicon name="filter"
-                      :stroke="filter ? ($vuetify.theme.dark ? '#FFFFFF' : '#FFFFFF' ) : ($vuetify.theme.dark ? '#FFFFFF' : '#111111')"
-                      fill="transparent"/>
-          </v-btn>
-          -->
-          <button @click="filterPanel" class="button-v2" style="padding:.3em 1.6em;">
+          <button @click="toggleFilterPanel" class="button-v2" style="padding:.3em 1.6em;">
             <span>Фильтр</span>
             <heroicon name="filter" stroke="currentColor" fill="transparent"/>
           </button>
         </div>
       </v-card-text>
 
-      <!-- ПАРАМЕТРЫ ФИЛЬТРА -->
-      <v-card-text v-if="dayIndex === 0" class="pa-0 mt-10 filter-panel">
-        <transition name="fade">
-          <div v-if="filter" class="d-flex align-center justify-space-between">
-            <v-text-field class="mr-8" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined
-                          hide-details
-                          placeholder="Название"/>
-            <v-text-field type="date" style="border-radius: 12px;background: #FFFFFF; width: 100%" outlined
-                          hide-details
-                          class="ml-8"
-                          placeholder="Дата"/>
-          </div>
-        </transition>
-      </v-card-text>
-
       <!-- РЕПОРТАЖИ -->
-      <!-- {{reportsCacheMap[curDateItem]}} TODO: сюда попадает coverImage с каритнкой -->
-
-      <div v-if="dayIndex === 0 && !Array.isArray(reportsCacheMap[curDateItem])"
+      <div v-if="dayIndex === 0 && !Array.isArray(filteredReports[curDateItem])"
             class="d-flex flex-wrap reports_block">
         <v-skeleton-loader
           class="skeleton_card"
@@ -62,14 +37,14 @@
           type="image"
         />
       </div>
-      <div v-else-if="Array.isArray(reportsCacheMap[curDateItem]) && reportsCacheMap[curDateItem]?.length === 0"
+      <div v-else-if="Array.isArray(filteredReports[curDateItem]) && filteredReports[curDateItem]?.length === 0"
             class="text-62 black--text mt-8">Репортажей в этот день не найдено
       </div>
 
       <template v-else>
-        <template v-if="reportsCacheMap[curDateItem]?.length > 0">
+        <template v-if="filteredReports[curDateItem]?.length > 0">
           <div data-aos="fade-up"
-                data-aos-duration="1000" v-for="(report, index) of reportsCacheMap[curDateItem]"
+                data-aos-duration="1000" v-for="(report, index) of filteredReports[curDateItem]"
                 :key="report.id">
             <VPlayer
               :id="report.id"
@@ -87,128 +62,6 @@
       </template>
     </template>
   </div>
-
-
-  <!-- <div id="top">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://kipish.kg/" },
-        { "@type": "ListItem", "position": 2, "name": "Видеорепортажи", "item": "https://kipish.kg/videos" }
-      ]
-    }
-    </script>
-
-    <v-row class="ma-0 pa-0 wrapper reports_desc_container">
-      <v-col class="pa-0" cols="12">
-        <tool-bar/>
-      </v-col>
-      <v-col style="min-height: 70vh" class="pa-0 px-16 mb-120" cols="12">
-        <v-card elevation="0" color="transparent">
-
-          <div v-if="loading" class="d-flex flex-wrap reports_block">
-            <v-skeleton-loader
-              class="skeleton_card"
-              width="100%"
-              height="600"
-              type="image"
-            />
-          </div>
-          <template v-else>
-            <!-- РУЛЕТКА --
-            <template>
-              <time-roulette :dateMap="this.reportDateMap" @setActualDay="selectDay" class="mb-15"/>
-            </template>
-
-            <!-- CONTENT --
-
-            <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays">
-              <v-card-text data-aos="fade-up"
-                           data-aos-duration="1000" :class="dayIndex !== 0 && 'mt-8'"
-                           class="px-0 pt-0 pb-0 d-flex justify-space-between" :key="curDateItem + dayIndex">
-                <!-- НАДПИСЬ ДНЯ НЕДЕЛИ И ДАТА --
-                <div v-if="curDateItem">
-                  <span style="border-right: 1px solid rgba(17, 17, 17, 0.1);"
-                        class="pr-4 mr-4 text-32 font-weight-300 text-uppercase black--text font-title">{{
-                      getDayOfWeekFormatted(curDateItem)
-                    }}</span>
-                  <span class="text-32 text-uppercase black--text">{{ formatDateFormatted(curDateItem) }}</span>
-                </div>
-
-                <!-- КНОПКА ФИЛЬТР, отображается только для первого дня --
-                <div v-if="dayIndex === 0">
-                  <v-btn depressed @click="filterPanel"
-                         :style="filter ? ($vuetify.theme.dark ? 'border: 1px solid #FFFFFF' : 'border: 1px solid #0000001A') : ($vuetify.theme.dark ? 'border: 1px solid #FFFFFF' : 'border: 1px solid rgba(0, 0, 0, 0.10)')"
-                         style="border-radius: 12px !important;"
-                         :outlined="!filter"
-                         color="red"
-                         class="px-6 py-6 hover-red">
-                    <span :class="filter ? 'white--text' : 'black--text'" class="text-20 mr-3">Фильтр</span>
-                    <heroicon name="filter"
-                              :stroke="filter ? ($vuetify.theme.dark ? '#FFFFFF' : '#FFFFFF' ) : ($vuetify.theme.dark ? '#FFFFFF' : '#111111')"
-                              fill="transparent"/>
-                  </v-btn>
-                </div>
-              </v-card-text>
-
-              <!-- ПАРАМЕТРЫ ФИЛЬТРА --
-              <v-card-text v-if="dayIndex === 0" class="pa-0 mt-10 filter-panel">
-                <transition name="fade">
-                  <div v-if="filter" class="d-flex align-center justify-space-between">
-                    <v-text-field class="mr-8" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined
-                                  hide-details
-                                  placeholder="Название"/>
-                    <v-text-field type="date" style="border-radius: 12px;background: #FFFFFF; width: 100%" outlined
-                                  hide-details
-                                  class="ml-8"
-                                  placeholder="Дата"/>
-                  </div>
-                </transition>
-              </v-card-text>
-
-              <!-- РЕПОРТАЖИ --
-              <!-- {{reportsCacheMap[curDateItem]}} TODO: сюда попадает coverImage с каритнкой --
-
-              <div v-if="dayIndex === 0 && !Array.isArray(reportsCacheMap[curDateItem])"
-                   class="d-flex flex-wrap reports_block">
-                <v-skeleton-loader
-                  class="skeleton_card"
-                  width="100%"
-                  height="600"
-                  type="image"
-                />
-              </div>
-              <div v-else-if="Array.isArray(reportsCacheMap[curDateItem]) && reportsCacheMap[curDateItem]?.length === 0"
-                   class="text-62 black--text mt-8">Репортажей в этот день не найдено
-              </div>
-
-              <template v-else>
-                <template v-if="reportsCacheMap[curDateItem]?.length > 0">
-                  <div data-aos="fade-up"
-                       data-aos-duration="1000" v-for="(report, index) of reportsCacheMap[curDateItem]"
-                       :key="report.id">
-                    <VPlayer
-                      :id="report.id"
-                      :title="report.title"
-                      :subTitle="formatDate(report.reportDate)"
-                      :label="report?.establishment?.name"
-                      :coverImage="report.coverPath ? `https://files.kipish.kg/${report.coverPath}` : ''"
-                      :coverId="report.coverImageId"
-                      :src="videoDomain + report.id"
-                      :link="'/video/' + report.id"
-                    />
-                  </div>
-                  <a-dpc data-aos="fade-left" class="my-15" :key="dayIndex" v-if="shouldShowDesktopEvents(dayIndex)"/>
-                </template>
-              </template>
-            </template>
-          </template>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div> -->
 </template>
 
 <script lang="ts">
@@ -217,12 +70,39 @@ import TimeRouletteNew from "@/components/common/TimeRouletteNew.vue";
 import VPlayer from "@/components/common/VPlayer/VPlayer.vue";
 import ADpc from "@/components/common/ad/ADpc.vue";
 import BaseBreadcrumbs from '@/components/common/BaseBreadcrumbs.vue';
+import BaseTextBox from '~/components/common/BaseTextBox.vue';
 
 export default {
   name: "VideosDesktop",
-  components: { ADpc, VPlayer, TimeRouletteNew, BaseBreadcrumbs },
+  components: { ADpc, VPlayer, TimeRouletteNew, BaseBreadcrumbs, BaseTextBox },
   computed: {
     ...mapStores( useAppStore ),
+
+    filteredReports() {
+      if (this.filterOptions?.name || this.filterOptions.date) {
+        const filteredReportsMap: any = {};
+        for (const curDateItem of this.visibleDays) {
+          if (!this.reportsCacheMap[curDateItem]) continue;
+
+          const filteredReports = this.reportsCacheMap[curDateItem].filter((report: any) => {
+            const matchesName = this.filterOptions?.name && String(report.name)
+              .toLowerCase()
+              .includes(String(this.filterOptions.name).toLowerCase());
+
+            return matchesName;
+          });
+
+          if (filteredReports.length > 0) {
+            filteredReportsMap[curDateItem] = filteredReports;
+            // filteredVisibleDays.push(curDateItem);
+          }
+        }
+
+        return filteredReportsMap;
+      } else {
+        return this.reportsCacheMap;
+      }
+    }
   },
 
   head() {
@@ -245,6 +125,9 @@ export default {
     startX: 0,
     scrollLeft: 0,
     advertisements: [] as any[],
+    filterOptions: {
+      name: '',
+    } as any,
 
     currentDay: null as any,
     reports: [] as any[],
@@ -255,7 +138,7 @@ export default {
     visibleDays: [] as any[],
     potentialDays: [] as any[], // Массив потенциальных к загрузке дат
 
-    filter: false,
+    showFilterOptions: false,
     page: 0,
     size: 15,
     loading: false,
@@ -369,13 +252,8 @@ export default {
       this.fetchReports(formattedDate);
     },
 
-    // setSelectedCity(city) {
-    //   this.city = city;
-    //   this.getReports();
-    // },
-
-    filterPanel() {
-      this.filter = !this.filter
+    toggleFilterPanel() {
+      this.showFilterOptions = !this.showFilterOptions;
     },
 
     getReports() {
@@ -471,6 +349,17 @@ export default {
 }
 
 .videos-desktop {
+  .reports-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin:.6em 0;
+
+    >* {
+      flex:auto 1 0;
+    }
+  }
 
 }
 

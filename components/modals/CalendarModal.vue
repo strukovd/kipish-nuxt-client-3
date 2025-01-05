@@ -54,6 +54,8 @@ export default defineComponent({
     },
 
     close(resValue?: any) {
+      if(!(resValue instanceof Date)) resValue = null;
+
       const appStore = useAppStore();
       if (appStore) {
         const modal = appStore.modals.pop();
