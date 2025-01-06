@@ -92,24 +92,13 @@ export default defineComponent({
       }
 
 			&:focus-within {
-				box-shadow: 0 0 0 2px #0079C1aa;
+				box-shadow: 0 0 0 2px #353535aa;
 			}
 
 			.v-icon {
 				padding-top:.1em;
 				margin-right:.3em;
 				opacity:.8;
-
-				// font-size: 1.4em;
-				// display: flex;
-				// align-items: center;
-				// padding: 1em 2em 1em 2em;
-				// margin-bottom: 0;
-				// font-weight: 400;
-				// color: #5c6873;
-				// background-color: #f0f3f5;
-				// border: 1px solid #e4e7ea;
-				// border-radius: 0 5px 5px 0;
 			}
 			&>input {
 				flex: auto 1 0;
