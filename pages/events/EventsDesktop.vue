@@ -5,9 +5,22 @@
 
     <TimeRouletteNew :dateMap="eventsDateMap" @setActualDay="selectDay" class="mb-15"/>
 
-    <div style="margin-bottom:1.6em;">
+    <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
+      <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
+      <!-- <BaseTextBox v-model="filterOptions.establishmentName" placeholder="Заведение"/>
+      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar'); if(date) selectDay(date); }" v-model="selectedDay" placeholder="Выберите дату" disabled/> -->
+    </section>
+
+    <div style="display: flex; justify-content: space-between; margin-bottom:1.6em;">
       <span class="pr-4 mr-4 text-32 font-weight-300 text-uppercase black--text font-title">Актуальные события</span>
-      <!-- TODO: фильтры -->
+
+      <!-- КНОПКА ФИЛЬТР, отображается только для первого дня -->
+      <div>
+        <button @click="toggleFilterPanel" class="button-v2" style="padding:.3em 1.6em;">
+          <span>Фильтр</span>
+          <heroicon name="filter" stroke="currentColor" fill="transparent"/>
+        </button>
+      </div>
     </div>
 
 
@@ -23,59 +36,6 @@
       <v-skeleton-loader class="skeleton_card" width="416" height="600" type="image" v-for="i in 3" :key="i"/>
     </div>
   </div>
-
-
-  <!-- <v-row style="width: 1440px !important;" class="ma-0 pa-0">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://kipish.kg/" },
-        { "@type": "ListItem", "position": 2, "name": "События", "item": "https://kipish.kg/events" }
-      ]
-    }
-    </script>
-
-    <v-col style="min-height: 70vh" class="pa-0 px-16 mb-120" cols="12">
-      <v-card elevation="0" color="transparent">
-
-        <v-card-text class="px-0 pt-7 pb-0 d-flex align-center justify-space-between">
-          <div class="d-flex align-end">
-            <span class="text-32 font-weight-300 text-uppercase mr-8 black--text font-title">
-              {{ selectedDay ? formatDate(selectedDay) : 'АКТУАЛЬНЫЕ СОБЫТИЯ' }}
-            </span>
-          </div>
-          <div>
-            <button @click="openFilterPanel" class="button-v2" style="padding:.3em 1.6em;">
-              <span>Фильтр</span>
-              <heroicon name="filter" stroke="currentColor" fill="transparent"/>
-            </button>
-          </div>
-        </v-card-text>
-
-        <v-card-text class="pa-0">
-          <transition name="fade">
-            <div v-if="filter" class="mt-15 d-flex align-center filter_panel">
-              <v-text-field clearable v-model="filterPanel.name" class="mr-8" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined hide-details placeholder="Название"/>
-              <v-autocomplete clearable v-model="filterPanel.cata" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined hide-details placeholder="Категории" return-object item-text="nameRu" :items="categoriesPost"/>
-            </div>
-          </transition>
-        </v-card-text>
-        <v-card-text v-if="!loading" class="pa-0 mt-10 d-flex flex-wrap events_block">
-          <v-card-text class="pa-0 d-flex flex-wrap reports_block pb-8">
-            <div v-if="filteredEventWithPanel.length === 0" style="flex:auto 1 0;">
-              <h1 style="text-align:center; margin-top: 2em;" class="font-weight-300 text-uppercase black--text font-title">События в этот день не найдены</h1>
-            </div>
-            <BaseEventCard :event="event" v-for="(event, index) of filteredEventWithPanel" :key="event.id" width="416"/>
-          </v-card-text>
-        </v-card-text>
-        <div v-else class="d-flex flex-wrap">
-          <v-skeleton-loader class="skeleton_card" width="416" height="600" type="image" v-for="i in 3" :key="i"/>
-        </div>
-      </v-card>
-    </v-col>
-  </v-row> -->
 </template>
 
 <script lang="ts">
@@ -83,10 +43,11 @@ import { mapStores } from "pinia";
 import BaseBreadcrumbs from "~/components/common/BaseBreadcrumbs.vue";
 import TimeRouletteNew from "~/components/common/TimeRouletteNew.vue";
 import BaseEventCard from "~/components/common/BaseEventCard.vue";
+import BaseTextBox from "~/components/common/BaseTextBox.vue";
 
 export default {
   name: "EventsDesktop",
-  components: { TimeRouletteNew, BaseBreadcrumbs, BaseEventCard },
+  components: { TimeRouletteNew, BaseBreadcrumbs, BaseEventCard, BaseTextBox },
   head() {
     return {
       link: [
@@ -106,6 +67,12 @@ export default {
     page: 0,
     size: 15,
 
+    showFilterOptions: false,
+    filterOptions: {
+      name: '',
+      cata: null
+    } as any,
+
     closeOnClick: true,
     scrollPosition: 0,
     parallaxMultiplier: 0.5,
@@ -123,10 +90,6 @@ export default {
     activeTab: 'ALL',
     eventTypes: ['ALL', 'CONCERT', 'EXHIBITION', 'PARTY', 'FESTIVAL', 'SHOW', 'PERFORMANCE'],
     loading: true,
-    filterPanel: {
-      name: '',
-      cata: null
-    } as any,
   }),
 
   computed: {
@@ -134,12 +97,12 @@ export default {
 
     filteredEventWithPanel() {
       let filteredEvents = this.events;
-      if (this.filterPanel.name) {
-        filteredEvents = filteredEvents.filter((el: any) => el.title.toLowerCase().startsWith(this.filterPanel.name.toLowerCase()));
+      if (this.filterOptions.name) {
+        filteredEvents = filteredEvents.filter((el: any) => el.title.toLowerCase().startsWith(this.filterOptions.name.toLowerCase()));
       }
 
-      if (this.filterPanel.cata !== null) {
-        filteredEvents = filteredEvents.filter((el: any) => el.eventType.nameRu === this.filterPanel.cata.nameRu);
+      if (this.filterOptions.cata !== null) {
+        filteredEvents = filteredEvents.filter((el: any) => el.eventType.nameRu === this.filterOptions.cata.nameRu);
       }
 
       return filteredEvents;
@@ -162,6 +125,10 @@ export default {
   },
 
   methods: {
+    toggleFilterPanel() {
+      this.showFilterOptions = !this.showFilterOptions;
+    },
+
     fetchDateMap() {
       const params = {
         city: this.appStore.currentCity?.id ?? null,
@@ -234,16 +201,25 @@ export default {
 
       return `${day} ${month} / ${year}`;
     },
-
-    openFilterPanel() {
-      this.filter = !this.filter
-    },
   },
 }
 </script>
 
 
 <style lang="scss">
+.events-desktop {
+  .reports-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin:0 0 2em 0;
+
+    >* {
+      flex:auto 1 0;
+    }
+  }
+}
 .reports_block {
   .img_item {
     .v-image__image {
