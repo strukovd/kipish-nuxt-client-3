@@ -9,8 +9,8 @@
         <div class="close-button" @click="close"><v-icon color="white">mdi-close</v-icon></div>
       </div>
       <div class="functions">
-        <BaseButton @click="close">Скачать</BaseButton>
-        <BaseButton @click="close"><Heroicon name="share"/></BaseButton>
+        <BaseButton type="glass" @click="close">Скачать</BaseButton>
+        <BaseButton type="glass" @click="close"><Heroicon size="2em" name="share" fill="currentColor"/></BaseButton>
       </div>
     </div>
     <aside v-show="payload.files.length-1 > payload.index" class="arrow-right" @click="nextImage">

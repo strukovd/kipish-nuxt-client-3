@@ -26,6 +26,9 @@ export default defineComponent({
 
 <style lang="scss">
 .base-button {
+  // line-height:1.4em;
+  // min-height: 1.4em;
+
   &.small-button {
     color: #111111;
     border:1px solid rgba(0, 0, 0, 0.3);
@@ -58,6 +61,39 @@ export default defineComponent({
     font-size:20px;
     color: #111111;
     border:1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding:.2em 1.6em;
+    letter-spacing: 0.0892857143em;
+    max-width: 100%;
+    outline: none;
+    position: relative;
+    text-decoration: none;
+    text-indent: 0.0892857143em;
+    text-transform: uppercase;
+    user-select: none;
+    transition:all 0.3s ease-in-out 0s;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: .6em;
+    line-height: 2em;
+    margin-right: .3em;
+
+
+    &:hover {
+      background-color: #fe252e;
+      color: #f9f9f9;
+    }
+  }
+
+  &.glass-button {
+    font-family:"ALS Hauss VF", sans-serif;
+    font-weight: 400;
+    font-size:20px;
+    color: #f0f0f0;
+    background-color: rgba(255 255 255 / 0.3);
     border-radius: 8px;
     padding:.2em 1.6em;
     letter-spacing: 0.0892857143em;
