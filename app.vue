@@ -1,5 +1,8 @@
 <template>
-  <div @resize="onResize">
+  <div v-show="isServer" class="loadingScreen">
+    <img class="logo" src="/images/logo-kipish.svg" alt="Logo">
+  </div>
+  <div v-show="!isServer" @resize="onResize">
     <NuxtLayout :name="layout">
       <ClientOnly>
         <transition name="modal">
@@ -29,6 +32,9 @@ export default {
 
   computed: {
     ...mapStores( useAppStore ),
+    isServer() {
+      return !import.meta.client;
+    },
 
     layout() {
       return this.appStore.isMobile ? 'default-mobile' : 'default';
@@ -93,6 +99,38 @@ export default {
 </script>
 
 <style lang="scss">
+.loadingScreen {
+  height:100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:auto;
+  padding:0 20vw;
+	animation: pulse 2s infinite ease-out;
+
+	/* pulse animation */
+	@keyframes pulse {
+		0% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.1);
+			opacity: 0.3;
+		}
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	.logo {
+		padding:0 1em;
+		margin-bottom:.6em;
+		max-height: 150px;
+	}
+}
+
 .modal-enter-active, .modal-leave-active {
   transition:opacity .2s ease-in 0s;
 }
