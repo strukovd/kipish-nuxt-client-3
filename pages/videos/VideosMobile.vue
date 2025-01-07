@@ -5,40 +5,34 @@
     <h1 class="h1-font text-32 black--text font-title text-uppercase font-weight-300" style="margin-bottom:.6em;">Видеоотчеты мероприятий в Бишкеке</h1>
 
     <TimeRouletteNew :avgMonthWidth="1460" :dateMap="reportDateMap" @setActualDay="selectDay" class="mb-6"/>
+
+    <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
+      <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
+      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar'); if(date) selectDay(date); }" v-model="selectedDay" placeholder="Выберите дату" disabled/>
+    </section>
+
     <BaseButton @click="showFilterOptions = !showFilterOptions">
       <span>Фильтр</span>
       <heroicon name="filter" stroke="currentColor" fill="transparent"/>
     </BaseButton>
-    <!-- <div class="filter">
-      <transition name="fade">
-        <div v-if="showFilterOptions" class="d-flex flex-column mt-4 filter-panel">
-          <v-text-field v-model="filterOptions.name" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined hide-details placeholder="Название"/>
-          <v-text-field v-model="filterOptions.establishmentName" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined hide-details class="mt-4" placeholder="Заведение"/>
-          <v-btn style="border: none; margin: 0; background: #ffffff; border-radius: 12px !important; border: 1px solid rgba(0, 0, 0, 0.10)" outlined color="white" class="d-flex justify-start text-none py-7 px-3 mt-4" @click="openDatePicker = true">
-            <span style="color: #000000" class="text-16 mr-3 font-weight-375">{{ selectedDay ? selectedDay : 'Выберите дату'}}</span>
-          </v-btn>
-        </div>
-      </transition>
-    </div> -->
-
 
     <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays" :key="curDateItem + dayIndex">
       <v-card-text data-aos="fade-up" data-aos-duration="1000" :class="dayIndex !== 0 && 'mt-8'" class="week-title px-0 pt-0 pb-0 d-flex justify-space-between">
         <!-- НАДПИСЬ ДНЯ НЕДЕЛИ И ДАТА -->
-        <div v-if="currentDay && Array.isArray(reportsCacheMap[curDateItem])">
+        <div v-if="currentDay && Array.isArray(filteredReports[curDateItem])">
           <span style="border-right: 1px solid rgba(17, 17, 17, 0.1);" class="text-20 font-weight-300 text-uppercase black--text font-title mr-2">{{ getDayOfWeekFormatted(curDateItem) }}</span>
           <span class="text-14 text-uppercase dark--text">{{ formatDateFormatted(curDateItem) }}</span>
         </div>
       </v-card-text>
 
       <!-- РЕПОРТАЖИ -->
-      <Loader v-if="dayIndex === 0 && !Array.isArray(reportsCacheMap[curDateItem])"/>
-      <div v-else-if="Array.isArray(reportsCacheMap[curDateItem]) && reportsCacheMap[curDateItem]?.length === 0" class="text-32 black--text mt-6">Репортажей в этот день не найдено</div>
+      <Loader v-if="dayIndex === 0 && !Array.isArray(filteredReports[curDateItem])"/>
+      <div v-else-if="Array.isArray(filteredReports[curDateItem]) && filteredReports[curDateItem]?.length === 0" class="text-32 black--text mt-6">Репортажей в этот день не найдено</div>
 
       <!-- Вставляем карточки рекламы среди карточек репортажей -->
       <section v-else class="video-cards">
-        <template v-if="reportsCacheMap[curDateItem]?.length > 0">
-          <div data-aos="fade-up" data-aos-duration="1000" v-for="(report, index) of reportsCacheMap[curDateItem]" :key="report.id">
+        <template v-if="filteredReports[curDateItem]?.length > 0">
+          <div data-aos="fade-up" data-aos-duration="1000" v-for="(report, index) of filteredReports[curDateItem]" :key="report.id">
             <VPlayerMobile
               :id="report.id"
               :title="report.title"
@@ -65,15 +59,42 @@ import ADmob from "~/components/common/ad/ADmob.vue";
 import BaseBreadcrumbs from "~/components/common/BaseBreadcrumbs.vue";
 import BaseButton from "~/components/common/BaseButton.vue";
 import BaseReportCard from "~/components/common/BaseReportCard.vue";
+import BaseTextBox from "~/components/common/BaseTextBox.vue";
 import Loader from "~/components/common/Loader.vue";
 import TimeRouletteNew from "~/components/common/TimeRouletteNew.vue";
 import VPlayerMobile from "~/components/common/VPlayer/VPlayerMobile.vue";
 
 export default {
   name: "ReportsDesktop",
-  components: { Loader, TimeRouletteNew, BaseBreadcrumbs, BaseReportCard, BaseButton, VPlayerMobile, ADmob },
+  components: { Loader, TimeRouletteNew, BaseBreadcrumbs, BaseReportCard, BaseButton, VPlayerMobile, ADmob, BaseTextBox },
   computed: {
     ...mapStores( useAppStore ),
+
+    filteredReports() {
+      if (this.filterOptions?.name || this.filterOptions.date) {
+        const filteredReportsMap: any = {};
+        for (const curDateItem of this.visibleDays) {
+          if (!this.reportsCacheMap[curDateItem]) continue;
+
+          const filteredReports = this.reportsCacheMap[curDateItem].filter((report: any) => {
+            const matchesName = this.filterOptions?.name && String(report.title)
+              .toLowerCase()
+              .includes(String(this.filterOptions.name).toLowerCase());
+
+            return matchesName;
+          });
+
+          if (filteredReports.length > 0) {
+            filteredReportsMap[curDateItem] = filteredReports;
+            // filteredVisibleDays.push(curDateItem);
+          }
+        }
+
+        return filteredReportsMap;
+      } else {
+        return this.reportsCacheMap;
+      }
+    }
   },
 
   data: () => ({
@@ -95,7 +116,9 @@ export default {
     visibleDays: [] as any[],
     potentialDays: [] as any[], // Массив потенциальных к загрузке дат
 
-    filter: false,
+    filterOptions: {
+      name: '',
+    } as any,
     page: 0,
     size: 15,
     loading: false,
@@ -107,6 +130,7 @@ export default {
     const today = new Date();
     this.currentDay = this.convertDateToFetchFormat(today.toLocaleDateString('fr-CA'));
   },
+
   mounted() {
     this.initOnScrollFetcher();
     this.getReports();
@@ -327,75 +351,19 @@ export default {
 }
 
 .videos-mobile {
-  .v-picker--date {
-    .v-picker__title {
-      .v-date-picker-title {
-        display: flex !important;
-        justify-content: center;
-        flex-direction: row !important;
-        gap: 1em;
-        flex-wrap: wrap;
-        line-height: 1;
-        display: flex;
-        flex-direction: column;
+  .reports-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    gap: 1em;
+    margin:.6em 0;
 
-        .v-date-picker-title__year {
-          text-align: center;
-          // display: block;
-          font-size: 2em;
-          opacity: 0.9;
-          margin: auto 0 auto auto;
-          // display: flex;
-        }
-        .v-date-picker-title__date {
-          text-align: center;
-          font-size: 1.6em;
-          opacity: 0.6;
-          padding: 0;
-          margin: auto auto auto 0;
-          display: flex;
-
-          &:not(:empty)::before {
-            content: '';
-            display: block;
-            width: 1px;
-            height: 1em;
-            margin: 0 .5em 0 0;
-            background-color: #bfc7c7;
-            opacity: 0.6;
-          }
-        }
-      }
-    }
-    .v-picker__body {
-      >div {
-        // background: #1e1e1e;
-      }
-      .v-date-picker-header {
-        font-weight: 400 !important;
-      }
-      .v-date-picker-table {
-        th {
-          font-size:.9em;
-          font-weight:500;
-          color: #bfc7c7;
-        }
-
-        td {
-          button {
-            border-radius: 4px;
-          }
-          .v-date-picker-table__current {
-            // border-color:#FE252E99;
-            background-color: #FE252E;
-            color: whitesmoke !important;
-            font-weight:600;
-            border-color: #FE252E;
-          }
-        }
-      }
+    >* {
+      flex:auto 1 0;
     }
   }
+
 
 
   .v-skeleton-loader__image {

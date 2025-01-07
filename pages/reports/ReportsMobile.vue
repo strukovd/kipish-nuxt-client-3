@@ -1,46 +1,21 @@
 <template>
-  <div class="reports-desktop mmid3">
+  <div class="reports-mobile mmid3">
     <!-- BREADCRUMBS -->
     <BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/reports', title: 'Все репортажи'}]"/>
     <h1 class="h1-font text-32 black--text font-title text-uppercase font-weight-300" style="margin-bottom:.6em;">Фотоотчеты с мероприятий в Бишкеке</h1>
 
     <TimeRouletteNew :avgMonthWidth="1460" :dateMap="reportDateMap" @setActualDay="selectDay" class="mb-6"/>
-    <BaseButton @click="showFilterOptions = !showFilterOptions">
+
+    <section v-if="showFilterOptions" data-aos="fade-down" data-aos-duration="300" class="reports-filter">
+      <BaseTextBox v-model="filterOptions.name" placeholder="Название"/>
+      <BaseTextBox v-model="filterOptions.establishmentName" placeholder="Заведение"/>
+      <BaseTextBox @click="async ()=>{ const date = await $modal.show('', 'Calendar'); if(date) selectDay(date); }" v-model="selectedDay" placeholder="Выберите дату" disabled/>
+    </section>
+
+    <BaseButton @click="showFilterOptions = !showFilterOptions" style="padding:.3em 1.6em;">
       <span>Фильтр</span>
       <heroicon name="filter" stroke="currentColor" fill="transparent"/>
     </BaseButton>
-    <div class="filter">
-      <transition name="fade">
-        <div v-if="showFilterOptions" class="d-flex flex-column mt-4 filter-panel">
-          <v-text-field v-model="filterOptions.name" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined hide-details placeholder="Название"/>
-          <v-text-field v-model="filterOptions.establishmentName" style="border-radius: 12px;background: #FFFFFF;width: 100%" outlined hide-details class="mt-4" placeholder="Заведение"/>
-          <v-btn style="border: none; margin: 0; background: #ffffff; border-radius: 12px !important; border: 1px solid rgba(0, 0, 0, 0.10)" outlined color="white" class="d-flex justify-start text-none py-7 px-3 mt-4" @click="openDatePicker = true">
-            <span style="color: #000000" class="text-16 mr-3 font-weight-375">{{ selectedDay ? selectedDay : 'Выберите дату'}}</span>
-          </v-btn>
-        </div>
-      </transition>
-    </div>
-    <v-dialog class="calendar-dialog" overlay-color="#1e1e1e" v-model="openDatePicker" max-width="600">
-         <v-card elevation="0" color="transparent">
-           <v-date-picker
-              :weekdays="[1, 2, 3, 4, 5, 6, 7]"
-              :weekday-format="getDay"
-              elevation="0" locale="ru"
-              v-model="currentDate"
-              color="#333333"
-              @input="onFilterDateSelect"
-              style="border-radius:12px; width:100%;"
-              :style="{background: appStore.isDark ? `#1e1e1e` : `#FFFFFF`}"
-              outlined />
-
-           <v-btn depressed @click="openDatePicker = false" style="border-radius: 16px !important;width: 100%"
-                  color="#CCCCCC80"
-                  class="py-8 px-15 hover-red mt-4">
-             <span class="text-20 white--text opacity-70">Закрыть</span>
-           </v-btn>
-         </v-card>
-    </v-dialog>
-
 
     <template v-if="currentDay" v-for="(curDateItem, dayIndex) of visibleDays" :key="curDateItem + dayIndex">
       <v-card-text data-aos="fade-up" data-aos-duration="1000" :class="dayIndex !== 0 && 'mt-8'" class="week-title px-0 pt-0 pb-0 d-flex justify-space-between">
@@ -75,11 +50,12 @@ import { mapStores } from "pinia";
 import BaseBreadcrumbs from "~/components/common/BaseBreadcrumbs.vue";
 import BaseButton from "~/components/common/BaseButton.vue";
 import BaseReportCard from "~/components/common/BaseReportCard.vue";
+import BaseTextBox from "~/components/common/BaseTextBox.vue";
 import TimeRouletteNew from "~/components/common/TimeRouletteNew.vue";
 
 export default {
   name: "ReportsDesktop",
-  components: { TimeRouletteNew, BaseBreadcrumbs, BaseReportCard, BaseButton },
+  components: { TimeRouletteNew, BaseBreadcrumbs, BaseReportCard, BaseButton, BaseTextBox },
   computed: {
     ...mapStores( useAppStore ),
 
@@ -383,7 +359,20 @@ export default {
   background: #1e1e1e;
 }
 
-.reports-desktop {
+.reports-mobile {
+  .reports-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    gap: 1em;
+    margin:.6em 0;
+
+    >* {
+      flex:auto 1 0;
+    }
+  }
+
   .v-picker--date {
     .v-picker__title {
       .v-date-picker-title {

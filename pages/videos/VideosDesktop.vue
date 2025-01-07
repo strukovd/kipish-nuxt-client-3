@@ -85,7 +85,7 @@ export default {
           if (!this.reportsCacheMap[curDateItem]) continue;
 
           const filteredReports = this.reportsCacheMap[curDateItem].filter((report: any) => {
-            const matchesName = this.filterOptions?.name && String(report.name)
+            const matchesName = this.filterOptions?.name && String(report.title)
               .toLowerCase()
               .includes(String(this.filterOptions.name).toLowerCase());
 
@@ -336,17 +336,6 @@ export default {
 
 
 <style lang="scss">
-.filter-panel {
-  .v-icon {
-    color: black !important;
-  }
-  .v-input input {
-    color: black !important;
-    &::placeholder {
-      color: black !important;
-    }
-  }
-}
 
 .videos-desktop {
   .reports-filter {
