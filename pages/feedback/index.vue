@@ -1,10 +1,10 @@
 <template>
   <div>
-    <template v-if="appStore.windowWidth > 1400">
+    <template v-if="!appStore.isMobile">
       <FeedbackDesktop/>
     </template>
     <template v-else>
-      <!-- <FeedbackMobile/> -->
+      <FeedbackMobile/>
     </template>
   </div>
 </template>
@@ -12,11 +12,11 @@
 <script>
 import { mapStores } from 'pinia';
 import FeedbackDesktop from "./FeedbackDesktop.vue";
-// import FeedbackMobile from "./FeedbackMobile.vue";
+import FeedbackMobile from "./FeedbackMobile.vue";
 
 export default {
   name: "Feedback",
-  components: { FeedbackDesktop, },
+  components: { FeedbackDesktop, FeedbackMobile },
   computed: {
     ...mapStores( useAppStore ),
   },
