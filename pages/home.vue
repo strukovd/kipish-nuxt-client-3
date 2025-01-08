@@ -31,11 +31,32 @@
       <BaseAd :loading="loading"/>
     </ClientOnly>
   </section>
-  <section class="about-section" data-aos="fade-up" data-aos-duration="1500">
-    <!-- <DesktopMedia/> -->
+  <section class="about-section mid" data-aos="fade-up" data-aos-duration="1500">
+    <div style="display:flex; gap:1em;">
+      <section style="flex:40% 0 1; text-align:left; color:#444444; display:flex; flex-direction:column; justify-content:space-between;">
+        <h2 class="h1-font" style="z-index: 999; font-size:82px; line-height:1.2em; position:relative;"><span style="padding-left:1em;">Кипишуй</span><br><span>с нами</span></h2>
+        <p class="font-text" style="font-weight:300; font-size:24px;">Медиа ресурс о светской, вечерней и ночной жизни города Место, куда заходят чтобы почувствовать и быть в курсе всех событий в культурной жизни столицы</p>
+      </section>
+      <section style="flex:auto 1 0;">
+        <BaseMediaSlider :posters="[
+          { url: 'https://files.kipish.kg/static/info/1.jpg' },
+          { url: 'https://files.kipish.kg/static/info/2.jpg' },
+          { url: 'https://files.kipish.kg/static/info/3.jpg' },
+          { url: 'https://files.kipish.kg/static/info/4.jpg' },
+        ]"/>
+      </section>
+    </div>
   </section>
-  <section class="statistics-section" data-aos="fade-up" data-aos-duration="1500">
-
+  <section class="statistics-section mid" data-aos="fade-up" data-aos-duration="1500">
+    <div class="stat-items">
+      <div class="stat-item" v-for="counter in counters">
+        <div class="h1-font" style="font-size:68px; margin-bottom:2em;"><IncNum :value="counter.targetValue"/>k+</div>
+        <div style="color:#444444; font-size:24px;">
+          <div>{{ counter.label }}</div>
+          <div>{{ counter.subLabel }}</div>
+        </div>
+      </div>
+    </div>
   </section>
   <section class="carousel-section" data-aos="fade-up" data-aos-duration="1500">
 
@@ -46,7 +67,10 @@
 import { useAppStore } from '@/stores';
 import { mapStores } from 'pinia';
 import { defineComponent } from 'vue';
+import ADpc from '~/components/common/ad/ADpc.vue';
+import IncNum from '~/components/common/IncNum.vue';
 import BaseAd from '~/components/common/BaseAd.vue';
+import BaseMediaSlider from '~/components/common/BaseMediaSlider.vue';
 import BasePosterSlider from '~/components/common/BasePosterSlider.vue';
 import Marquee from '~/components/common/Marquee.vue';
 import DesktopEstabs from '~/components/sections/estabsBlock/DesktopEstabs.vue';
@@ -54,7 +78,7 @@ import DesktopReports from '~/components/sections/reportsBlock/DesktopReports.vu
 import DesktopVideos from '~/components/sections/videoBlock/DesktopVideos.vue';
 
 export default defineComponent({
-  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideos, DesktopEstabs },
+  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideos, DesktopEstabs, ADpc, BaseMediaSlider, IncNum },
   computed: {
     ...mapStores( useAppStore ),
   },
@@ -69,6 +93,11 @@ export default defineComponent({
           title: 'Нет активных мероприятий', file: '/static/images/post-bg-img.png'
         }
       ] as any[],
+      counters: [
+        {targetValue: 10, label: 'Более 10К отснятых', subLabel: 'репортажей'},
+        {targetValue: 800, label: 'Нами было отснято', subLabel: '800К фотографий'},
+        {targetValue: 50, label: 'С нами работает более 50+', subLabel: 'заведений'},
+      ],
     };
   },
 
@@ -113,5 +142,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.statistics-section {
+  .stat-items {
+    display:flex;
+    gap:1em;
+    justify-content:space-around;
 
+    .stat-item {
+      flex:33% 0 0 ;
+
+      &:not(:last-child) {
+        border-right:1px solid #aaa;
+      }
+    }
+  }
+}
 </style>
