@@ -1,21 +1,6 @@
 <template>
   <div class="modal-shadow" @keydown.esc="close" @pointerdown.self.stop.prevent="close" :style="{ background: visibleModal.options?.background }">
     <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
-    <!--
-    <div class="modal-window">
-      <header class="modal-header">
-        <h3>
-          <v-icon v-if="visibleModal.options?.icon" color="cornflowerblue" :icon="visibleModal.options?.icon" size="1.2em"/>
-          <span class="title">{{ visibleModal.title }}</span>
-        </h3>
-      </header>
-      <nav></nav>
-      <main class="main">
-        <component :is="visibleModal.template" :payload="visibleModal.options?.payload"></component>
-      </main>
-      <footer class="footer"></footer>
-    </div>
-    -->
   </div>
 </template>
 

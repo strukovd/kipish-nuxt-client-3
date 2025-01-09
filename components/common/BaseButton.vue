@@ -112,7 +112,7 @@ export default defineComponent({
     align-items: center;
     gap: .6em;
     line-height: 2em;
-    margin-right: .3em;
+    // margin-right: .3em;
 
 
     &:hover {
