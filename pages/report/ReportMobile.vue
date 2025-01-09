@@ -262,7 +262,14 @@ export default {
       if (index !== -1) {
         // this.imageIndex = index;
         // this.dialog = true;
-        this.$modal.show('', 'ImageView', {payload: {files: this.files, index}});
+        this.appStore.viewedPhoto.files = this.files;
+        this.appStore.viewedPhoto.currentIndex = index;
+        this.appStore.viewedPhoto.pagesIsOver = this.pagesIsOver;
+        this.$modal.show('', 'ImageView', {
+          payload: {
+            loadMore: this.loadMore
+          }
+        });
       } else {
         console.warn('Элемент с imageId', imageId, 'еще не доступен');
       }

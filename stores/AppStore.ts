@@ -25,6 +25,11 @@ export const useAppStore = defineStore('app', {
       {href: '/feedback',               title: 'Заказать съемку',   icon: 'mdi-video-marker'},
       // {href: '/news',                                  title: 'Новости',           icon: 'mdi-camera'},
     ],
+    viewedPhoto: {
+      files: [] as any[],
+      currentIndex: 0,
+      pagesIsOver: false,
+    },
   }),
   actions: {
     scrollToBottom() {
