@@ -1,5 +1,5 @@
 <template>
-  <div id="time-roulette" :class="{'dark-roulette': $vuetify.theme.dark}">
+  <div id="time-roulette" :class="{'dark-roulette': appStore.isDark}">
     <v-card-text class="pa-0" v-if="loading">
       <span class="text-24">Загрузка ленты...</span>
     </v-card-text>
@@ -738,9 +738,19 @@ export default {
         }
       }
 
-      .prev-month, .next-month {
+      .prev-month {
         &::before {
           background: linear-gradient(90deg, #171717 30%, #17171700 100%);
+        }
+
+        svg {
+          filter: invert(1);
+        }
+      }
+
+      .next-month {
+        &::before {
+          background: linear-gradient(270deg, #171717 30%, #17171700 100%);
         }
 
         svg {
