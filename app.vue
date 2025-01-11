@@ -43,8 +43,16 @@ export default {
 
   watch: {
     'appStore.isDark'() {
-      if(this.appStore.isDark) document.body.classList.add('dark-theme');
-      else document.body.classList.remove('dark-theme');
+      if( !import.meta.browser ) return;
+
+      if(this.appStore.isDark) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('dark-theme', String(this.appStore.isDark));
+      }
+      else {
+        document.body.classList.remove('dark-theme');
+        localStorage.removeItem('dark-theme');
+      }
     }
   },
 
@@ -53,10 +61,12 @@ export default {
 
     }
   },
+
   methods: {
     initGlobalProperties() {
       this.appStore.windowWidth = document.body.clientWidth;
       this.appStore.isMobile = document.body.clientWidth <= 1400;
+      if(localStorage.getItem('dark-theme') === 'true') this.appStore.isDark = true;
     },
 
     onResize() {
