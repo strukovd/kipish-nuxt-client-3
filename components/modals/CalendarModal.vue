@@ -75,45 +75,6 @@ export default defineComponent({
   }
 
   .v-picker--date {
-    // .v-picker__title {
-    //   .v-date-picker-title {
-    //     display: flex !important;
-    //     justify-content: center;
-    //     flex-direction: row !important;
-    //     gap: 1em;
-    //     flex-wrap: wrap;
-    //     line-height: 1;
-    //     display: flex;
-    //     flex-direction: column;
-
-    //     .v-date-picker-title__year {
-    //       text-align: center;
-    //       // display: block;
-    //       font-size: 2em;
-    //       opacity: 0.9;
-    //       margin: auto 0 auto auto;
-    //       // display: flex;
-    //     }
-    //     .v-date-picker-title__date {
-    //       text-align: center;
-    //       font-size: 1.6em;
-    //       opacity: 0.6;
-    //       padding: 0;
-    //       margin: auto auto auto 0;
-    //       display: flex;
-
-    //       &:not(:empty)::before {
-    //         content: '';
-    //         display: block;
-    //         width: 1px;
-    //         height: 1em;
-    //         margin: 0 .5em 0 0;
-    //         background-color: #bfc7c7;
-    //         opacity: 0.6;
-    //       }
-    //     }
-    //   }
-    // }
     .v-picker__body {
       background-color: currentColor;
       >div {

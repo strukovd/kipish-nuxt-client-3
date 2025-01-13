@@ -498,7 +498,7 @@ export default defineComponent({
     border:1px solid #AFAFAF;
     border-radius:8px;
     padding:1em 2em;
-    color:#222222;
+    // color:#222222;
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -677,6 +677,12 @@ export default defineComponent({
         border-radius: 11px;
       }
     }
+  }
+}
+
+.dark-theme {
+  .establishment-desktop {
+
   }
 }
 </style>
