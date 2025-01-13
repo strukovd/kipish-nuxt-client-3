@@ -34,9 +34,9 @@
         </div>
       </div>
       <div class="socials">
-        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px);"><heroicon height="18" width="24" fill="currentColor" name="youtube" class="icon"/></a>
-        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px);"><heroicon height="24" width="24" fill="currentColor" name="whatsapp" class="icon"/></a>
-        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px);"><heroicon height="24" width="24" fill="currentColor" name="instagram" class="icon"/></a>
+        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px);"><heroicon height="18" width="24" vHeight="18" vWidth="24" fill="currentColor" name="youtube" class="icon"/></a>
+        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px);"><heroicon height="24" width="24" vHeight="24" vWidth="24" fill="currentColor" name="whatsapp" class="icon"/></a>
+        <a target="_blank" href="https://www.instagram.com/kipishkg/" class="social-button" style="display:inline-block; border-radius:50%; width:40px; height:40px; border:1px solid rgba(0, 0, 0, 0.1); background-position: center center; background-size:auto calc(100% - 25px);"><heroicon height="24" width="24" vHeight="24" vWidth="24" fill="currentColor" name="instagram" class="icon"/></a>
       </div>
     </section>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="hero-wrapper">
-    <svg class="heroicon" :width="width" :height="height" :viewBox="`0 0 ${width ?? 24} ${height ?? 24}`" :fill="fill" :stroke="stroke" xmlns="http://www.w3.org/2000/svg" v-html="icons[name].path"></svg>
+    <svg class="heroicon" :width="width" :height="height" :viewBox="`0 0 ${vWidth ?? 24} ${vHeight ?? 24}`" :fill="fill" :stroke="stroke" xmlns="http://www.w3.org/2000/svg" v-html="icons[name].path"></svg>
   </div>
 </template>
 
@@ -12,6 +12,8 @@ export default defineComponent({
     name: { type: String, default: '', },
     width: {type: String, default: '24' },
     height: { type: String, default: '24' },
+    vWidth: {type: String },
+    vHeight: { type: String },
     size: { type: String, default: '24' },
     stroke: { type: String, default: 'none', },
     fill: { type: String, default: '#000000', },
