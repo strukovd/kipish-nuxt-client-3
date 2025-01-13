@@ -444,6 +444,9 @@ export default defineComponent({
 					this.totalFilesCounter = r.data.totalElements;
 					this.page++;
 					this.files = this.files.concat(r.data.content);
+          if(this.appStore.viewedPhoto.files.length > 0) {
+            this.appStore.viewedPhoto.files = this.files;
+          }
 				})
 				.finally(() => {
 					this.loadingMore = false;
