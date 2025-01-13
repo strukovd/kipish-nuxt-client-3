@@ -243,7 +243,7 @@ export default defineComponent({
     .functions {
       position: relative;
       display: flex;
-      align-items: center;
+      // align-items: center;
       justify-content: center;
       margin-top:1em;
       gap: 1em;

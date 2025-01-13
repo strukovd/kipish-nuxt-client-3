@@ -1,6 +1,6 @@
 {
   "name": "kipish-nuxt-client",
-  "version": "3.0.32",
+  "version": "3.0.34",
   "private": true,
   "type": "module",
   "scripts": {
