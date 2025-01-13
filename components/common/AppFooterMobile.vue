@@ -129,7 +129,7 @@ export default {
     margin:1.6em 0 0 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     font-size:18px;
-    color: #111111;
+    // color: #111111;
     flex-wrap: wrap;
     gap: 3em;
 

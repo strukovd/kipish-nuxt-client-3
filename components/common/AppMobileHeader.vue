@@ -26,6 +26,9 @@
         <div class="cursor-pointer ml-8">
           <heroicon @click="showMenu" class="cursor-pointer" name="burger" fill="currentColor" stroke="currentColor"/>
         </div>
+        <div class="cursor-pointer ml-8">
+          <img @click="appStore.isDark = !appStore.isDark" width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': appStore.isDark }"/>
+        </div>
       </section>
     </div>
   </header>
