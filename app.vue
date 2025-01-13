@@ -83,6 +83,21 @@ export default {
       this.appStore.windowWidth = document.body.clientWidth;
       this.appStore.isMobile = document.body.clientWidth <= 1400;
     },
+
+    shouldShowScrollArrow() {
+      // Если скрол в промежутке от 10% до 90%, то кнопка вверх\вниз будет показана
+      const scrollPosition = window.scrollY;
+      const documentHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercentage = (scrollPosition / documentHeight) * 100;
+
+      if (scrollPercentage > 90 || scrollPercentage < 10) {
+        this.appStore.shouldShowScrollArrow = undefined;
+      } else if (scrollPercentage < 70) {
+        this.appStore.shouldShowScrollArrow = 'bottom';
+      } else {
+        this.appStore.shouldShowScrollArrow = 'top';
+      }
+    }
   },
 
   created() {
@@ -92,6 +107,7 @@ export default {
       window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
           document.body.classList.add('scrolled'); // Добавляем класс, если страница прокручена
+          this.shouldShowScrollArrow();
         } else {
           document.body.classList.remove('scrolled'); // Убираем класс, если вернулись наверх
         }
@@ -100,6 +116,7 @@ export default {
       window.addEventListener("resize", this.onResize);
     }
   },
+
   destroyed() {
     if( import.meta.browser ) {
       window.removeEventListener("resize", this.onResize);
