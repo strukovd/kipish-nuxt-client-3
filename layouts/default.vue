@@ -7,18 +7,15 @@
       <slot/>
     </main>
     <ClientOnly>
-      <aside>
-        <div class="button-scroll-arrow"
-            v-show="appStore.shouldShowScrollArrow"
-            @click="scrollTo(appStore.shouldShowScrollArrow)"
-            :class="[appStore.shouldShowScrollArrow]"
+      <aside class="buttons-container">
+        <button class="button-scroll-arrow"
+          v-show="appStore.shouldShowScrollArrow"
+          @click="scrollTo(appStore.shouldShowScrollArrow)"
+          :class="[appStore.shouldShowScrollArrow]"
         >
-          <div style="width: 32px;height: 32px">
-            <v-img src="/icons/ArrowTop.svg" :style="{
-              rotate: appStore.shouldShowScrollArrow === 'up' ? '180deg' : undefined
-            }"/>
-          </div>
-        </div>
+          <img style="width: 32px;height: 32px" src="/icons/ArrowTop.svg" :style="{ rotate: appStore.shouldShowScrollArrow === 'up' ? '180deg' : undefined }"/>
+        </button>
+        <button class="button-book" v-show="needShowBookButton" @click="$modal.show('', 'book')">Забронировать столик</button>
       </aside>
     </ClientOnly>
     <ClientOnly>
@@ -36,6 +33,14 @@ export default {
   components: { AppHeader, AppFooter },
   computed: {
     ...mapStores( useAppStore ),
+
+    needShowBookButton() {
+      const router = useRouter();
+      const { currentRoute } = router;
+
+      return /\/establishment\/[\w\-]+$/.test(currentRoute.value.path);
+
+    },
   },
 
   methods: {
@@ -64,23 +69,44 @@ export default {
 #default-layout {
   position:relative;
 
-  .button-scroll-arrow {
-    background: white;
+  .buttons-container {
     position: fixed;
     bottom: 2em;
     right: 2em;
-    z-index: 99999;
-    cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 74px;
-    height:74px;
-    transition:all 300ms ease 0s;
+    justify-content: right;
+    // align-items: center;
+    gap: 1em;
+    width: 500px;
+    z-index: 99999;
 
-    &.bottom {
-      rotate: 180deg;
+    button {
+      display: block;
+      background-color: #f0f0f0;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      color: #333;
+      line-height: 74px;
+      height:74px;
+      cursor: pointer;
+    }
+
+    .button-scroll-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 74px;
+      height:74px;
+      transition:all 300ms ease 0s;
+
+      &.bottom {
+        rotate: 180deg;
+      }
+    }
+
+    .button-book {
+      padding:0 2em;
+      border-radius: 50px;
     }
   }
 }

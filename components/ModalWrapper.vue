@@ -11,6 +11,7 @@ import MobileAsideMenu from '~/components/modals/MobileAsideMenuModal.vue';
 import Find from '~/components/modals/FindModal.vue';
 import ImageView from '~/components/modals/ImageViewModal.vue';
 import Calendar from '~/components/modals/CalendarModal.vue';
+import Book from '~/components/modals/BookModal.vue';
 
 
 export default {
@@ -20,7 +21,7 @@ export default {
       return this.appStore.modals[this.appStore.modals.length-1];
     }
   },
-  components: { Confirm, MobileAsideMenu, Find, ImageView, Calendar },
+  components: { Confirm, MobileAsideMenu, Find, ImageView, Calendar, Book },
   methods: {
     onKeydown(e: KeyboardEvent) {
       if( e.key === 'Escape' ) {
