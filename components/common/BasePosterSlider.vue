@@ -1,6 +1,6 @@
 <template>
   <div class="base-poster-slider">
-    <img class="corner" src="/images/light-corner.png"/>
+    <img class="corner" :src="appStore.isDark ? `/images/dark-corner.png` : `/images/light-corner.png`"/>
     <v-carousel v-model="currentSlide" class="carousel" :continuous="false" hide-delimiters :show-arrows="false">
       <v-carousel-item class="slide" v-for="(poster, i) of posters" :key="i">
         <main v-if="poster" class="base-poster-block">
@@ -52,15 +52,23 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia';
+
 export default {
   props: {
     posters: Array
   },
+
+  computed: {
+    ...mapStores( useAppStore ),
+  },
+
   data() {
     return {
       currentSlide: 0
     };
   },
+
   methods: {
     customPrevMedia() {
       if (this.currentSlide > 0) {

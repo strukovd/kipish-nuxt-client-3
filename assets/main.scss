@@ -58,7 +58,6 @@ body {
 
 
 .button-v1 {
-  color: #111111;
   border:1px solid rgba(0, 0, 0, 0.3);
   border-radius: 16px;
   padding:34px 40px;
@@ -87,7 +86,6 @@ body {
   font-family:"ALS Hauss VF", sans-serif;
   font-weight: 400;
   font-size:20px;
-  color: #111111;
   border:1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding:.2em 1.6em;
@@ -117,7 +115,6 @@ body {
 
 .h1-mob-font {
   font-family: 'ALS Gorizont', sans-serif !important;
-  color:#111111;
   font-size: 32px;
   line-height:42px;
   font-weight: 200;
@@ -127,7 +124,6 @@ body {
 
 .h1-font {
   font-family: 'ALS Gorizont', sans-serif !important;
-  color:#111111;
   font-size: 82px;
   line-height:92px;
   font-weight: 300;
@@ -145,20 +141,21 @@ body {
   line-height:34px;
   font-weight:200;
   opacity:.7;
-  color: #111111;
   font-family:'ALS Hauss VF', sans-serif !important;
 }
 
 
 
-.white--text {
-  color: #FFFFFF;
-}
-
-
 .dark-theme {
   color: #FFFFFF;
   background: #171717;
+
+  .button-v1 {
+	border:1px solid rgba(255, 255, 255, 0.3);
+  }
+  .button-v2 {
+	border:1px solid rgba(255, 255, 255, 0.1);
+  }
 
   .h1-mob-font {
   color: #FFFFFF;
