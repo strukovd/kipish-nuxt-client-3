@@ -1,5 +1,5 @@
 <template>
-  <div v-if="payload?.fileDesktop" class="advertisement-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
+  <div class="base-advertisement-card" data-aos="fade-up" data-aos-duration="1000" :style="{width: width ? `${width}px` : 'auto'}">
     <v-img class="advertisement-card-image cursor-pointer"
       :src="payload.fileDesktop.file"
       lazy-src="/images/cover-2.jpg"
@@ -18,25 +18,29 @@
       </router-link>
     </v-img>
   </div>
-  <template v-else>
+  <!-- <template v-show="!payload?.fileDesktop">
     <v-skeleton-loader
       class="mx-auto"
       :width="width"
       height="516"
       type="image"
     ></v-skeleton-loader>
-  </template>
+  </template> -->
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
-  props: { payload: Object, width: Number | String },
+export default defineComponent({
+  props: {
+    payload: Object as () => any,
+    width: [Number, String]
+  },
   data() {
     return {};
   },
   methods: {
-    formatDate(dateString) {
+    formatDate(dateString: string) {
       if(!dateString) return '';
 
       const months = [
@@ -60,11 +64,11 @@ export default {
       return formattedDate;
     },
   },
-};
+});
 </script>
 
 <style lang="scss">
-.advertisement-card {
+.base-advertisement-card {
   position: relative;
 
   .advertisement-card-image {
