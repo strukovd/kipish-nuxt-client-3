@@ -37,6 +37,10 @@ export default defineComponent({
 
 <style lang="scss">
 #main-page {
+  [class*="-section"]:first-child {
+    margin-top: 4em;
+  }
+
   [class*="-section"]:not(:first-child) {
     margin-top: 6em;
   }

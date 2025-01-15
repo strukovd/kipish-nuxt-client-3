@@ -7,7 +7,24 @@
     </h1>
 
     <div class="mt-15 d-flex justify-center">
-      <swiper style="width: 100% !important;" v-show="videos.length" class="swiper ma-auto" :options="swiperOption" ref="swiper">
+      <swiper
+        class="swiper ma-auto"
+        v-show="videos.length"
+        style="width: 100% !important;"
+        :effect="'coverflow'"
+        :grabCursor="true"
+        :centeredSlides="true"
+        :slidesPerView="'auto'"
+        :coverflowEffect="{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }"
+        :pagination="true"
+        :modules="modules"
+        ref="swiper">
         <swiper-slide
           style="height : 550px !important;max-width: 845px !important;border-radius: 16px !important;position: relative"
           class="mx-8 cursor-pointer" v-for="(video,index) in videos"
@@ -66,28 +83,30 @@
     </div> -->
 
     <div class="mid" style="display:flex; justify-content:center; margin-top:110px; padding:0;">
-      <button class="button-v1" @click="$router.push('/reports')">СМОТРЕТЬ ВСЕ ВИДЕООТЧЕТЫ</button>
+      <button class="button-v1" @click="navigateTo('/reports')">СМОТРЕТЬ ВСЕ ВИДЕООТЧЕТЫ</button>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapStores } from "pinia";
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+import VideoPlayer from "@/components/common/VideoPlayer.vue";
+import Loader from "@/components/common/Loader.vue";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-// import 'swiper/modules/effect-coverflow/effect-coverflow.min.css';
-// import 'swiper/modules/pagination/pagination.min.css';
-
-
-import VideoPlayer from "@/components/common/VideoPlayer.vue";
-import Loader from "@/components/common/Loader.vue";
-
 export default {
   name: "DesktopVideos",
   components: { Loader, VideoPlayer, SwiperSlide, Swiper },
+  setup() {
+    return {
+      modules: [EffectCoverflow, Pagination],
+    };
+  },
+
   computed: {
     ...mapStores(useAppStore, ['videoDomain', 'currentCity']),
     swiper() {
@@ -97,7 +116,7 @@ export default {
 
   data: () => ({
     loadingVideos: false,
-    videos: [],
+    videos: [] as any[],
     videosUpdated: false,
     swiperOption: {
       effect: 'coverflow',
@@ -120,7 +139,7 @@ export default {
   }),
 
   methods: {
-    playVideo(id) {
+    playVideo(id: any) {
       console.log(id)
       this.videos.forEach(video => {
         if (video.id === id) {
@@ -140,8 +159,8 @@ export default {
       try {
         const { data: { content } } = await this.$http2.get(`/reports/video/top?city=${this.appStore.currentCity.id}`);
         this.videos = content
-          .filter(el => el.top)
-          .map(el => ({
+          .filter((el: any) => el.top)
+          .map((el: any) => ({
             ...el,
             videoUrl: null,
             play: false,
@@ -155,7 +174,7 @@ export default {
       }
     },
 
-    fetchImage(imageId) {
+    fetchImage(imageId: any) {
       return this.$http.get(`/files/${imageId}`)
         .then(r => {
           const imageMap = r.data;
@@ -163,7 +182,7 @@ export default {
         });
     },
 
-    async fetchVideoImages(videos) {
+    async fetchVideoImages(videos: any) {
       if (!videos) videos = this.data;
       videos.forEach(video => {
         if (video.coverImageId) {
@@ -175,7 +194,7 @@ export default {
       })
     },
 
-    formatDate(dateString) {
+    formatDate(dateString: string) {
       const months = [
         'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
         'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'

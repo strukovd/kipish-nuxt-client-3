@@ -166,8 +166,6 @@
 </template>
 
 <script lang="ts">
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import 'swiper/swiper.min.css';
 import { MasonryInfiniteGrid, FrameInfiniteGrid } from "@egjs/vue3-infinitegrid";
 import BaseBreadcrumbs from '~/components/common/BaseBreadcrumbs.vue';
 import { mapStores } from 'pinia';
@@ -175,7 +173,7 @@ import { mapStores } from 'pinia';
 
 export default defineComponent({
 	name: "ReportDesktop",
-	components: { SwiperSlide, Swiper, MasonryInfiniteGrid, FrameInfiniteGrid, BaseBreadcrumbs },
+	components: { MasonryInfiniteGrid, FrameInfiniteGrid, BaseBreadcrumbs },
 
 	// head() {
 	//	 return {
