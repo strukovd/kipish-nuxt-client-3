@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="dark ? 'pin-dark' : 'pin-light'">
-      <img :src="dark ? '/static/images/logo.svg' : '/static/images/logo2.svg'" width="26px" height="26px"/>
+      <img :src="dark ? '/images/logo.svg' : '/images/logo-white.svg'" width="26px" height="26px"/>
     </div>
     <div :class="dark ? 'pulse-dark' : 'pulse-light'"></div>
   </div>
