@@ -43,6 +43,6 @@ export default defineNuxtConfig({
     "vuetify/styles/main.sass"
   ],
   build: {
-    transpile: ['vuetify'],
+    transpile: ['vuetify', 'swiper'],
   },
 });
