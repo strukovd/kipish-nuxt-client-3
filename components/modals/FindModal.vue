@@ -7,7 +7,7 @@
         </div>
       </section>
       <section class="search-input">
-        <v-text-field v-model="searchWord" @input="search" hide-details placeholder="ПОИСК"></v-text-field>
+        <v-text-field v-model="searchWord" style="color:currentColor" @input="search" hide-details placeholder="ПОИСК"></v-text-field>
       </section>
       <!-- <v-divider class="mt-4"/> -->
       <section class="tags">
@@ -164,6 +164,10 @@ export default defineComponent({
 
     .search-input {
       width: 100%;
+
+      input {
+        color: #333333;
+      }
     }
 
     .tags {
