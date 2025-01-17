@@ -14,8 +14,27 @@
     <section class="row">
       <div style="display:flex; gap:1.4em;">
         <button @click="downloadZip" class="button-v1">Скачать весь отчет</button>
-        <button class="button-v1">
+        <button @click="showShareAlbum = !showShareAlbum" class="button-v1">
           <heroicon name="share" stroke="currentColor" fill="transparent" width="16px" height="16px"/>
+
+          <aside class="share-photo" v-if="showShareAlbum">
+            <button class="share-button whatsapp" @click="shareAlbum(`whatsapp`)" dark fab bottom color="green" small>
+              <v-icon>mdi-whatsapp</v-icon>
+            </button>
+            <button class="share-button facebook" @click="shareAlbum(`facebook`)" dark fab bottom color="blue" small>
+              <v-icon>mdi-facebook</v-icon>
+            </button>
+            <button class="share-button twitter" @click="shareAlbum(`twitter`)" dark fab bottom color="0088cc" small>
+              <v-icon>mdi-twitter</v-icon>
+            </button>
+            <button class="share-button telegram" @click="shareAlbum(`telegram`)" dark fab bottom color="blue" small>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24">
+                <path
+                  d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"
+                  fill="white"/>
+              </svg>
+            </button>
+          </aside>
 
           <!-- <div style="display:flex; position:absolute; top:0; right:-50%;">
               <v-btn @click="shareOnWhatsApp" dark fab bottom color="green" small>
@@ -79,89 +98,6 @@
         </div>
       </v-card-text>
     </section>
-
-
-
-    <!-- PREVIEW MODAL -->
-  <v-dialog overlay-opacity="0.4" eager overlay-color="#000000"
-      style="z-index: 999999 !important;overflow: visible !important"
-      v-model="dialog" max-width="1300">
-  <div style="position: relative;">
-    <v-carousel style="overflow: visible !important;" :height="appStore.windowWidth <= 1920 ? '650' : '730'" v-model="viewedImageId" hide-delimiters class="d-flex justify-center">
-    <v-carousel-item class="px-16"
-      style="border-radius:24px !important;width:1100px !important;overflow:visible !important; position:relative;"
-      v-for="(file, index) of files" :key="file.id"
-    >
-      <div class="d-flex justify-center align-center ma-auto mt-2"
-        :class="file.orientation === 'vertical' ? 'image_container_vertical' : 'image_container_horizontal'"
-      >
-
-      <div v-if="showSharePhoto" class=" d-flex"
-          style="display:flex;justify-content:center; position:absolute;left:0;right:0;bottom:1em;z-index:9999;"
-      >
-        <div style="background-color:#FFFFFF55; border-radius:8px; padding:.3em;">
-        <v-btn @click="shareImage(`whatsapp`)" class="mx-2" dark fab bottom color="green" small>
-          <v-icon>mdi-whatsapp</v-icon>
-        </v-btn>
-        <v-btn @click="shareImage(`facebook`)" class="mx-2" dark fab bottom color="blue" small>
-          <v-icon>mdi-facebook</v-icon>
-        </v-btn>
-        <v-btn @click="shareImage(`twitter`)" class="mx-2" dark fab bottom color="0088cc" small>
-          <v-icon>mdi-twitter</v-icon>
-        </v-btn>
-        <v-btn @click="shareImage(`telegram`)" class="mx-2" dark fab bottom color="blue" small>
-          <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-          <path
-            d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"
-            fill="white"/>
-          </svg>
-        </v-btn>
-        </div>
-      </div>
-
-      <img alt=""
-        class="image-watermark-image"
-        :class="file.orientation === 'vertical' ? 'vertical' : 'horizontal'"
-        :key="file.id"
-        :src="`https://files.kipish.kg/${file.minioBucket}/min-${file.minioPath}`"
-        style="border-radius: 24px !important;"/>
-      <div class="button-container">
-        <v-btn depressed style="border-radius: 50% !important" fab class="pa-5 hover-red" color="#FE252E"
-            @click="dialog = false">
-        <v-icon color="white">mdi-close</v-icon>
-        </v-btn>
-      </div>
-      </div>
-      <div class="pa-5 d-flex justify-center">
-      <v-btn depressed @click="downloadImage(file.id)" style="border-radius: 16px !important;"
-          color="#FFFFFF4D"
-          class="py-8 px-15 mr-4 hover-red">
-        <span class="text-20 white--text opacity-70">Скачать</span>
-      </v-btn>
-      <v-btn depressed @click="showSharePhoto = !showSharePhoto"
-          style="width:auto; border-radius: 16px !important;" color="#FFFFFF4D"
-          class="py-8 hover-red">
-        <heroicon name="share" stroke="#DFCDDD" fill="transparent"/>
-      </v-btn>
-      </div>
-    </v-carousel-item>
-    <!-- <template v-slot:prev="{on, attrs}">
-      <v-btn depressed :disabled="viewedImageId === 0" v-bind="attrs" v-on="on" class="py-8 px-1"
-          style="border-radius: 16px !important;" color="#FFFFFF4D">
-      <v-img width="40" height="40" src="/static/images/icons/ArrowLeft.svg"/>
-      </v-btn>
-    </template>
-    <template v-slot:next="{on, attrs}">
-      <v-btn depressed :disabled="viewedImageId === files.length - 1" v-bind="attrs" v-on="on"
-          class="py-8 px-1"
-          style="border-radius: 16px !important;" color="#FFFFFF4D">
-      <v-img width="40" height="40" src="/static/images/icons/ArrowRight.svg"/>
-      </v-btn>
-    </template> -->
-    </v-carousel>
-  </div>
-  </v-dialog>
-
   </div>
 </template>
 
@@ -197,7 +133,7 @@ export default defineComponent({
 	data() {
 		return {
 			dialShare: false,
-			showSharePhoto: false,
+			showShareAlbum: false,
 			show: false,
 			selectedImage: null as any,
 			days: [] as any[],
@@ -334,39 +270,30 @@ export default defineComponent({
 			};
 		},
 
-		shareImage(destination: any) {
-			const image = this.files.find((el, index) => index === this.viewedImageId);
-			let baseUrl = '';
+    shareAlbum(destination: string) {
+      if(!import.meta.browser) return;
 
-			if (process.env.NODE_ENV === 'production') {
-				baseUrl = 'https://kipish.kg/image';
-			} else {
-				baseUrl = 'http://localhost:8084/image';
-			}
+      let albumUrl = window.location.href;
+      let shareUrl;
 
-			const imageUrl = `${baseUrl}/${image.id}`;
+      switch (destination) {
+        case 'whatsapp':
+          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(albumUrl)}`;
+          break;
+        case 'telegram':
+          shareUrl = `https://t.me/share/url?url=${encodeURIComponent(albumUrl)}`;
+          break;
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(albumUrl)}`;
+          break;
+        case 'twitter':
+          let shareText = 'Kipish.kg';
+          shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(albumUrl)}&text=${encodeURIComponent(shareText)}`;
+          break;
+      }
 
-			let shareUrl;
-			let curUrl = window.location.href;
-
-			switch (destination) {
-				case 'whatsapp':
-					shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(imageUrl)}`;
-					break;
-				case 'telegram':
-					shareUrl = `https://t.me/share/url?url=${encodeURIComponent(imageUrl)}`;
-					break;
-				case 'facebook':
-					shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imageUrl)}`;
-					break;
-				case 'twitter':
-					let shareText = 'Kipish.kg';
-					shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(imageUrl)}&text=${encodeURIComponent(shareText)}`;
-					break;
-			}
-
-			window.open(shareUrl, '_blank');
-		},
+      window.open(shareUrl, '_blank');
+    },
 
 		getImageSize(item: any) {
 			const image: any = this.$refs['image_' + item.id];
@@ -382,48 +309,48 @@ export default defineComponent({
 			this.$http.put(`/albums/${this.appStore.sourceId}/views`);
 		},
 
-		shareOnFacebook() {
-			const url = window.location.href;
-			const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnTwitter() {
-			const url = window.location.href;
-			const shareText = 'Текст для шаринга'; // Замените на ваш текст
-			const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(shareText)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnInstagram() {
-			const url = window.location.href;
-			const shareUrl = `https://www.instagram.com/?url=${encodeURIComponent(url)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnVKontakte() {
-			const url = window.location.href;
-			const shareUrl = `https://vk.com/share.php?url=${encodeURIComponent(url)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnTelegram() {
-			const url = window.location.href;
-			const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnLinkedIn() {
-			const url = window.location.href;
-			const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(url)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnPinterest() {
-			const url = window.location.href;
-			const imageUrl = 'image-url';
-			const shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(imageUrl)}`;
-			window.open(shareUrl, '_blank');
-		},
-		shareOnWhatsApp() {
-			const url = window.location.href;
-			const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
-			window.open(shareUrl, '_blank');
-		},
+		// shareOnFacebook() {
+		// 	const url = window.location.href;
+		// 	const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnTwitter() {
+		// 	const url = window.location.href;
+		// 	const shareText = 'Текст для шаринга'; // Замените на ваш текст
+		// 	const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(shareText)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnInstagram() {
+		// 	const url = window.location.href;
+		// 	const shareUrl = `https://www.instagram.com/?url=${encodeURIComponent(url)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnVKontakte() {
+		// 	const url = window.location.href;
+		// 	const shareUrl = `https://vk.com/share.php?url=${encodeURIComponent(url)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnTelegram() {
+		// 	const url = window.location.href;
+		// 	const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnLinkedIn() {
+		// 	const url = window.location.href;
+		// 	const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(url)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnPinterest() {
+		// 	const url = window.location.href;
+		// 	const imageUrl = 'image-url';
+		// 	const shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(imageUrl)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
+		// shareOnWhatsApp() {
+		// 	const url = window.location.href;
+		// 	const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
+		// 	window.open(shareUrl, '_blank');
+		// },
 
 		async loadMore() {
 			this.loadingMore = true;
@@ -452,32 +379,36 @@ export default defineComponent({
 		},
 
 		downloadZip() {
-			// this.fileLoading = true
-			// this.$fileHttp.get('/albums/download/zip', {
-			// 	params: {id: this.appStore.sourceId},
-			// 	responseType: 'arraybuffer'
-			// })
-			// 	.then((response: any) => {
-			// 		try {
-			// 			const blob = new Blob([response.data], {type: 'application/zip'});
-			// 			const url = window.URL.createObjectURL(blob);
-			// 			const a = document.createElement('a');
-			// 			a.style.display = 'none';
-			// 			a.href = url;
-			// 			a.download = `отчёт-${this.model.name}.zip`;
-			// 			document.body.appendChild(a);
-			// 			a.click();
-			// 			window.URL.revokeObjectURL(url);
-			// 			this.fileLoading = false
-			// 		} catch (error) {
-			// 			console.error('Ошибка при обработке данных:', error);
-			// 			this.fileLoading = false
-			// 		}
-			// 	})
-			// 	.catch((error: any) => {
-			// 		console.error('Ошибка при загрузке файла:', error);
-			// 		this.fileLoading = false
-			// 	});
+			this.fileLoading = true
+			this.$http.get('/albums/download/zip', {
+        headers: {
+          Accept: 'application/octet-stream',
+          'Content-Type': 'application/octet-stream'
+        },
+				params: {id: this.appStore.sourceId},
+				responseType: 'arraybuffer'
+			})
+				.then((response: any) => {
+					try {
+						const blob = new Blob([response.data], {type: 'application/zip'});
+						const url = window.URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.style.display = 'none';
+						a.href = url;
+						a.download = `отчёт-${this.model.name}.zip`;
+						document.body.appendChild(a);
+						a.click();
+						window.URL.revokeObjectURL(url);
+						this.fileLoading = false
+					} catch (error) {
+						console.error('Ошибка при обработке данных:', error);
+						this.fileLoading = false
+					}
+				})
+				.catch((error: any) => {
+					console.error('Ошибка при загрузке файла:', error);
+					this.fileLoading = false
+				});
 		},
 
 		downloadImage(id: any) {
@@ -834,5 +765,39 @@ export default defineComponent({
 		height: 550px !important;
 		width: 800px !important;
 	}
+}
+
+
+.share-photo {
+  display:flex;
+  justify-content:center;
+  position:absolute;
+  top: -4em;
+  left: -80%;
+  // bottom:5em;
+  z-index:9999;
+  background-color:#FFFFFF55;
+  border-radius:8px;
+  padding:.3em;
+
+  .share-button {
+    border-radius: 50%;
+    margin-right: 8px !important;
+    margin-left: 8px !important;
+    color: #fff;
+    font-size: .75rem;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+    height: 40px;
+    width: 40px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &.whatsapp { background-color: #25D366; }
+    &.telegram { background-color: #0088cc; }
+    &.twitter { background-color: #0088cc; }
+    &.facebook { background-color: #3b5998; }
+  }
 }
 </style>
