@@ -48,17 +48,6 @@ import BaseTextBox from "~/components/common/BaseTextBox.vue";
 export default {
   name: "EventsDesktop",
   components: { TimeRouletteNew, BaseBreadcrumbs, BaseEventCard, BaseTextBox },
-  head() {
-    return {
-      link: [
-        {rel: 'icon', type: 'image/x-icon', href: '/favicon.svg'},
-        {
-          rel: 'canonical',
-          href: 'https://kipish.kg/events/'
-        }
-      ],
-    }
-  },
 
   data: () => ({
     eventsDateMap: {} as any,

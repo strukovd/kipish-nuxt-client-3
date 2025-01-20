@@ -52,10 +52,12 @@ import CardEventMobile from "~/components/common/CardEventMobile.vue";
 export default defineComponent({
   name: "EventMobile",
   components: { BaseBreadcrumbs, BaseTitle, BaseButton, CardEventMobile },
+
   data: () => ({
     loading: true,
     model: {} as any
   }),
+
   computed: {
     ...mapStores( useAppStore ),
     pageTitle() {
@@ -67,9 +69,78 @@ export default defineComponent({
 
       return title;
     },
+
+    schemaEvent() {
+      const model = this.model || {};
+      const establishment = model.establishment || {};
+      const files = model.files || [];
+
+      return {
+        "@context": "http://schema.org",
+        "@type": "Event",
+        name: model.title || '',
+        description: model.description || '',
+        image: files.length ? `https://files.kipish.kg/${files[0].minioBucket}/${files[0].minioPath}` : '',
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
+        startDate: model.date || '',
+        location: {
+          "@type": "Place",
+          name: establishment.name || '',
+          address: {
+            addressRegion: "Chuy",
+            postalCode: "724314",
+            addressCountry: "Kyrgyzstan"
+          }
+        },
+        organizer: {
+          "@type": "Organization",
+          name: "Kipish",
+          url: "https://kipish.kg/"
+        }
+      };
+    }
   },
 
   methods: {
+    setHead() {
+      useHead({
+        script: [
+          { type: 'application/ld+json', children: JSON.stringify(this.schemaEvent) }
+        ],
+        title: this.model.title ? `${this.model.title} | Кипиш` : 'Кипиш',
+        meta: [
+          {
+            name: 'description',
+            content:
+              (this.model?.date ? this.model.date : '') +
+              (this.model?.establishment?.name ? ` в ${this.model.establishment.name} ` : '') +
+              (this.model?.eventType?.nameRu ? `состоится ${this.model.eventType.nameRu} — ` : '') +
+              (this.model?.title ? `${this.model.title}. ` : '') +
+              `Смотрите фото и видео отчет и подробности мероприятия на Кипише.`
+          },
+          { name: 'keywords', content: 'бар, Бишкек, отдых, напитки, развлечения' },
+          { property: 'og:title', content: this.model.title ? `${this.model.title} | Кипиш` : 'Кипиш' },
+          {
+            property: 'og:description',
+            content:
+              (this.model?.date ? this.model.date : '') +
+              (this.model?.establishment?.name ? ` в ${this.model.establishment.name} ` : '') +
+              (this.model?.eventType?.nameRu ? `состоится ${this.model.eventType.nameRu} — ` : '') +
+              (this.model?.title ? `${this.model.title}. ` : '') +
+              `Смотрите фото и видео отчет и подробности мероприятия на Кипише.`
+          },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:url', content: 'https://www.kipish.kg/' },
+          { property: 'og:image', content: 'https://www.kipish.kg/image.jpg' }
+        ],
+        link: [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+          { rel: 'canonical', href: 'https://kipish.kg/event/' }
+        ]
+      });
+    },
+
     formatDate(dateString: string) {
       console.log(dateString);
       if( !dateString ) {
@@ -108,6 +179,10 @@ export default defineComponent({
           this.loading = false;
         })
     }
+  },
+
+  mounted() {
+    this.setHead();
   },
 
   created() {

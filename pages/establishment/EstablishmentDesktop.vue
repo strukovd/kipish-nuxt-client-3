@@ -252,8 +252,7 @@ export default defineComponent({
     }
   },
 
-	data() {
-		return {
+	data: () => ({
       loading: true,
       loadingNearBy: true,
       form: {
@@ -289,10 +288,52 @@ export default defineComponent({
       eventsCurPage: 0,
       eventsTotalPage: 0,
       eventsPageSize: 2
-		}
-	},
+	}),
 
 	methods: {
+    setHead() {
+      useHead({
+        title: `${this.model?.name || ''}`.concat(
+          (this.model?.name && this.model?.categories?.length)
+            ? ` — ${this.model?.categories[0].nameRu} в Бишкеке | `
+            : ``,
+          `Кипиш`
+        ),
+        meta: [
+          {
+            name: 'description',
+            content: `${this.model?.categories?.length ? this.model?.categories[0].nameRu : ``}`.concat(
+              ` ${this.model?.name || ''} — узнайте больше о лучших заведениях Бишкека. `,
+              `Фотоотчеты, отзывы и информация о заведении на Кипише.`
+            )
+          },
+          { name: 'keywords', content: 'бар, Бишкек, отдых, напитки, развлечения' },
+          {
+            property: 'og:title',
+            content: `${this.model?.name || ''}`.concat(
+              (this.model?.name && this.model?.categories?.length)
+                ? ` — ${this.model?.categories[0].nameRu} в Бишкеке | `
+                : ``,
+              `Кипиш`
+            )
+          },
+          {
+            property: 'og:description',
+            content: `${this.model?.categories?.length ? this.model?.categories[0].nameRu : ``}`.concat(
+              ` ${this.model?.name || ''} — узнайте больше о лучших заведениях Бишкека. `,
+              `Фотоотчеты, отзывы и информация о заведении на Кипише.`
+            )
+          },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:url', content: 'https://kipish.kg' }
+        ],
+        link: [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+          { rel: 'canonical', href: 'https://kipish.kg/establishment/' }
+        ],
+
+      })
+    },
     fetch() {
       this.loading = true;
       this.$http2.get(`/establishments/${this.appStore.sourceId}`)
@@ -450,6 +491,10 @@ export default defineComponent({
       this.fetchNearBy();
     }
 	},
+
+  mounted() {
+    this.setHead();
+  },
 
   created() {
     this.init();

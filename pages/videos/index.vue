@@ -20,45 +20,30 @@ export default defineComponent({
   computed: {
     ...mapStores( useAppStore ),
   },
-  head() {
-    return {
-      title: 'Видео отчеты и репортажи о событиях в Бишкеке | Кипиш',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Смотрите эксклюзивные видео отчеты с лучших событий и заведений Бишкека на Кипише. Погружайтесь в атмосферу светской и ночной жизни города вместе с нами.'
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content: 'бар, Бишкек, отдых, напитки, развлечения'
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'Видео отчеты и репортажи о событиях в Бишкеке | Кипиш'
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Смотрите эксклюзивные видео отчеты с лучших событий и заведений Бишкека на Кипише. Погружайтесь в атмосферу светской и ночной жизни города вместе с нами.'
-        },
-        {
-          hid: 'og:type',
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://kipish.kg/'
-        }
-      ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' }
-      ]
-    };
+
+  methods: {
+    setHead() {
+      useHead({
+        title: 'Видео отчеты и репортажи о событиях в Бишкеке | Кипиш',
+        meta: [
+          { name: 'description', content: 'Смотрите эксклюзивные видео отчеты с лучших событий и заведений Бишкека на Кипише. Погружайтесь в атмосферу светской и ночной жизни города вместе с нами.' },
+          { name: 'keywords', content: 'бар, Бишкек, отдых, напитки, развлечения' },
+          { property: 'og:title', content: 'Видео отчеты и репортажи о событиях в Бишкеке | Кипиш' },
+          { property: 'og:description', content: 'Смотрите эксклюзивные видео отчеты с лучших событий и заведений Бишкека на Кипише. Погружайтесь в атмосферу светской и ночной жизни города вместе с нами.' },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:url', content: 'https://kipish.kg/' },
+          { property: 'og:image', content: 'https://www.kipish.kg/image.jpg' },
+        ],
+        link: [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+          { rel: 'canonical', href: 'https://kipish.kg/reports/' },
+        ],
+      })
+    },
+  },
+
+  mounted() {
+    this.setHead();
   }
 });
 </script>

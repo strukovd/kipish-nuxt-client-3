@@ -67,7 +67,6 @@ export default defineComponent({
   computed: {
     ...mapStores( useAppStore ),
 
-
     filteredEventWithPanel() {
       let filteredEvents = this.events;
       if (this.filterOptions.name) {

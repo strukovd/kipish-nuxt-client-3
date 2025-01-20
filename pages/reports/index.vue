@@ -21,45 +21,84 @@ export default defineComponent({
   computed: {
     ...mapStores( useAppStore ),
   },
-  head() {
-    return {
-      title: 'Фото отчеты: лучшие события и заведения Бишкека | Кипиш',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Смотрите фото отчеты с лучших событий и заведений Бишкека на Кипише. Узнайте, как проходят яркие мероприятия города, и не пропустите ни одного значимого события!'
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content: 'бар, Бишкек, отдых, напитки, развлечения'
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'Фото отчеты: лучшие события и заведения Бишкека | Кипиш'
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Смотрите фото отчеты с лучших событий и заведений Бишкека на Кипише. Узнайте, как проходят яркие мероприятия города, и не пропустите ни одного значимого события!'
-        },
-        {
-          hid: 'og:type',
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://kipish.kg/'
-        }
-      ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' }
-      ]
-    };
+
+  // head() {
+  //   return {
+  //     title: 'Фото отчеты: лучшие события и заведения Бишкека | Кипиш',
+  //     meta: [
+  //       {
+  //         hid: 'description',
+  //         name: 'description',
+  //         content: 'Смотрите фото отчеты с лучших событий и заведений Бишкека на Кипише. Узнайте, как проходят яркие мероприятия города, и не пропустите ни одного значимого события!'
+  //       },
+  //       {
+  //         hid: 'keywords',
+  //         name: 'keywords',
+  //         content: 'бар, Бишкек, отдых, напитки, развлечения'
+  //       },
+  //       {
+  //         hid: 'og:title',
+  //         property: 'og:title',
+  //         content: 'Фото отчеты: лучшие события и заведения Бишкека | Кипиш'
+  //       },
+  //       {
+  //         hid: 'og:description',
+  //         property: 'og:description',
+  //         content: 'Смотрите фото отчеты с лучших событий и заведений Бишкека на Кипише. Узнайте, как проходят яркие мероприятия города, и не пропустите ни одного значимого события!'
+  //       },
+  //       {
+  //         hid: 'og:type',
+  //         property: 'og:type',
+  //         content: 'website'
+  //       },
+  //       {
+  //         hid: 'og:url',
+  //         property: 'og:url',
+  //         content: 'https://kipish.kg/'
+  //       }
+  //     ],
+  //     link: [
+  //       { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' }
+  //     ]
+  //   };
+  // },
+
+  methods: {
+    setHead() {
+      useHead({
+        title: 'Фото отчеты: лучшие события и заведения Бишкека | Кипиш',
+        meta: [
+          { hid: 'description', name: 'description', content: 'Смотрите фото отчеты с лучших событий и заведений Бишкека на Кипише. Узнайте, как проходят яркие мероприятия города, и не пропустите ни одного значимого события!' },
+          { hid: 'keywords', name: 'keywords', content: 'бар, Бишкек, отдых, напитки, развлечения' },
+          { hid: 'og:title', property: 'og:title', content: 'Фото отчеты: лучшие события и заведения Бишкека | Кипиш' },
+          { hid: 'og:description', property: 'og:description', content: 'Смотрите фото отчеты с лучших событий и заведений Бишкека на Кипише. Узнайте, как проходят яркие мероприятия города, и не пропустите ни одного значимого события!' },
+          { hid: 'og:type', property: 'og:type', content: 'website' },
+          { hid: 'og:url', property: 'og:url', content: 'https://kipish.kg/' },
+          { property: 'og:image', content: 'http://kipish.kg/images/logo-white.svg' }
+        ],
+        link: [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+          { rel: 'canonical', href: 'https://kipish.kg/reports/' },
+        ],
+        script: [
+          {
+            type: 'application/ld+json',
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://kipish.kg/" },
+                { "@type": "ListItem", "position": 2, "name": "Репортажи", "item": "https://kipish.kg/reports" }
+              ]
+            }),
+          }
+        ]
+      })
+    },
+  },
+
+  mounted() {
+    this.setHead();
   },
 });
 </script>

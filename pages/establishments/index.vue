@@ -19,45 +19,66 @@ export default defineComponent({
   computed: {
     ...mapStores( useAppStore )
   },
-  head() {
-    return {
-      title: 'Лучшие заведения Бишкека: рестораны, кафе и бары | Кипиш',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Откройте лучшие рестораны Бишкека, уютные кафе, ночные клубы и модные бары. Узнайте больше о топовых заведениях города и выбирайте идеальное место для вашего отдыха на Кипише.'
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content: 'бар, Бишкек, отдых, напитки, развлечения'
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'Лучшие заведения Бишкека: рестораны, кафе и бары | Кипиш'
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Откройте лучшие рестораны Бишкека, уютные кафе, ночные клубы и модные бары. Узнайте больше о топовых заведениях города и выбирайте идеальное место для вашего отдыха на Кипише.'
-        },
-        {
-          hid: 'og:type',
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://kipish.kg/'
-        }
-      ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' }
-      ]
-    };
+
+  methods: {
+    setHead() {
+      useHead({
+        title: 'Лучшие заведения Бишкека: рестораны, кафе и бары | Кипиш',
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'Откройте лучшие рестораны Бишкека, уютные кафе, ночные клубы и модные бары. Узнайте больше о топовых заведениях города и выбирайте идеальное место для вашего отдыха на Кипише.'
+          },
+          {
+            hid: 'keywords',
+            name: 'keywords',
+            content: 'бар, Бишкек, отдых, напитки, развлечения'
+          },
+          {
+            hid: 'og:title',
+            property: 'og:title',
+            content: 'Лучшие заведения Бишкека: рестораны, кафе и бары | Кипиш'
+          },
+          {
+            hid: 'og:description',
+            property: 'og:description',
+            content: 'Откройте лучшие рестораны Бишкека, уютные кафе, ночные клубы и модные бары. Узнайте больше о топовых заведениях города и выбирайте идеальное место для вашего отдыха на Кипише.'
+          },
+          {
+            hid: 'og:type',
+            property: 'og:type',
+            content: 'website'
+          },
+          {
+            hid: 'og:url',
+            property: 'og:url',
+            content: 'https://kipish.kg/'
+          }
+        ],
+        link: [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+          { rel: 'canonical', href: 'https://kipish.kg/establishments/' }
+        ],
+        script: [
+          {
+            type: 'application/ld+json',
+            json: {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://kipish.kg/" },
+                { "@type": "ListItem", "position": 2, "name": "Заведения", "item": "https://kipish.kg/establishments" }
+              ]
+            }
+          }
+        ]
+      })
+    }
+  },
+
+  mounted() {
+    this.setHead();
   }
 });
 </script>
