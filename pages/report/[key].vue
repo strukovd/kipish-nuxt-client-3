@@ -34,7 +34,7 @@ export default defineComponent({
           { property: 'og:description', content: 'Откройте для себя яркие события Бишкека: концерты, вечеринки, фестивали и культурные мероприятия. Найдите лучшие места и планируйте свой отдых с актуальной афишей на Кипише.' },
           { property: 'og:type', content: 'website' },
           { property: 'og:url', content: 'https://kipish.kg/' },
-          { property: 'og:image', content: 'https://www.kipish.kg/logo-white.png' }
+          { property: 'og:image', content: 'https://files.kipish.kg/static/images/logo-white.png' }
         ],
         link: [
           { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },

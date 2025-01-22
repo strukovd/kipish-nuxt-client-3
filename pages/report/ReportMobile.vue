@@ -80,7 +80,7 @@ export default {
         {property: 'og:description', content: this.model?.name && this.model?.establishment?.name ? `Фотоотчет с ${this.model.name} в ${this.model.establishment?.name}. Смотрите лучшие фото на Кипише — медиа ресурсе о светской жизни Бишкека.` : 'Смотрите лучшие фото на Кипише — медиа ресурсе о светской жизни Бишкека.'},
         {property: 'og:type', content: 'website'},
         {property: 'og:url', content: 'https://www.kipish.kg/'},
-        {property: 'og:image', content: 'https://www.kipish.kg/logo-white.png'}
+        {property: 'og:image', content: 'https://files.kipish.kg/static/images/logo-white.png'}
       ],
       link: [
         {rel: 'icon', type: 'image/x-icon', href: '/favicon.svg'}

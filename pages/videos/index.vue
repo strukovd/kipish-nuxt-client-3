@@ -32,7 +32,7 @@ export default defineComponent({
           { property: 'og:description', content: 'Смотрите эксклюзивные видео отчеты с лучших событий и заведений Бишкека на Кипише. Погружайтесь в атмосферу светской и ночной жизни города вместе с нами.' },
           { property: 'og:type', content: 'website' },
           { property: 'og:url', content: 'https://kipish.kg/' },
-          { property: 'og:image', content: 'https://www.kipish.kg/logo-white.png' },
+          { property: 'og:image', content: 'https://files.kipish.kg/static/images/logo-white.png' },
         ],
         link: [
           { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
