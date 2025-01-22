@@ -132,7 +132,7 @@ export default defineComponent({
           },
           { property: 'og:type', content: 'website' },
           { property: 'og:url', content: 'https://www.kipish.kg/' },
-          { property: 'og:image', content: 'https://www.kipish.kg/image.jpg' }
+          { property: 'og:image', content: 'https://www.kipish.kg/logo-white.png' }
         ],
         link: [
           { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
