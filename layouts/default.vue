@@ -1,8 +1,8 @@
 <template>
   <section id="default-layout">
-    <ClientOnly>
-      <AppHeader/>
-    </ClientOnly>
+    <AppHeader/>
+    <!-- <ClientOnly>
+    </ClientOnly> -->
     <main style="min-height:600px; padding-bottom:6em;">
       <slot/>
     </main>
@@ -18,9 +18,9 @@
         <button class="button-book" v-show="needShowBookButton" @click="$modal.show('', 'book')">Забронировать столик</button>
       </aside>
     </ClientOnly>
-    <ClientOnly>
-      <AppFooter/>
-    </ClientOnly>
+    <AppFooter/>
+    <!-- <ClientOnly>
+    </ClientOnly> -->
   </section>
 </template>
 
