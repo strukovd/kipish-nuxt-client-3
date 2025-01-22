@@ -52,6 +52,63 @@ export default {
     return {}
   },
 
+  setup() {
+    useHead({
+      title: 'Кипиш — Медиа ресурс о светской и ночной жизни в Бишкеке',
+      meta: [
+        { name: 'description', content: 'Откройте для себя яркие события Бишкека: концерты, вечеринки, фестивали и культурные мероприятия. Найдите лучшие места и планируйте свой отдых с актуальной афишей на Кипише.' },
+        { name: 'keywords', content: 'бар, Бишкек, отдых, напитки, развлечения' },
+        { property: 'og:title', content: 'Афиша мероприятий в Бишкеке: концерты, вечеринки, фестивали | Кипиш' },
+        { property: 'og:description', content: 'Откройте для себя яркие события Бишкека: концерты, вечеринки, фестивали и культурные мероприятия. Найдите лучшие места и планируйте свой отдых с актуальной афишей на Кипише.' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://kipish.kg/' },
+        { property: 'og:image', content: 'https://kipish.kg/logo-kipish.svg' }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+        { rel: 'canonical', href: 'https://kipish.kg/' },
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            "@context": "http://schema.org/",
+            "@type": "LocalBusiness",
+            "name": "Kipish",
+            "image": "https://kipish.kg/static/images/logo.svg",
+            "telephone": "+996 504 443444",
+            "url": "https://kipish.kg/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "г. Бишкек, ул. Медерова 163/1",
+              "addressLocality": "Bishkek",
+              "addressRegion": "Chuy",
+              "postalCode": "720005",
+              "addressCountry": "Kyrgyzstan"
+            },
+            "sameAs": [
+              "https://www.instagram.com/kipishkg/",
+              "https://www.youtube.com/channel/UCaHkOh9c7dgps2aC4EbShSA"
+            ]
+          })
+        },
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            "@context": "http://schema.org/",
+            "@type": "WebSite",
+            "url": "https://kipish.kg/",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://kipish.kg/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })
+        }
+      ],
+    })
+  },
+
   methods: {
     setHead() {
       useHead({
