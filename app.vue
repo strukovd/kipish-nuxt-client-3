@@ -49,9 +49,7 @@ export default {
   },
 
   data() {
-    return {
-
-    }
+    return {}
   },
 
   methods: {
@@ -147,6 +145,10 @@ export default {
         this.appStore.shouldShowScrollArrow = 'top';
       }
     }
+  },
+
+  mounted() {
+    this.setHead();
   },
 
   created() {

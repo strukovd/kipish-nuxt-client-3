@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       charset: 'utf-8',
+      htmlAttrs: { lang: 'ru' },
+      // title: 'Kipish.kg - Медиа ресурс о светской и ночной жизни в Бишкеке',
+      // base: { target: '_blank', href: 'https://kipish.kg/' },
       viewport: 'width=device-width, initial-scale=1',
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg', },
