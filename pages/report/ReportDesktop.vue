@@ -17,7 +17,7 @@
         <button @click="showShareAlbum = !showShareAlbum" class="button-v1">
           <heroicon name="share" stroke="currentColor" fill="transparent" width="16px" height="16px"/>
 
-          <aside class="share-photo" v-if="showShareAlbum">
+          <aside class="share-report-photo" v-if="showShareAlbum">
             <button class="share-button whatsapp" @click="shareAlbum(`whatsapp`)" dark fab bottom color="green" small>
               <v-icon>mdi-whatsapp</v-icon>
             </button>
@@ -121,7 +121,7 @@ export default defineComponent({
 	//			 { name: 'keywords', content: 'бар, Бишкек, отдых, напитки, развлечения' },
 	//			 { property: 'og:type', content: 'website' },
 	//			 { property: 'og:url', content: 'https://www.kipish.kg/' },
-	//			 { property: 'og:image', content: 'https://www.kipish.kg/logo-white.png' }
+	//			 { property: 'og:image', content: 'https://files.kipish.kg/static/images/logo-white.png' }
 	//		 ],
 	//		 link: [
 	//			 {rel: 'icon', type: 'image/x-icon', href: '/favicon.svg'},
@@ -768,7 +768,7 @@ export default defineComponent({
 }
 
 
-.share-photo {
+.share-report-photo {
   display:flex;
   justify-content:center;
   position:absolute;
