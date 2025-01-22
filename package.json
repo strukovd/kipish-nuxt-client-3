@@ -14,6 +14,7 @@
   "dependencies": {
     "@egjs/vue3-infinitegrid": "^4.12.0",
     "@mdi/font": "^7.4.47",
+    "@nuxtjs/sitemap": "^7.2.3",
     "@pinia/nuxt": "^0.7.0",
     "@yandex/ymaps3-types": "^1.0.15542062",
     "axios": "^1.7.8",
