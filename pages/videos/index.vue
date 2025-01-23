@@ -33,6 +33,8 @@ export default defineComponent({
           { property: 'og:type', content: 'website' },
           { property: 'og:url', content: 'https://kipish.kg/' },
           { property: 'og:image', content: 'https://files.kipish.kg/static/images/logo-white.png' },
+          { property: 'og:image:width', content: '53' },
+          { property: 'og:image:height', content: '54' },
         ],
         link: [
           { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
