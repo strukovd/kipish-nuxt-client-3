@@ -3,6 +3,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   if(to.path.startsWith('/report/')) sourceUrl = `/url/album/${to.params.key}`;
   else if(to.path.startsWith('/establishment/')) sourceUrl = `/url/establishment/${to.params.key}`;
   else if(to.path.startsWith('/event/')) sourceUrl = `/url/event/${to.params.key}`;
+  else if(to.path.startsWith('/poster/')) sourceUrl = `/url/poster/${to.params.key}`;
 
 
   const key = String(to.params.key);

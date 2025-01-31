@@ -20,11 +20,11 @@ export const useAppStore = defineStore('app', {
     links: [
       {href: '/reports',                title: 'Фото',              icon: 'mdi-camera'},
       {href: '/videos',                 title: 'Видео',             icon: 'mdi-video'},
+      {href: '/posters',                title: 'Новости',           icon: 'mdi-camera'},
       {href: '/events',                 title: 'События',           icon: 'mdi-calendar'},
       {href: '/establishments',         title: 'Заведения',         icon: 'mdi-glass-wine'},
       {onClick: 'scrollToBottom',       title: 'Контакты',          icon: 'mdi-phone-message'},
       {href: '/feedback',               title: 'Заказать съемку',   icon: 'mdi-video-marker'},
-      // {href: '/news',                                  title: 'Новости',           icon: 'mdi-camera'},
     ],
     viewedPhoto: {
       files: [] as any[],

@@ -5,7 +5,7 @@
       lazy-src="/images/cover-2.jpg"
       height="516"
     >
-      <router-link :to="`/news/${payload?.url?.url ?? payload.id}`" class="news-card-content">
+      <router-link :to="`/poster/${payload?.url?.url ?? payload.id}`" class="news-card-content">
         <div>
           <div v-if="payload.establishment?.name" style="background: #FFFFFF33;border-radius: 30px;display: inline-block" class="py-1 px-4">
             <span class="text-18 white--text">{{ payload.establishment?.name }}</span>
