@@ -54,7 +54,7 @@ import { mapStores } from 'pinia';
 // import Search from "@/views/other/Search.vue";
 
 export default {
-  name: "AppFooter",
+  name: "AppFooterMobile",
   data() {
     return {};
   },

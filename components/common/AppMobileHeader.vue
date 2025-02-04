@@ -39,7 +39,7 @@ import { mapStores } from 'pinia';
 // import Search from "@/views/other/Search.vue";
 
 export default {
-  name: "AppHeader",
+  name: "AppHeaderMobile",
   // components: {Search},
   data() {
     return {

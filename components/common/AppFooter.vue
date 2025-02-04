@@ -130,6 +130,8 @@ export default {
 
   .row-2 {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
     align-items: center;
     justify-content: space-between;
     padding:5em 0;

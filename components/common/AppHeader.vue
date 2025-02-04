@@ -140,6 +140,7 @@ export default {
     .left-side {
       display:flex;
       align-items:center;
+      padding:0 1em;
 
       .city-select {
         max-width: 200px;
