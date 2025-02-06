@@ -1,24 +1,24 @@
 <template>
   <div>
-    <template v-if="!appStore.isMobile">
-      <PosterDesktop/>
+    <template v-if="!$device.isMobile">
+      <PostDesktop/>
     </template>
     <template v-else>
-      <PosterMobile/>
+      <PostMobile/>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import PosterDesktop from "~/pages/poster/PosterDesktop.vue";
-import PosterMobile from "~/pages/poster/PosterMobile.vue";
+import PostDesktop from "~/pages/post/PostDesktop.vue";
+import PostMobile from "~/pages/post/PostMobile.vue";
 import { mapStores } from "pinia";
 
 
 export default defineComponent({
-  name: "Poster",
+  name: "Post",
   middleware: ['checkSourceId'],
-  components: { PosterDesktop, PosterMobile },
+  components: { PostDesktop, PostMobile },
   computed: {
     ...mapStores( useAppStore )
   }

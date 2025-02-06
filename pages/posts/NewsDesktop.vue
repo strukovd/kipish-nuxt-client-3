@@ -6,7 +6,7 @@
 
     <section class="news-section">
       <BaseNewsCard
-        class="poster"
+        class="post"
         :key="post.id"
         v-for="post of posts"
         :payload="post"
@@ -174,7 +174,7 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
 
-    .poster {
+    .post {
       flex:45% 1 0;
     }
   }
