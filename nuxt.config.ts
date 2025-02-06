@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@pinia/nuxt', 'nuxt-aos', 'vue-yandex-maps/nuxt', '@nuxtjs/sitemap'],
+  modules: ['@pinia/nuxt', 'nuxt-aos', 'vue-yandex-maps/nuxt', '@nuxtjs/sitemap', '@nuxtjs/device', ],
 
   yandexMaps: {
     apikey: '62c88456-1fdb-474c-8ed3-a45218e508ca',

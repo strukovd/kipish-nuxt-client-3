@@ -8,11 +8,11 @@ export const useAppStore = defineStore('app', {
     redirects: [],
     redirectsMap: null,
     errorMessages: [],
+    isMobile: false,
 
     videoDomain: process.env.NODE_ENV === 'production' ? '/api/v1/reports/video/stream/' : 'http://localhost:8083/api/v1/reports/video/stream/',
     windowWidth: 0,
     shouldShowScrollArrow: undefined as any,
-    isMobile: false,
     currentCity: import.meta.browser ? JSON.parse(localStorage.getItem('city') ?? 'null') : {"id":1,"nameRu":"Бишкек","nameKg":"Бишкек","nameEn":"Bishkek","visible":true},
     sourceId: import.meta.browser ? JSON.parse(localStorage.getItem('sourceId') ?? 'null') : null,
     isDark: false,
@@ -20,7 +20,7 @@ export const useAppStore = defineStore('app', {
     links: [
       {href: '/reports',                title: 'Фото',              icon: 'mdi-camera'},
       {href: '/videos',                 title: 'Видео',             icon: 'mdi-video'},
-      {href: '/posters',                title: 'Новости',           icon: 'mdi-camera'},
+      {href: '/posts',                  title: 'Новости',           icon: 'mdi-camera'},
       {href: '/events',                 title: 'События',           icon: 'mdi-calendar'},
       {href: '/establishments',         title: 'Заведения',         icon: 'mdi-glass-wine'},
       {onClick: 'scrollToBottom',       title: 'Контакты',          icon: 'mdi-phone-message'},

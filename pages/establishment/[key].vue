@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="!appStore.isMobile">
+    <template v-if="!$device.isMobile">
       <EstablishmentDesktop/>
     </template>
     <template v-else>

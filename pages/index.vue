@@ -1,7 +1,7 @@
 <template>
   <div id="main-page">
     <template v-if="true || appStore.currentCity">
-      <template v-if="!appStore.isMobile">
+      <template v-if="!$device.isMobile">
         <Home key="home"/>
       </template>
       <template v-else>

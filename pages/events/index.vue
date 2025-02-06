@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="!appStore.isMobile">
+    <template v-if="!$device.isMobile">
       <EventsDesktop/>
     </template>
     <template v-else>

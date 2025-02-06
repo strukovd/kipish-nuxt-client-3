@@ -2,6 +2,9 @@
   <div v-show="isServer" class="loadingScreen">
     <img class="logo" src="/images/logo-kipish.svg" alt="Logo">
   </div>
+  <!-- <div v-if="$device">
+    {{ $device.isMobile }}
+  </div> -->
   <div v-show="!isServer" @resize="onResize">
     <NuxtLayout :name="layout">
       <ClientOnly>
@@ -29,7 +32,7 @@ export default {
     },
 
     layout() {
-      return this.appStore.isMobile ? 'default-mobile' : 'default';
+      return this.$device.isMobile ? 'default-mobile' : 'default';
     }
   },
 
@@ -171,7 +174,7 @@ export default {
 
     initGlobalProperties() {
       this.appStore.windowWidth = document.body.clientWidth;
-      this.appStore.isMobile = document.body.clientWidth <= 1400;
+      this.$device.isMobile = document.body.clientWidth <= 1400 || import.meta.client && (navigator as any).userAgentData?.mobile;
       if(localStorage.getItem('dark-theme') === 'true') this.appStore.isDark = true;
     },
 
@@ -187,7 +190,7 @@ export default {
       else return;
 
       this.appStore.windowWidth = document.body.clientWidth;
-      this.appStore.isMobile = document.body.clientWidth <= 1400;
+      this.$device.isMobile = document.body.clientWidth <= 1400;
     },
 
     shouldShowScrollArrow() {
