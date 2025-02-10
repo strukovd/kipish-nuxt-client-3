@@ -3,7 +3,7 @@
     <v-skeleton-loader v-if="loading" style="border-radius: 17px;" type="image" width="100%" height="240px"/>
     <div v-else>
       <a :href="advertisement?.link" target="_blank" rel="noreferrer">
-        <img class="ad-img" lazy-src="/images/cover-2.jpg" :height="appStore.isMobile ? `240px` : `320px`" width="100%" :src="advertisementPath"/>
+        <img class="ad-img" lazy-src="/images/cover-2.jpg" :height="$device.isMobile ? `240px` : `320px`" width="100%" :src="advertisementPath"/>
       </a>
     </div>
   </div>
@@ -17,10 +17,10 @@ export default {
     loading: {type: Boolean, default: false}
   },
   computed: {
-    ...mapStores( useAppStore, ['isMobile'] ),
+    ...mapStores( useAppStore ),
     advertisementPath() {
       let ad;
-      if( this.appStore.isMobile ) {
+      if( this.$device.isMobile ) {
         ad = this.advertisement?.fileMobile ?? 'https://files.kipish.kg/advertisement/ADVERTISEMENT/380%D1%85360.gif';
       }
       else {
