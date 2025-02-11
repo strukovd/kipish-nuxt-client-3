@@ -1,128 +1,162 @@
 <template>
-  <v-card v-if="data.length" elevation="0" color="transparent" class="wrapper mt-80">
-    <v-card-text class="pa-0 px-15 d-flex justify-center flex-column">
-      <div class="d-flex justify-start">
-        <div class="d-flex flex-column align-center">
-          <div class="d-flex align-center">
-            <span class="text-82 font-weight-300 font-title black--text text-uppercase mr-8">Актуальные</span>
-            <div class="mt-3">
-              <span style="line-height: 29px;" class=" text-24 black--text opacity-70 font-weight-200">/ Будь в центре кипиша</span>
-            </div>
-          </div>
-          <div>
-            <span class="text-82 font-weight-300 font-title black--text text-uppercase">новости</span>
-          </div>
+    <div class="desktop-reports mid">
+    <h1 class="h1-font text-82 font-weight-300 font-title black--text text-uppercase">
+      <div>Новости</div>
+      <span style="padding-left:1em;">недели</span>
+      <span class="h2-font" style="padding-left:1em;">/ Будь в центре <br> кипиша</span>
+    </h1>
+
+
+    <section style="display:flex; flex-direction:row; gap:1em;">
+      <section style="flex:30% 0 0;">
+        <div style="margin-top:8em;">
+          <img src="/images/news-subscribe.png" alt="subscribe" width="100%">
         </div>
-      </div>
-    </v-card-text>
-    <v-card-text class="pa-0 px-15 mt-80">
-      <div style="border-top: 1px solid #111111"></div>
-      <div v-for="item in data" :key="item.id" class="mt-12 news_block__item">
-        <v-row class="pa-0 ma-0">
-          <v-col cols="4" class="pa-0">
-            <div @click="$router.push('/news/' + item.id)" class="news_block__title cursor-pointer">
-              <span class="text-28 dark2--text font-weight-550">{{ item.title }}</span>
+        <!-- <div>
+          <h2>Будь в курсе новостей</h2>
+          <div>Подпишителсь на наши соц. сети</div>
+          <BaseButton>Подписаться</BaseButton>
+        </div> -->
+      </section>
+      <section style="flex:70% 0 0;">
+        <div style="position: relative;border-radius: 20px 0 0 20px; gap:2em;" class="d-flex flex-wrap mt-15">
+          <template v-if="!loading">
+            <BaseNewsCard v-for="post of posts" :key="post.id" :payload="post" width="100%"/>
+            <!-- <BaseEstabCard v-for="estab of estabs" :key="estab.id" :item="estab"></BaseEstabCard> -->
+          </template>
+          <template v-else>
+            <div v-for="i of 4" :key="i" style="display:flex;flex-direction:column;overflow:hidden;border-radius:20px;position:relative;">
+              <v-skeleton-loader class="mx-auto" type="image"></v-skeleton-loader>
             </div>
-          </v-col>
-          <v-col cols="4" class="pa-0">
-            <div>
-              <span class="text-16 dark2--text">{{ item.description }}</span>
-              <div class="d-flex align-center mt-80">
-                <span class="font-weight-medium dark2--text mr-8 text-uppercase">Советы</span>
-                <span class="text-14 opacity-50">{{ item.pubDate }}</span>
-              </div>
-            </div>
-          </v-col>
-          <v-col class="pa-0 d-flex justify-center" cols="4">
-            <div>
-              <v-img class="news_block__image"
-                     :src="item.coverImage"/>
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-    </v-card-text>
-    <v-card-text class="d-flex justify-center pa-0 mt-10">
-      <v-btn @click="$router.push('/news')" style="border-radius: 16px !important;"
-             :color="$vuetify.theme.dark ? '#FFFFFF' : '#0000004D'" outlined class="px-10 py-11 hover-red">
-        <span class="text-16 black--text font-weight-medium text-uppercase">СМОТРЕТЬ ВСЕ НОВОСТИ</span>
-      </v-btn>
-    </v-card-text>
-  </v-card>
+          </template>
+        </div>
+      </section>
+    </section>
+
+    <div style="display:flex; justify-content:center; margin-top:110px; padding:0;">
+      <button class="button-v1" @click="$router.push('/posts')">СМОТРЕТЬ ВСЕ НОВОСТИ</button>
+    </div>
+  </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import Vue from "vue";
+import BaseEstabCard from "@/components/common/BaseEstabCard.vue";
+import { mapStores } from "pinia";
+import BaseButton from "~/components/common/BaseButton.vue";
+import BaseNewsCard from "~/components/common/BaseNewsCard.vue";
 
 export default {
-  name: "DesktopNews",
-  data() {
-    return {
-      data: [],
+  name: "DesktopEstabs",
+  components: { BaseEstabCard, BaseNewsCard, BaseButton },
+  computed: {
+    ...mapStores(useAppStore, ['currentCity']),
+  },
+  data: () => ({
+    loading: false,
+    currentSlideEstab: [],
+    posts: [],
+  }),
+  created() {
+    if (this.appStore.currentCity) {
+      this.fetchNews()
     }
   },
   methods: {
     async fetchNews() {
-      if(!this.$store.state.currentCity) {
+      if(!this.appStore.currentCity) {
         return;
       }
+      this.loading = true;
+      this.currentSlideEstab = [];
+      const params = {cityId: this.appStore.currentCity.id}
       try {
-        const params = {
-          city: this.$store.state.currentCity.id
-        }
-        const {data: {content}} = await this.$http2.get('/posts', {params})
-        this.data = content
-        await this.fetchNewsImages(this.data)
+        const { data: { content } } = await this.$http2.get('/posts?size=2');
+        this.posts = content;
+        this.currentSlideEstab = Array(this.posts.length).fill(1);
+        this.loading = false;
       } catch (e) {
-        console.log(e)
+        this.posts = [];
+        this.loading = false
       }
     },
-    async fetchNewsImages(data) {
-      if (!data) data = this.data;
-      for (const news of data) {
-        if (news.coverImageId) {
-          this.fetchImage(news.coverImageId)
-            .then(image => {
-              Vue.set(news, 'coverImage', image);
-            });
-        }
-      }
-    },
-    fetchImage(imageId) {
-      return this.$http.get(`/files/${imageId}`)
-        .then(r => {
-          const imageMap = r.data;
-          return imageMap[imageId];
+
+    customPrevEstab(estabIndex) {
+      if (this.currentSlideEstab[estabIndex] > 1) {
+        this.currentSlideEstab = [...this.currentSlideEstab];
+        this.currentSlideEstab[estabIndex]--;
+        this.$nextTick(() => {
+          this.$refs.estab[estabIndex].prev();
         });
+      }
     },
-  },
-  mounted() {
-    this.fetchNews()
+    customNextEstab(estabIndex) {
+      if (this.currentSlideEstab[estabIndex] < this.posts[estabIndex].images.filter(el => el.source === 'ESTABLISHMENT').length) {
+        this.currentSlideEstab = [...this.currentSlideEstab];
+        this.currentSlideEstab[estabIndex]++;
+        this.$nextTick(() => {
+          this.$refs.estab[estabIndex].next();
+        });
+      }
+    },
   }
 }
 </script>
 
+<style lang="scss">
+// .desktop_estabs {
+//   .button_link {
+//     &:hover {
+//       background: #373737 !important;
+//     }
+//   }
 
-<style scoped lang="scss">
-.news_block__item {
-  padding-bottom: 32px;
-  border-bottom: 1px solid #CACCCE;
+//   .v-skeleton-loader__image {
+//     width: 416px !important;
+//     height: 600px !important;
+//     border-radius: 16px !important;
+//   }
 
-  &:last-child {
-    border-bottom: none
-  }
-}
+//   .estabs_card {
+//     width: 416px;
+//     height: 600px;
+//     margin-right: 32px !important;
+//     margin-bottom: 32px !important;
+//   }
 
-.news_block__image {
-  width: 356px;
-  height: 258px;
-  border-radius: 20px;
-}
+//   //.estabs_card:nth-child(3n+1),
+//   //.estabs_card:nth-child(3n+3) {
+//   //  .estabs_card__content {
+//   //    height: 340px !important;
+//   //  }
+//   //  height: 440px !important;
+//   //  .v-image {
+//   //    height: 340px !important;
+//   //  }
+//   //  .v-image__image {
+//   //    height: 340px !important;
+//   //  }
+//   //}
 
-.news_block__title {
-  span:hover {
-    color: #FE252E !important;
-  }
-}
+//   //.estabs_card:nth-child(3n+2) {
+//   //  height: 420px !important;
+//   //  .estabs_card__content {
+//   //    height: 320px !important;
+//   //  }
+//   //  .v-image {
+//   //    height: 320px !important;
+//   //  }
+//   //  .v-image__image {
+//   //    height: 320px !important;
+//   //  }
+//   //}
+
+//   .estabs_card:nth-child(3n) {
+//     margin-right: 0 !important;
+//   }
+
+//   .estabs_card:nth-last-child(-n+3) {
+//     margin-bottom: 0 !important;
+//   }
+// }
+
 </style>

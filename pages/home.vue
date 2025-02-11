@@ -59,7 +59,10 @@
     </div>
   </section>
   <section class="carousel-section" data-aos="fade-up" data-aos-duration="1500">
-
+    <ImageCarouselDesktop/>
+  </section>
+  <section class="news-section" data-aos="fade-up" data-aos-duration="1500">
+    <DesktopNews/>
   </section>
 </template>
 
@@ -76,9 +79,11 @@ import Marquee from '~/components/common/Marquee.vue';
 import DesktopEstabs from '~/components/sections/estabsBlock/DesktopEstabs.vue';
 import DesktopReports from '~/components/sections/reportsBlock/DesktopReports.vue';
 import DesktopVideos from '~/components/sections/videoBlock/DesktopVideos.vue';
+import DesktopNews from '~/components/sections/newsBlock/DesktopNews.vue';
+import ImageCarouselDesktop from '~/components/common/ImageCarousel/ImageCarouselDesktop.vue';
 
 export default defineComponent({
-  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideos, DesktopEstabs, ADpc, BaseMediaSlider, IncNum },
+  components: { BasePosterSlider, Marquee, BaseAd, DesktopReports, DesktopVideos, DesktopEstabs, DesktopNews, ADpc, BaseMediaSlider, ImageCarouselDesktop, IncNum },
   computed: {
     ...mapStores( useAppStore ),
   },
@@ -87,12 +92,6 @@ export default defineComponent({
     return {
       loading: true,
       posters: [] as any[],
-      defaultPosters: [ // TODO: удалить
-        {
-          description: '', date: '', imgReserve: true, files: [], isLogo: false, isCover: true,
-          title: 'Нет активных мероприятий', file: '/static/images/post-bg-img.png'
-        }
-      ] as any[],
       counters: [
         {targetValue: 10, label: 'Более 10К отснятых', subLabel: 'репортажей'},
         {targetValue: 800, label: 'Нами было отснято', subLabel: '800К фотографий'},
@@ -110,24 +109,10 @@ export default defineComponent({
       };
       this.$http2.get('/posters', {params})
         .then((resp)=>{
-          if (!resp.data?.content.length) {
-            this.posters = this.defaultPosters;
-            return;
-          }
-
           this.posters = resp.data.content;
-          if(this.posters?.length) {
-            // парсим значение поля options
-            this.posters.forEach((poster, inx) => {
-              if (poster.options) {
-                poster.options = JSON.parse(poster.options);
-              }
-            })
-          }
         })
         .catch((error) => {
           console.error('Error fetching posters:', error);
-          this.posters = this.defaultPosters;
         })
         .finally(() => {
           setTimeout(() => { this.loading = false; }, 0);
