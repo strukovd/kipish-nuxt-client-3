@@ -6,6 +6,7 @@
       </div>
       <div style="display: flex; align-items: center; gap:2em;">
         <heroicon size="28" @click="$modal.show('', 'Find', { nonCloseable: true, background: '#f5f5f5f0' })" class="cursor-pointer" name="search" fill="currentColor"/>
+        <!-- <img @click="appStore.isDark = !appStore.isDark" width="32" height="32" src="/images/theme.svg" :class="{ 'rotate-animation': rotateAnimation, 'rotate': appStore.isDark }"/> -->
       </div>
     </section>
 

@@ -1,82 +1,75 @@
 <template>
-  <v-card v-if="data.length" elevation="0" color="transparent" class="wrapper mt-80 px-4">
-    <v-card-text class="pa-0 d-flex justify-center flex-column">
-      <div class="d-flex flex-column">
-        <span class="text-32 black--text text-uppercase font-title">Актуальные</span>
-        <span class="text-32 black--text text-uppercase font-title ml-15">новости</span>
-      </div>
-    </v-card-text>
-    <v-card-text  class="pa-0 mt-7">
-      <div style="border-top: 1px solid #111111"></div>
+  <div class="mobile-estabs">
+    <h1 class="font-title" style="font-size:28px; text-transform:uppercase; margin-bottom:1em; font-weight:300;">
+      <div>Лучшие заведения</div>
+      <div style="padding-left:1em;">Бишкека</div>
+    </h1>
 
-      <div class="news-item" v-for="item in data" :key="item.id" @click="$router.push('/news/' + item.id)">
-        <section class="image">
-          <v-img class="cover-image" :src="item.coverImage"/>
-        </section>
-        <section class="text">
-          <div class="date"><div class="date-badges">{{ localizeDate(item.pubDate) }}</div></div>
-          <div class="title">{{ item.title }}</div>
-          <!-- <div class="description">{{ item.description }}</div> -->
-        </section>
-      </div>
-
-      <!-- <div v-for="item in data" class="mt-12 text-center d-flex justify-center news_block__item">
-        <div class="d-flex flex-column justify-center">
-          <div @click="$router.push('/news/' + item.id)" class="news_block__title cursor-pointer">
-            <span class="text-28 dark2--text font-weight-550">{{ item.title }}</span>
-          </div>
-          <div class="mt-6">
-            <v-img class="news_block__image"
-                   :src="item.coverImage"/>
-          </div>
+    <div class="estab-cards">
+      <template v-if="!loading">
+        <MCardEstab v-for="estab of estabs" :key="estab.id" :item="estab"></MCardEstab>
+      </template>
+      <template v-else>
+        <div v-for="i of 4" :key="i" style="display:flex;flex-direction:column;overflow:hidden;border-radius:20px;position:relative;">
+          <v-skeleton-loader class="mx-auto" type="image"></v-skeleton-loader>
         </div>
-      </div> -->
+      </template>
+    </div>
 
-
-    </v-card-text>
-  </v-card>
+    <div style="display:flex; justify-content:center; margin-top:110px; padding:0;">
+      <button class="button-v1" @click="$router.push('/establishments')">СМОТРЕТЬ ВСЕ ЗАВЕДЕНИЯ</button>
+    </div>
+  </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import Vue from "vue";
+import { mapStores } from "pinia";
+import MCardEstab from "~/components/common/MCardEstab.vue";
 
 export default {
-  name: "MobileNews",
-  data() {
-    return {
-      data: [],
+  name: "MobileEstabs",
+  components: { MCardEstab },
+  computed: {
+    ...mapStores(useAppStore, ['currentCity']),
+  },
+  data: () => ({
+    loading: false,
+    currentSlideEstab: [],
+    estabs: [],
+  }),
+  created() {
+    if (this.appStore.currentCity) {
+      this.fetchEstabs()
     }
   },
   methods: {
-    localizeDate(date) {
-      if( /\d{2}-\d{2}-\d{4}/.test(date) ) {
-        return date.split('-').reverse().join('.');
-      }
-    },
-
-    async fetchNews() {
-      if(!this.$store.state.currentCity) {
+    async fetchEstabs() {
+      if(!this.appStore.currentCity) {
         return;
       }
+      this.loading = true;
+      this.currentSlideEstab = [];
+      const params = {cityId: this.appStore.currentCity.id}
       try {
-        const params = {
-          city: this.$store.state.currentCity.id
-        }
-        const {data: {content}} = await this.$http2.get('/posts', {params})
-        this.data = content
-        await this.fetchNewsImages(this.data)
+        const { data: { content } } = await this.$http2.get('/establishments?top=true')
+        // const filteredEstabs = content.filter(estab => estab.id === 37 || estab.id === 30 || estab.id === 41)
+        // this.estabs = filteredEstabs.splice(0, 6);
+        this.estabs = content;
+        await this.fetchEstabsImages(this.estabs)
+        this.currentSlideEstab = Array(this.estabs.length).fill(1);
+        this.loading = false;
       } catch (e) {
-        console.log(e)
+        this.estabs = [];
+        this.loading = false
       }
     },
-    async fetchNewsImages(data) {
-      if (!data) data = this.data;
-      for (const news of data) {
-        if (news.coverImageId) {
-          this.fetchImage(news.coverImageId)
+    async fetchEstabsImages(estabs) {
+      if (!estabs) estabs = this.estabs;
+      for (const estab of estabs) {
+        if (estab.coverImageId) {
+          this.fetchImage(estab.coverImageId)
             .then(image => {
-              Vue.set(news, 'coverImage', image);
+              estab.coverImage = image;
             });
         }
       }
@@ -88,86 +81,38 @@ export default {
           return imageMap[imageId];
         });
     },
-  },
-  mounted() {
-    this.fetchNews()
+
+    customPrevEstab(estabIndex) {
+      if (this.currentSlideEstab[estabIndex] > 1) {
+        this.currentSlideEstab = [...this.currentSlideEstab];
+        this.currentSlideEstab[estabIndex]--;
+        this.$nextTick(() => {
+          this.$refs.estab[estabIndex].prev();
+        });
+      }
+    },
+    customNextEstab(estabIndex) {
+      if (this.currentSlideEstab[estabIndex] < this.estabs[estabIndex].images.filter(el => el.source === 'ESTABLISHMENT').length) {
+        this.currentSlideEstab = [...this.currentSlideEstab];
+        this.currentSlideEstab[estabIndex]++;
+        this.$nextTick(() => {
+          this.$refs.estab[estabIndex].next();
+        });
+      }
+    },
   }
 }
 </script>
 
-
-<style scoped lang="scss">
-.news-item {
-  display: flex;
-  margin:1em 0;
-
-  .image {
-    .cover-image {
-      // width: 356px;
-      // height: 258px;
-      width: 200px;
-      height: 143px;
-      border-radius: 20px;
-      object-fit: cover;
-      margin-right: 1em;
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
-
-  .text {
+<style lang="scss">
+.mobile-estabs {
+  .estab-cards {
+    padding: 0;
+    margin-top: 10px;
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: column;
-    padding:0 .3em;
-
-    .date {
-      background: rgba(255, 255, 255, 0.1);
-
-      .date-badges {
-        display: inline-block;
-        color: #777777;
-        padding: .1em 0;
-      }
-    }
-
-    .title {
-      color: #111111;
-    }
-
-    .description {
-      color: #111111;
-      text-wrap: pretty;
-      text-overflow: ellipsis;
-      max-height: 6em;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4;
-      position: relative;
-    }
-  }
-}
-
-
-.news_block__item {
-  padding-bottom: 32px;
-  border-bottom: 1px solid #CACCCE;
-
-  &:last-child {
-    border-bottom: none
-  }
-}
-
-.news_block__image {
-  width: 356px;
-  height: 258px;
-  border-radius: 20px;
-}
-
-.news_block__title {
-  span:hover {
-    color: #FE252E !important;
+    gap: 32px;
   }
 }
 </style>
