@@ -16,6 +16,8 @@ export const useAppStore = defineStore('app', {
     currentCity: import.meta.browser ? JSON.parse(localStorage.getItem('city') ?? 'null') : {"id":1,"nameRu":"Бишкек","nameKg":"Бишкек","nameEn":"Bishkek","visible":true},
     sourceId: import.meta.browser ? JSON.parse(localStorage.getItem('sourceId') ?? 'null') : null,
     isDark: false,
+    pages: [] as string[],
+    pageKey: undefined as string | undefined,
     modals: [] as ModalModel[],
     links: [
       {href: '/reports',                title: 'Фото',              icon: 'mdi-camera'},
