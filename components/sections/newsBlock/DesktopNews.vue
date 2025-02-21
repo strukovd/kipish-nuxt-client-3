@@ -1,10 +1,6 @@
 <template>
     <div class="desktop-reports mid">
-    <h1 class="h1-font text-82 font-weight-300 font-title black--text text-uppercase">
-      <div>Новости</div>
-      <span style="padding-left:1em;">недели</span>
-      <span class="h2-font" style="padding-left:1em;">/ Будь в центре <br> кипиша</span>
-    </h1>
+    <h1 v-html="$t('main.news-title')" class="h1-font text-82 font-weight-300 font-title black--text text-uppercase"></h1>
 
 
     <section style="display:flex; flex-direction:row; gap:1em;">
@@ -34,7 +30,7 @@
     </section>
 
     <div style="display:flex; justify-content:center; margin-top:110px; padding:0;">
-      <button class="button-v1" @click="$router.push('/posts')">СМОТРЕТЬ ВСЕ НОВОСТИ</button>
+      <button class="button-v1" @click="$router.push('/posts')">{{ $t('main.news-show-more') }}</button>
     </div>
   </div>
 </template>

@@ -1,10 +1,6 @@
 <template>
   <div class="desktop-reports">
-    <h1 class="h1-font mid text-82 font-weight-300 font-title black--text text-uppercase">
-      <div>Видеоотчеты</div>
-      <span style="padding-left:1em;">недели</span>
-      <span class="h2-font" style="padding-left:1em;">/ Каждый отчет <br/> наше лицо</span>
-    </h1>
+    <h1 class="h1-font mid text-82 font-weight-300 font-title black--text text-uppercase" v-html="$t('main.videos-title')"></h1>
 
     <ClientOnly>
       <VideoSwiper v-if="videos.length" :videos="videos" />
@@ -21,7 +17,7 @@
     </div> -->
 
     <div class="mid" style="display:flex; justify-content:center; margin-top:110px; padding:0;">
-      <button class="button-v1" @click="navigateTo('/reports')">СМОТРЕТЬ ВСЕ ВИДЕООТЧЕТЫ</button>
+      <button class="button-v1" @click="navigateTo('/reports')">{{ $t('main.videos-show-more') }}</button>
     </div>
   </div>
 </template>

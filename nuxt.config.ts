@@ -5,6 +5,22 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
+  i18n: {
+    locales: [
+      { code: 'ru', language: 'ru-RU' },
+      { code: 'kg', language: 'kg-KG' },
+      { code: 'en', language: 'en-US' },
+    ],
+    defaultLocale: 'ru',
+    strategy: 'prefix_except_default', // Префикс для всех, кроме дефолтного
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      fallbackLocale: 'ru',
+      alwaysRedirect: true,
+    }
+  },
+
   app: {
     head: {
       charset: 'utf-8',
@@ -30,7 +46,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@pinia/nuxt', 'nuxt-aos', 'vue-yandex-maps/nuxt', '@nuxtjs/sitemap', '@nuxtjs/device', ],
+  modules: ['@pinia/nuxt', 'nuxt-aos', 'vue-yandex-maps/nuxt', '@nuxtjs/sitemap', '@nuxtjs/device', '@nuxtjs/i18n'],
 
   yandexMaps: {
     apikey: '62c88456-1fdb-474c-8ed3-a45218e508ca',

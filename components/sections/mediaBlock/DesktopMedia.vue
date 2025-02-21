@@ -2,7 +2,7 @@
   <v-card elevation="0" color="transparent" class="py-0 px-16 mt-13 post_block wrapper">
     <v-card-text class="pa-0">
       <div class="post_title d-flex flex-column">
-        <h1 class="h1-font" style="z-index: 999; font-size:68px; line-height:1.2em;"><span>Медиа ресурс о светской</span><br><span>жизни</span></h1>
+        <h1 class="h1-font" style="z-index: 999; font-size:68px; line-height:1.2em;" v-html="$t('main.title')"></h1>
       </div>
 
       <div class="post_banner" style="position: relative;">

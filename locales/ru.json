@@ -1,0 +1,21 @@
+{
+	"main": {
+		"title":"<span>Медиа ресурс о светской</span><br><span>жизни</span>",
+		"marquee1": "Стиль / Люди / События /",
+		"reports-title": "<span>Актуальные</span><span class=\"h2-font\" style=\"padding-left:1em;\">/ Каждая задача возможность <br/> сделать больше и лучше</span><span style=\"padding-left:1em;\">фотоотчеты</span>",
+		"reports-show-more": "СМОТРЕТЬ ВСЕ РЕПОРТАЖИ",
+		"videos-title": "<div>Видеоотчеты</div> <span style=\"padding-left:1em;\">недели</span> <span class=\"h2-font\" style=\"padding-left:1em;\">/ Каждый отчет <br/> наше лицо</span>",
+		"videos-show-more": "СМОТРЕТЬ ВСЕ ВИДЕООТЧЕТЫ",
+		"estabs-title": "<div>Лучшие заведения</div> <span style=\"padding-left:1em;\">Бишкека</span> <span class=\"h2-font\" style=\"padding-left:1em;\">/ Каждый день <br> стратегически важен</span>",
+		"estabs-show-more": "СМОТРЕТЬ ВСЕ ЗАВЕДЕНИЯ",
+		"about-title": "<span style=\"padding-left:1em;\">Кипишуй</span><br><span>с нами</span>",
+		"about-text": "Медиа ресурс о светской, вечерней и ночной жизни города Место, куда заходят чтобы почувствовать и быть в курсе всех событий в культурной жизни столицы",
+		"news-title": "<div>Новости</div> <span style=\"padding-left:1em;\">недели</span> <span class=\"h2-font\" style=\"padding-left:1em;\">/ Будь в центре <br> кипиша</span>",
+		"news-show-more": "СМОТРЕТЬ ВСЕ НОВОСТИ",
+
+		"end": "123"
+	},
+	"reports": {
+		"title": "Фотоотчеты с мероприятий в Бишкеке"
+	}
+}

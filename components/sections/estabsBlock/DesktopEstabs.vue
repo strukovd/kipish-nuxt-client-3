@@ -1,10 +1,6 @@
 <template>
     <div class="desktop-reports">
-    <h1 class="h1-font text-82 font-weight-300 font-title black--text text-uppercase">
-      <div>Лучшие заведения</div>
-      <span style="padding-left:1em;">Бишкека</span>
-      <span class="h2-font" style="padding-left:1em;">/ Каждый день <br> стратегически важен</span>
-    </h1>
+    <h1 v-html="$t('main.estabs-title')" class="h1-font text-82 font-weight-300 font-title black--text text-uppercase"></h1>
 
     <div style="position: relative;border-radius: 20px 0 0 20px; gap:2em;" class="d-flex flex-wrap mt-15">
       <template v-if="!loading">
@@ -18,7 +14,7 @@
     </div>
 
     <div style="display:flex; justify-content:center; margin-top:110px; padding:0;">
-      <button class="button-v1" @click="$router.push('/reports')">СМОТРЕТЬ ВСЕ ЗАВЕДЕНИЯ</button>
+      <button class="button-v1" @click="$router.push('/reports')">{{ $t('main.estabs-show-more') }}</button>
     </div>
   </div>
 </template>

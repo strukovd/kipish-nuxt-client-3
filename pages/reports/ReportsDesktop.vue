@@ -1,7 +1,7 @@
 <template>
   <div class="reports-desktop mid">
     <BaseBreadcrumbs :breadcrumbs="[{href: '/', title: 'Главная'}, {href: '/reports', title: 'Репортажи'}]"/>
-    <h1 class="h1-font text-68 black--text font-title text-uppercase font-weight-300">Фотоотчеты с мероприятий в Бишкеке</h1>
+    <h1 class="h1-font text-68 black--text font-title text-uppercase font-weight-300">{{$t('reports.title') }}</h1>
 
     <TimeRouletteNew :dateMap="reportDateMap" @setActualDay="selectDay" class="my-15"/>
 

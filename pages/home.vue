@@ -9,7 +9,7 @@
   </section>
   <section class="marquee-section" data-aos="fade-up" data-aos-duration="1500">
     <ClientOnly>
-      <Marquee text="Стиль / Люди / События /"/>
+      <Marquee :text="$t('main.marquee1')"/>
     </ClientOnly>
   </section>
   <section class="ad-section mid" data-aos="fade-up" data-aos-duration="1500">
@@ -34,8 +34,8 @@
   <section class="about-section mid" data-aos="fade-up" data-aos-duration="1500">
     <div style="display:flex; gap:1em;">
       <section style="flex:40% 0 1; text-align:left; color:#444444; display:flex; flex-direction:column; justify-content:space-between;">
-        <h2 class="h1-font" style="z-index: 999; font-size:82px; line-height:1.2em; position:relative;"><span style="padding-left:1em;">Кипишуй</span><br><span>с нами</span></h2>
-        <p class="font-text" style="font-weight:300; font-size:24px;">Медиа ресурс о светской, вечерней и ночной жизни города Место, куда заходят чтобы почувствовать и быть в курсе всех событий в культурной жизни столицы</p>
+        <h2 v-html="$t('main.about-title')" class="h1-font" style="z-index: 999; font-size:82px; line-height:1.2em; position:relative;"></h2>
+        <p class="font-text" style="font-weight:300; font-size:24px;">{{ $t('main.about-text') }}</p>
       </section>
       <section style="flex:auto 1 0;">
         <BaseMediaSlider :posters="[

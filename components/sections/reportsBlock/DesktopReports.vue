@@ -1,10 +1,6 @@
 <template>
   <div class="desktop-reports">
-    <h1 class="h1-font text-82 font-weight-300 font-title black--text text-uppercase mr-8">
-      <span>Актуальные</span>
-      <span class="h2-font" style="padding-left:1em;">/ Каждая задача возможность <br/> сделать больше и лучше</span>
-      <span style="padding-left:1em;">фотоотчеты</span>
-    </h1>
+    <h1 class="h1-font text-82 font-weight-300 font-title black--text text-uppercase mr-8" v-html="$t('main.reports-title')"></h1>
 
     <div class="photo-cards pa-0 mt-10 d-flex flex-wrap" style="gap: 32px">
       <template v-for="(card, index) of reports" :key="index">
@@ -17,7 +13,7 @@
     </div>
 
     <div style="display:flex; justify-content:center; margin-top:110px; padding:0;">
-      <button class="button-v1" @click="$router.push('/reports')">СМОТРЕТЬ ВСЕ РЕПОРТАЖИ</button>
+      <button class="button-v1" @click="$router.push('/reports')">{{ $t('main.reports-show-more') }}</button>
     </div>
   </div>
 
