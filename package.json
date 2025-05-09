@@ -1,6 +1,6 @@
 {
   "name": "kipish-nuxt-client",
-  "version": "3.0.83",
+  "version": "3.0.89",
   "private": true,
   "type": "module",
   "scripts": {
@@ -30,6 +30,7 @@
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue-yandex-maps": "^2.1.4",
+    "vue2-editor": "^2.10.3",
     "vue3-marquee-slider": "^1.0.5",
     "vueperslides": "^3.5.1",
     "vuetify": "^3.0.0"

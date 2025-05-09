@@ -42,7 +42,7 @@
 
     <section class="row-3">
       <div>© 2024. Все права защищены</div>
-      <div>Политика конфидециальности</div>
+      <div style="cursor:pointer;" @click="$router.push('/privacy-policy')">Политика конфидециальности</div>
       <div><a target="_blank" href="https://paleo.studio/">Developed by paleo</a></div>
     </section>
   </footer>

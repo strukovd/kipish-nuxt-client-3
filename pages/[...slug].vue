@@ -10,57 +10,30 @@
       <br>
       <NuxtLink to="/">Вернуться на главную</NuxtLink>
     </div>
-    <CustomPage v-else/>
+    <CustomPage v-else />
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import CustomPage from './CustomPage.vue';
-import { mapStores } from 'pinia';
 
-export default defineComponent({
-  components: { CustomPage },
-  computed: {
-    ...mapStores( useAppStore ),
-  },
+const route = useRoute();
+const { data: pages, pending: loading, error } = await useAsyncData('pages', () =>
+  $fetch('/pages/keys')
+);
 
-  data() {
-    return {
-      loading: true,
-      customPage: false,
-    };
-  },
-  methods: {},
-
-  beforeCreate() {
-    const route = useRoute();
-    const router = useRouter();
-
-    const r = this.$http.get(`pages/keys`)
-      .then(r => {
-        this.appStore.pages = r.data;
-
-        const pathKey = route.path.replace('/', '');
-        if ( this.appStore.pages.includes(pathKey) ) {
-          this.customPage = true;
-          // router.replace({ path: route.path });
-        } else {
-          definePageMeta({
-            title: '404 - Страница не найдена',
-            meta: [
-              { name: 'robots', content: 'noindex, nofollow' },
-            ],
-          });
-
-          throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
-        }
-      })
-      .finally(() => {
-        this.loading = false;
-      });
-
+const customPage = computed(() => {
+  if (error.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
   }
+  return pages.value?.includes(route.path.replace('/', ''));
+});
+
+useHead({
+  title: customPage.value ? 'Custom Page' : '404 - Страница не найдена',
+  meta: customPage.value
+    ? []
+    : [{ name: 'robots', content: 'noindex, nofollow' }],
 });
 </script>
 
@@ -70,5 +43,4 @@ export default defineComponent({
   margin: 50px;
   font-family: Arial, sans-serif;
 }
-
 </style>
